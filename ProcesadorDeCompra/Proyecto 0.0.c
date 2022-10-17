@@ -2,26 +2,29 @@
 
 
 void main(){
-    struct fecha
-    {
+    /*Declaramos una struct para almacenar fechas*/
+    struct fecha {
         int dia;
         int mes;
         int year;
     };
     
-    struct clientes
-    {   char nombre[20];
-        char correo[20];
-        char direccion[30];
-        int telefono;
-        char contactof[20];
-        char username[15];
-        char clave[10];
-        struct fecha fnacimiento;
-        char lnacimiento[20];
-        char genero[10];
+    /*Declaramos un struct para guardar clientes*/
+    struct clientes {   
+            char nombre[20];
+            char correo[20];
+            char direccion[30];
+            int telefono;
+            char contactof[20];
+            char username[15];
+            char clave[10];
+            struct fecha fnacimiento;
+            char lnacimiento[20];
+            char genero[10];
 
     };
+
+    /*Ahora nos toca definir la función para agregar un nuevo cliente*/
     struct clientes primero;
     printf("Ingrese día de nacimiento:\n");
     scanf("%d", &primero.fnacimiento.dia);
