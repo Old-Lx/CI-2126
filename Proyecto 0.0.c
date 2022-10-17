@@ -24,13 +24,14 @@ void main(){
     };
     struct clientes primero;
     printf("Ingrese día de nacimiento:\n");
-    scanf("%d",&primero.fnacimiento.dia);
-    printf("Ingreso el día: %d",primero.fnacimiento.dia);
+    scanf("%d", &primero.fnacimiento.dia);
+    printf("Ingreso el día: %d", primero.fnacimiento.dia);
     printf("\nIngrese mes de nacimiento:\n");
-    scanf("%d",&primero.fnacimiento.mes);
-    printf("Ingreso el mes: %d",primero.fnacimiento.mes);
+    scanf("%d", &primero.fnacimiento.mes);
+    printf("Ingreso el mes: %d", primero.fnacimiento.mes);
     printf("\nIngrese año de nacimiento:\n");
-    scanf("%d",&primero.fnacimiento.year);
-    printf("Ingreso el año: %d",primero.fnacimiento.year);
-    printf("\n\nExcelente, su fecha de nacimiento es: %d / %d / %d",primero.fnacimiento.dia,primero.fnacimiento.mes,primero.fnacimiento.year);
+    scanf("%d", &primero.fnacimiento.year);
+    printf("Ingreso el año: %d", primero.fnacimiento.year);
+    printf("\n\nExcelente, su fecha de nacimiento es: %d / %d / %d", primero.fnacimiento.dia, 
+    primero.fnacimiento.mes, primero.fnacimiento.year);
 }
