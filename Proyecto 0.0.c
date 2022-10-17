@@ -1,20 +1,36 @@
-
 #include <stdio.h>
 
 
 void main(){
-    struct clientes
-    {   int cedula;
-        char Nombre[20];
-        char direccion[30];    
+    struct fecha
+    {
+        int dia;
+        int mes;
+        int year;
     };
-    int i=0;
-    struct clientes primero ={26739819,"gustavo"};
-    printf("%d\n\n\n\n",primero.cedula);    
-    printf("hola Compañeritos, ingresen nuevo usuario:\n");
-    scanf("%d",&primero.cedula);
-    printf("%d\n\n\n\n",primero.cedula);
-    for(i=0;i<5;i++){
-        printf("*");
-    }
+    
+    struct clientes
+    {   char nombre[20];
+        char correo[20];
+        char direccion[30];
+        int telefono;
+        char contactof[20];
+        char username[15];
+        char clave[10];
+        struct fecha fnacimiento;
+        char lnacimiento[20];
+        char genero[10];
+
+    };
+    struct clientes primero;
+    printf("Ingrese día de nacimiento:\n");
+    scanf("%d",&primero.fnacimiento.dia);
+    printf("Ingreso el día: %d",primero.fnacimiento.dia);
+    printf("\nIngrese mes de nacimiento:\n");
+    scanf("%d",&primero.fnacimiento.mes);
+    printf("Ingreso el mes: %d",primero.fnacimiento.mes);
+    printf("\nIngrese año de nacimiento:\n");
+    scanf("%d",&primero.fnacimiento.year);
+    printf("Ingreso el año: %d",primero.fnacimiento.year);
+    printf("\n\nExcelente, su fecha de nacimiento es: %d / %d / %d",primero.fnacimiento.dia,primero.fnacimiento.mes,primero.fnacimiento.year);
 }
