@@ -18,8 +18,8 @@ void main(){
             char contactof[20];
             char username[15];
             char clave[10];
-            struct fecha fnacimiento;
-            char lnacimiento[20];
+            struct fecha fechaNacimiento;
+            char lugarNacimiento[20];
             char genero[10];
 
     };
@@ -27,14 +27,14 @@ void main(){
     /*Ahora nos toca definir la función para agregar un nuevo cliente*/
     struct clientes primero;
     printf("Ingrese día de nacimiento:\n");
-    scanf("%d", &primero.fnacimiento.dia);
-    printf("Ingreso el día: %d", primero.fnacimiento.dia);
+    scanf("%d", &primero.fechaNacimiento.dia);
+    printf("Ingreso el día: %d", primero.fechaNacimiento.dia);
     printf("\nIngrese mes de nacimiento:\n");
-    scanf("%d", &primero.fnacimiento.mes);
-    printf("Ingreso el mes: %d", primero.fnacimiento.mes);
+    scanf("%d", &primero.fechaNacimiento.mes);
+    printf("Ingreso el mes: %d", primero.fechaNacimiento.mes);
     printf("\nIngrese año de nacimiento:\n");
-    scanf("%d", &primero.fnacimiento.year);
-    printf("Ingreso el año: %d", primero.fnacimiento.year);
-    printf("\n\nExcelente, su fecha de nacimiento es: %d / %d / %d", primero.fnacimiento.dia, 
-    primero.fnacimiento.mes, primero.fnacimiento.year);
+    scanf("%d", &primero.fechaNacimiento.year);
+    printf("Ingreso el año: %d", primero.fechaNacimiento.year);
+    printf("\n\nExcelente, su fecha de nacimiento es: %d / %d / %d", primero.fechaNacimiento.dia, 
+    primero.fechaNacimiento.mes, primero.fechaNacimiento.year);
 }
