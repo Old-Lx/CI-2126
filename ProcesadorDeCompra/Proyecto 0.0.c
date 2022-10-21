@@ -12,7 +12,7 @@ typedef struct {
 } fecha ;
 
 /*Declaramos un struct para guardar clientes*/
-struct cliente {   
+typedef struct {   
         char nombre[20];
         char correo[20];
         char direccion[30];
@@ -23,7 +23,7 @@ struct cliente {
         fecha fechaNacimiento;
         char lugarNacimiento[20];
         char genero[10];
-};
+}cliente ;
 
 /*Arreglo dinámico que guarda a los clientes*/
 typedef struct {
