@@ -44,6 +44,45 @@ baseDeDatos *bddNueva(size_t N) {
 void nuevoCliente() {
     
 }
+
+
+int main() {
+    printf("¿Ya te registraste?\n Escribe s si te registraste y n si no estás registrado\n");
+    const char answer = fscanf(stdin, "%s");
+
+    if (answer == "s") {
+        ingresar();
+    }
+
+    else {
+        nuevoCliente();
+        guardarCliente();
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
     struct clientes primero;
     printf("Ingrese día de nacimiento:\n");
