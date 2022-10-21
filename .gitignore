@@ -48,3 +48,6 @@
 *.exe
 *.out
 *.app
+
+#prueba
+prueba.c
