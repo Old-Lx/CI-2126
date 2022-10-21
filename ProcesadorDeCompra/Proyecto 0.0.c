@@ -5,11 +5,11 @@
 /*#include <csv.h>*/
 
 /*Declaramos una struct para almacenar fechas*/
-struct fecha {
+typedef struct {
     int dia;
     int mes;
     int year;
-};
+} fecha ;
 
 /*Declaramos un struct para guardar clientes*/
 struct cliente {   
@@ -20,20 +20,20 @@ struct cliente {
         char contactof[20];
         char username[15];
         char clave[10];
-        struct fecha fechaNacimiento;
+        fecha fechaNacimiento;
         char lugarNacimiento[20];
         char genero[10];
 };
 
 /*Arreglo dinámico que guarda a los clientes*/
-struct baseDeDatos {
+typedef struct {
     double *datos;
     size_t size;
     size_t capacidad;
-};
+} baseDeDatos ;
 
-struct baseDeDatos *bddNueva(size_t N) {
-    struct baseDeDatos *BDD = (struct baseDeDatos *) malloc(sizeof(struct baseDeDatos));
+baseDeDatos *bddNueva(size_t N) {
+    baseDeDatos *BDD = (baseDeDatos *) malloc(sizeof(baseDeDatos));
     BDD->size = N;
     BDD->capacidad = N;
     return BDD;
