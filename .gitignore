@@ -51,3 +51,7 @@
 
 #prueba
 prueba.c
+
+#database files
+*.csv
+*.txt
