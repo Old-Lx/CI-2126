@@ -215,62 +215,6 @@ do{
 }
 
 
-/*printf("Ingrese día de nacimiento:\n");
-    scanf("%d", &nuevo.fechaNacimiento.dia);
-    printf("Ingreso el día: %d", nuevo.fechaNacimiento.dia);
-    printf("\nIngrese mes de nacimiento:\n");
-    scanf("%d", &nuevo.fechaNacimiento.mes);
-    printf("Ingreso el mes: %d", nuevo.fechaNacimiento.mes);
-    printf("\nIngrese año de nacimiento:\n");
-    scanf("%d", &nuevo.fechaNacimiento.year);
-    printf("Ingreso el año: %d", nuevo.fechaNacimiento.year);
-    printf("\n\nExcelente, su fecha de nacimiento es: %d / %d / %d", nuevo.fechaNacimiento.dia, 
-    nuevo.fechaNacimiento.mes, nuevo.fechaNacimiento.year);*/
-
-/*      int n=0;
-    int opcion;
-    int i;
-    do{
-    printf("\nSeleccione su género:\nFemenino[1]\nMasculino[2]\nNo especificar[3]\n");
-    scanf("%d", &opcion);
-
-        switch (opcion)
-        { 
-            case 1 :
-                nuevo.genero[10] = "Femenino";
-                printf("Ingreso el día: %s", nuevo.genero);
-                n=2;
-                break;
-            case 2 :
-                nuevo.genero[10] = "Masculino";
-                n=2;
-                break;
-            case 3 :
-                nuevo.genero[10] = "Indef";
-                n=2;
-                break;        
-            default:
-                printf("\n No ingresaste una opcion valida\n");
-                n=0;
-                break;
-        }}while (n < 1);
-*/
-
-/*
-    struct clientes primero;
-    printf("Ingrese día de nacimiento:\n");
-    scanf("%d", &primero.fechaNacimiento.dia);
-    printf("Ingreso el día: %d", primero.fechaNacimiento.dia);
-    printf("\nIngrese mes de nacimiento:\n");
-    scanf("%d", &primero.fechaNacimiento.mes);
-    printf("Ingreso el mes: %d", primero.fechaNacimiento.mes);
-    printf("\nIngrese año de nacimiento:\n");
-    scanf("%d", &primero.fechaNacimiento.year);
-    printf("Ingreso el año: %d", primero.fechaNacimiento.year);
-    printf("\n\nExcelente, su fecha de nacimiento es: %d / %d / %d", primero.fechaNacimiento.dia, 
-    primero.fechaNacimiento.mes, primero.fechaNacimiento.year);*/
-
-
 int main() {
     /*printf("¿Ya te registraste?\n Escribe s si te registraste y n si no estás registrado\n");*/
 
