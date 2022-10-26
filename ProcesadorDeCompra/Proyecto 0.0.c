@@ -215,7 +215,7 @@ do{
 
 do{
     printf("\nSeleccione metodo de comunicación preferido:\nTelefono[1]\nCorreo[2]"); // Modo de contacto favorito mediante menu
-        scanf("%d", aux);
+        scanf("%d", &aux);
         switch (aux)
     {
     case 1:
