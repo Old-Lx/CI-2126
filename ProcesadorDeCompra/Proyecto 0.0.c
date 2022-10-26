@@ -53,81 +53,77 @@ int abrirBDDClientes() {
     cliente clientes[100];
 
     char buff[1024]; //guarda las primeras 1024 líneas en un buffer
-    int filas = 0;
     int column = 0;
     int count = 0;
+    int i = 0;
 
-    for (int i = 0; i < 9; i++) {
+    while (fgets(buff, 1024, bddcsv)) {
 
-        while (fgets(buff, 1024, bddcsv)) {
-            printf("%s\n", buff); //Imprime la línea leída
-            
-            char tempFecha[10];
-            char tempTelf[20];
+        /*printf("%s\n", buff);*/ //Imprime la línea leída
 
-            char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
-        
-            while (entrada) {
+        char tempFecha[10];
+        char tempTelf[20];
+
+        char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
+    
+        while (entrada) {
+
+            if (count != 0) {
+                
+                
                 if (column == 0) {
-                    strcpy(clientes[i].nombre, entrada);
-                    printf("%d\n%s\n", column, entrada);
+                    strcpy(clientes[i-1].nombre, entrada);
                 }
 
                 else if (column == 1) {
-                    strcpy(clientes[i].correo, entrada);
-                    printf("%d\n%s\n", column, entrada);
+                    strcpy(clientes[i-1].correo, entrada);
                 }
 
                 else if (column == 2) {
-                    strcpy(clientes[i].direccion, entrada);
-                    printf("%d\n%s\n", column, entrada);
+                    strcpy(clientes[i-1].direccion, entrada);
                 }
 
                 else if (column == 3) {
                     strcpy(tempTelf, entrada);
-                    printf("%d\n%s\n", column, entrada);
                 }
 
                 else if (column == 4) {
-                    strcpy(clientes[i].contactof, entrada);
-                    printf("%d\n%s\n", column, entrada);
+                    strcpy(clientes[i-1].contactof, entrada);
                 }
 
                 else if (column == 5) {
-                    strcpy(clientes[i].username, entrada);
-                    printf("%d\n%s\n", column, entrada);
+                    strcpy(clientes[i-1].username, entrada);
                 }
 
                 else if (column == 6) {
-                    strcpy(clientes[i].clave, entrada);
-                    printf("%d\n%s\n", column, entrada);
+                    strcpy(clientes[i-1].clave, entrada);
                 }
 
                 else if (column == 7) {
                     strcpy(tempFecha, entrada);
-                    printf("%d\n%s\n", column, entrada);
                 }
 
                 else if (column == 8) {
-                    strcpy(clientes[i].lugarNacimiento, entrada);
-                    printf("%d\n%s\n", column, entrada);
+                    strcpy(clientes[i-1].lugarNacimiento, entrada);
                 }
 
                 else if (column == 9) {
-                    strcpy(clientes[i].genero, entrada);
-                    printf("%d\n%s\n", column, entrada);
+                    strcpy(clientes[i-1].genero, entrada);
                 }
-                entrada = strtok(NULL, ";");
-                column++;
-                count++;
             }
-            column = 0;
-        };
+            entrada = strtok(NULL, ";");
+            column++;
+            count++;
+
+        }
+        column = 0;
+        i++;
+        
     };
 
     fclose(bddcsv);
 
-    for (int i = 0; i < 3; i++) {
+    /*for (int i = 0; i < 7; i++) {
         printf("Nombre-> %s correo-> %s direccion-> %s contactofav-> %s username-> %s clave-> %s lugarNac-> %s genero-> %s\n",
         clientes[i].nombre,
         clientes[i].correo,
@@ -137,7 +133,7 @@ int abrirBDDClientes() {
         clientes[i].clave,
         clientes[i].lugarNacimiento,
         clientes[i].genero);
-    };
+    };*/
 
     printf("\n%d entradas leídas\n\n", count);    
 

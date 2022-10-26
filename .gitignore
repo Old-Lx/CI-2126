@@ -53,5 +53,4 @@
 prueba.c
 
 #database files
-*.csv
 *.txt
