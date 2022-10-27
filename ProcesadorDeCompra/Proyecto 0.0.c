@@ -16,7 +16,7 @@ typedef struct {
         char nombre[20];
         char correo[20];
         char direccion[30];
-        int telefono;
+        char telefono[12];
         char contactof[20];
         char username[15];
         char clave[10];
@@ -141,32 +141,38 @@ int abrirBDDClientes() {
 
 
 /*Crea un nuevo cliente*/
-void nuevoCliente() {
+cliente nuevoCliente() {
     char comprClave[10];
     int n,aux;
-
     cliente nuevo;
     printf("Bienvenido, solicitaremos tus datos para registrarte\n"); //Nombre
     printf("\nIngrese su nombre y apellido:\n");
-    scanf("%s", &nuevo.nombre);
+    fgets(nuevo.nombre, 20, stdin);
+    fflush(stdin);
 
     printf("\nIngrese direccion de correo electrónico:\n"); //corrreo
-    scanf("%s", &nuevo.correo);
+    fgets(nuevo.correo, 20, stdin);
+    fflush(stdin);
 
     printf("\nIngrese dirección de habitación:\n"); //Direccion
-    scanf("%s", &nuevo.direccion);
+    fgets(nuevo.direccion, 30, stdin);
+    fflush(stdin);
 
     printf("\nIngrese número de telefono:\n"); //telefono
-    scanf("%s", &nuevo.telefono);
+    fgets(nuevo.telefono, 12, stdin);
+    fflush(stdin);
 
     printf("\nIngrese un nombre de usuario:\n"); //nombre de usuario
-    scanf("%s", &nuevo.username);
+    fgets(nuevo.username, 15, stdin);
+    fflush(stdin);
 
     do {
         printf("\nIngrese una nueva clave de seguridad:\n"); //Clave y comprobación
-        scanf("%s", &nuevo.clave);
+        fgets(nuevo.clave, 10, stdin);
+        fflush(stdin);
         printf("\nCompruebe su clave de seguridad:\n");
-        scanf("%s", &comprClave);
+        fgets(comprClave, 10, stdin);
+        fflush(stdin);
         if (strcmp(nuevo.clave, comprClave) == 0) {
             n=2;
         } else {
@@ -184,51 +190,53 @@ void nuevoCliente() {
     scanf("%d", &nuevo.fechaNacimiento.year);
 
     printf("\nIngrese lugar de nacimiento:\n");//Lugar de nacimiento
-    scanf("%s", &nuevo.lugarNacimiento);
-do{
-    printf("\nSeleccione su género:\nFemenino[1]\nMasculino[2]\nNo especificar[3]\n"); //Género mediante menu
-    scanf("%d", &aux);
-    switch (aux)
-    {
-    case 1:
-        strcpy(nuevo.genero,"Femenino");
-        n=2;
-        break;
-    case 2:
-        strcpy(nuevo.genero,"Masculino");
-        n=2;
-        break;
-    case 3:
-        strcpy(nuevo.genero,"Sin especificar");
-        n=2;
-        break;
-    default:
-        printf("\n No ingresaste una opcion valida, selecciona nuevamente:");
-        n=0;
-        break;
-    }
-    }while (n<1 );
+    fgets(nuevo.lugarNacimiento, 20, stdin);
+    fflush(stdin);
 
-do{
-    printf("\nSeleccione metodo de comunicación preferido:\nTelefono[1]\nCorreo[2]"); // Modo de contacto favorito mediante menu
+    do{//Género mediante menu
+        printf("\nSeleccione su género:\nFemenino[1]\nMasculino[2]\nNo especificar[3]\n"); 
         scanf("%d", &aux);
         switch (aux)
-    {
-    case 1:
-        strcpy(nuevo.contactof,"Telefono");
-        n=2;
-        break;
-    case 2:
-        strcpy(nuevo.contactof,"Correo");
-        n=2;
-        break;
-    default:
-        printf("\n No ingresaste una opcion valida, selecciona nuevamente:");
-        n=0;
-        break;
-    }
-    }while (n<1 );
-    
+        {
+        case 1:
+            strcpy(nuevo.genero, "Femenino");
+            n=2;
+            break;
+        case 2:
+            strcpy(nuevo.genero, "Masculino");
+            n=2;
+            break;
+        case 3:
+            strcpy(nuevo.genero, "Sin especificar");
+            n=2;
+            break;
+        default:
+            printf("\n No ingresaste una opcion valida, selecciona nuevamente:");
+            n=0;
+            break;
+        }
+        }while (n<1 );
+
+    do{// Modo de contacto favorito mediante menu
+        printf("\nSeleccione metodo de comunicación preferido:\nTelefono[1]\nCorreo[2]\n"); 
+            scanf("%d", &aux);
+            switch (aux)
+        {
+        case 1:
+            strcpy(nuevo.contactof, "Telefono");
+            n=2;
+            break;
+        case 2:
+            strcpy(nuevo.contactof, "Correo");
+            n=2;
+            break;
+        default:
+            printf("\n No ingresaste una opcion valida, selecciona nuevamente:");
+            n=0;
+            break;
+        }
+        }while (n<1 );
+    return nuevo;
 }
 
 
