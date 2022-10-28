@@ -241,18 +241,58 @@ cliente nuevoCliente() {
 
 
 int main() {
-    /*printf("¿Ya te registraste?\n Escribe s si te registraste y n si no estás registrado\n");*/
-
-    abrirBDDClientes();
-
-    /*if (strcmp(answer, s)) {
-        ingresar();
+    int k;
+    char answer[2];
+    do{
+    printf("\nBienvenido!\n¿Estas registrado en nuestra tienda?\n Escribe\n[S] si\n[N] no\nIngrese su respuesta:  \n");
+    fgets(answer, 2, stdin);
+    fflush(stdin);
+    
+    if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0) {
+        do{
+        printf("Quieres Iniciar Sesion?\n[S] si\n[N] no\nIngrese su respuesta:  ");
+        fgets(answer, 2, stdin);
+        fflush(stdin);
+        if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0){
+            //ingresar();
+            printf("****Función en Mantenimiento, intente de nuevo más tarde****");
+            k=2;
+            }
+         else if (strcmp(answer, "N") == 0 || strcmp(answer, "n") == 0)
+         {printf("*****Ingresaste como Invitado*****");
+            k=2;
+        }
+        else {
+            printf("Opción invalida, intente de nuevo");
+            k=0;
+        };
+        }while (k<1);
+   
     }
+    else if (strcmp(answer, "N") == 0 || strcmp(answer, "n") == 0){
+        do{
+        printf("Quieres Registrarte?\n[S] si\n[N] no\nIngrese su respuesta:  ");
+        fgets(answer, 2, stdin);
+        fflush(stdin);
+        if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0){
+            nuevoCliente();
+            k=2;
+            }
+         else if (strcmp(answer, "N") == 0 || strcmp(answer, "n") == 0)
+         {printf("*****Ingresaste como Invitado*****");
+            k=2;
+        }
+        else {
+            printf("Opción invalida, intente de nuevo");
+            k=0;
+        };
+        }while (k<1);
+   
+    }else {
+        printf("Opción invalida, intente de nuevo");
+        k=0;
+    }}while (k<1);
+    
 
-    else {
-        nuevoCliente();
-        guardarCliente();
-        abrirBDDClientes();
-    }*/
     return 0;
 }
