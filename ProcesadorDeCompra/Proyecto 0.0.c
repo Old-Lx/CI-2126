@@ -244,7 +244,7 @@ int main() {
     int k;
     char answer[2];
     do{
-    printf("\nBienvenido!\n¿Estas registrado en nuestra tienda?\n Escribe\n[S] si\n[N] no\nIngrese su respuesta:  \n");
+    printf("\nBienvenido!\n¿Estas registrado en nuestra tienda?\n[S] si\n[N] no\nIngrese su respuesta:  \n");
     fgets(answer, 2, stdin);
     fflush(stdin);
     
@@ -293,6 +293,6 @@ int main() {
         k=0;
     }}while (k<1);
     
-    scanf("%d");
+    scanf("%s");
     return 0;
 }
