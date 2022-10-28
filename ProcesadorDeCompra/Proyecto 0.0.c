@@ -188,7 +188,7 @@ cliente nuevoCliente() {
 
     printf("\nIngrese año de nacimiento:\n");//Fecha de nacimiento
     scanf("%d", &nuevo.fechaNacimiento.year);
-
+    fflush(stdin);
     printf("\nIngrese lugar de nacimiento:\n");//Lugar de nacimiento
     fgets(nuevo.lugarNacimiento, 20, stdin);
     fflush(stdin);
