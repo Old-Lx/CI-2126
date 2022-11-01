@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1667266763 source:c:\users\gustavo\documents\github\ci-2126\equipo red\main.c
+	<stdio.h>
+	"Login.h"
+
+1667266781 c:\users\gustavo\documents\github\ci-2126\equipo red\login.h
+
