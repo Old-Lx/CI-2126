@@ -283,7 +283,9 @@ producto nuevoProducto() {
     printf("Solicitaremos los datos para añadir un nuevo producto:\n"); 
     printf("\nIngrese código:\n");
     fgets(nuevo.codigo, 20, stdin);
+
     /*Añadir comprobación si no se encuentra en la base de datos*/
+    
     fflush(stdin);
     //system ("cls");
 
