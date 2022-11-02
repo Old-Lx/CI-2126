@@ -158,7 +158,7 @@ int abrirBDDClientes() {
         clientes[i].genero);
     };*/
 
-    printf("\n%d entradas le�das\n\n", count);
+    printf("\n%d entradas leidas\n\n", count);
 
 }
 
@@ -174,17 +174,17 @@ cliente nuevoCliente() {
     fflush(stdin);
     //system ("cls");
 
-    printf("\nIngrese direccion de correo electr�nico:\n"); //corrreo
+    printf("\nIngrese direccion de correo electrónico:\n"); //corrreo
     fgets(nuevo.correo, 20, stdin);
     fflush(stdin);
     //system ("cls");
 
-    printf("\nIngrese direcci�n de habitaci�n:\n"); //Direccion
+    printf("\nIngrese direcci�n de habitación:\n"); //Direccion
     fgets(nuevo.direccion, 30, stdin);
     fflush(stdin);
     //system ("cls");
 
-    printf("\nIngrese n�mero de telefono:\n"); //telefono
+    printf("\nIngrese número de telefono:\n"); //telefono
     fgets(nuevo.telefono, 12, stdin);
     fflush(stdin);
     //system ("cls");
@@ -209,7 +209,7 @@ cliente nuevoCliente() {
         }}while (n < 1);
         //system ("cls");
 
-    printf("Ingrese d�a de nacimiento:\n");
+    printf("Ingrese día de nacimiento:\n");
     scanf("%d", &nuevo.fechaNacimiento.dia);
     //system ("cls");
 
@@ -217,7 +217,7 @@ cliente nuevoCliente() {
     scanf("%d", &nuevo.fechaNacimiento.mes);
     //system ("cls");
 
-    printf("\nIngrese a�o de nacimiento:\n");//Fecha de nacimiento
+    printf("\nIngrese año de nacimiento:\n");//Fecha de nacimiento
     scanf("%d", &nuevo.fechaNacimiento.year);
     fflush(stdin);
     //system ("cls");
@@ -252,7 +252,7 @@ cliente nuevoCliente() {
         //system ("cls");
 
     do{// Modo de contacto favorito mediante menu
-        printf("\nSeleccione metodo de comunicaci�n preferido:\nTelefono[1]\nCorreo[2]\n");
+        printf("\nSeleccione metodo de comunicación preferido:\nTelefono[1]\nCorreo[2]\n");
             scanf("%d", &aux);
             switch (aux)
         {
