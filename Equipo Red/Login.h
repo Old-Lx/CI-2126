@@ -285,7 +285,7 @@ producto nuevoProducto() {
     fgets(nuevo.codigo, 20, stdin);
 
     /*Añadir comprobación si no se encuentra en la base de datos*/
-    
+
     fflush(stdin);
     //system ("cls");
 
