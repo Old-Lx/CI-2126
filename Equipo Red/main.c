@@ -10,7 +10,7 @@ int main() {
     int k;
     char answer[2];
     do{
-    printf("\nBienvenido!\n�Estas registrado en nuestra tienda?\n[S] si\n[N] no\nIngrese su respuesta:  \n");
+    printf("\nBienvenido!\nEstas registrado en nuestra tienda?\n[S] si\n[N] no\nIngrese su respuesta:  \n");
     fgets(answer, 2, stdin);
     fflush(stdin);
     //system ("cls");
@@ -23,7 +23,7 @@ int main() {
         //system ("cls");
         if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0){
             //ingresar();
-            printf("****Funci�n en Mantenimiento, intente de nuevo m�s tarde****");
+            printf("****Función en Mantenimiento, intente de nuevo más tarde****");
             k=2;
             }
          else if (strcmp(answer, "N") == 0 || strcmp(answer, "n") == 0)
@@ -31,7 +31,7 @@ int main() {
             k=2;
         }
         else {
-            printf("Opci�n invalida, intente de nuevo");
+            printf("Opción invalida, intente de nuevo");
             k=0;
         };
         }while (k<1);
@@ -52,16 +52,16 @@ int main() {
             k=2;
         }
         else {
-            printf("Opci�n invalida, intente de nuevo");
+            printf("Opción invalida, intente de nuevo");
             k=0;
         };
         }while (k<1);
 
     }else {
-        printf("Opci�n invalida, intente de nuevo");
+        printf("Opción invalida, intente de nuevo");
         k=0;
     }}while (k<1);
 
-    scanf("%s");
+    
     return 0;
 }

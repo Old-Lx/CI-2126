@@ -172,27 +172,27 @@ cliente nuevoCliente() {
     printf("\nIngrese su nombre y apellido:\n");
     fgets(nuevo.nombre, 20, stdin);
     fflush(stdin);
-    system ("cls");
+    //system ("cls");
 
     printf("\nIngrese direccion de correo electr�nico:\n"); //corrreo
     fgets(nuevo.correo, 20, stdin);
     fflush(stdin);
-    system ("cls");
+    //system ("cls");
 
     printf("\nIngrese direcci�n de habitaci�n:\n"); //Direccion
     fgets(nuevo.direccion, 30, stdin);
     fflush(stdin);
-    system ("cls");
+    //system ("cls");
 
     printf("\nIngrese n�mero de telefono:\n"); //telefono
     fgets(nuevo.telefono, 12, stdin);
     fflush(stdin);
-    system ("cls");
+    //system ("cls");
 
     printf("\nIngrese un nombre de usuario:\n"); //nombre de usuario
     fgets(nuevo.username, 15, stdin);
     fflush(stdin);
-    system ("cls");
+    //system ("cls");
 
     do {
         printf("\nIngrese una nueva clave de seguridad:\n"); //Clave y comprobaci�n
@@ -207,27 +207,27 @@ cliente nuevoCliente() {
             printf("\n\nLas claves NO son iguales, por favor ingresa de nuevo\n");
             n=0;
         }}while (n < 1);
-        system ("cls");
+        //system ("cls");
 
     printf("Ingrese d�a de nacimiento:\n");
     scanf("%d", &nuevo.fechaNacimiento.dia);
-    system ("cls");
+    //system ("cls");
 
     printf("\nIngrese mes de nacimiento:\n");
     scanf("%d", &nuevo.fechaNacimiento.mes);
-    system ("cls");
+    //system ("cls");
 
     printf("\nIngrese a�o de nacimiento:\n");//Fecha de nacimiento
     scanf("%d", &nuevo.fechaNacimiento.year);
     fflush(stdin);
-    system ("cls");
+    //system ("cls");
     printf("\nIngrese lugar de nacimiento:\n");//Lugar de nacimiento
     fgets(nuevo.lugarNacimiento, 20, stdin);
     fflush(stdin);
-    system ("cls");
+    //system ("cls");
 
-    do{//G�nero mediante menu
-        printf("\nSeleccione su g�nero:\nFemenino[1]\nMasculino[2]\nNo especificar[3]\n");
+    do{//Género mediante menu
+        printf("\nSeleccione su género:\nFemenino[1]\nMasculino[2]\nNo especificar[3]\n");
         scanf("%d", &aux);
         switch (aux)
         {
@@ -249,7 +249,7 @@ cliente nuevoCliente() {
             break;
         }
         }while (n<1 );
-        system ("cls");
+        //system ("cls");
 
     do{// Modo de contacto favorito mediante menu
         printf("\nSeleccione metodo de comunicaci�n preferido:\nTelefono[1]\nCorreo[2]\n");
@@ -270,7 +270,7 @@ cliente nuevoCliente() {
             break;
         }
         }while (n<1 );
-        system ("cls");
+        //system ("cls");
     return nuevo;
 }
 
