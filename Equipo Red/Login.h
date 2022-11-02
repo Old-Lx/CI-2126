@@ -280,27 +280,43 @@ cliente nuevoCliente() {
 producto nuevoProducto() {
     int n,aux;
     producto nuevo;
-    printf("Solicitaremos los datos para añadir un nuevo producto:\n"); //Nombre
+    printf("Solicitaremos los datos para añadir un nuevo producto:\n"); 
     printf("\nIngrese código:\n");
     fgets(nuevo.codigo, 20, stdin);
     /*Añadir comprobación si no se encuentra en la base de datos*/
     fflush(stdin);
     //system ("cls");
 
-    printf("\nIngrese descripción del producto:\n"); //corrreo
+    printf("\nIngrese descripción del producto:\n"); 
     fgets(nuevo.descripcion, 145, stdin);
     fflush(stdin);
     //system ("cls");
 
-    printf("\nIngrese el precio:\n"); //Direccion
-    scanf("%f",&nuevo.precio);
-    fflush(stdin);
-    //system ("cls");
-
-    printf("\nIngrese el número de productos en existencia:\n"); //Direccion
-    scanf("%i",&nuevo.stock);
-    fflush(stdin);
-    //system ("cls");
+    do{
+        printf("\nIngrese el precio:\n"); 
+        scanf("%f",&nuevo.precio);
+        if(nuevo.precio <= 0){
+            printf("\nOpción invalida, intente de nuevo");
+            aux = 0;
+        }else{
+            aux = 2;
+        };
+        fflush(stdin);
+        //system ("cls");
+    }while (aux < 1);
+    
+    do{/*¨Comprobación de stock*/
+        printf("\nIngrese la cantidad de productos disponibles:\n"); 
+        scanf("%i",&nuevo.stock);
+        if(nuevo.stock <= 0){
+            printf("\nOpción invalida, intente de nuevo");
+            aux = 0;
+        }else{
+            aux = 2;
+        };
+        fflush(stdin);
+        //system ("cls");
+    }while (aux < 1);
 }
 
 #endif // LOGIN_H_INCLUDED
