@@ -56,6 +56,8 @@ int abrirBDDClientes();
 /*Crea un nuevo cliente*/
 cliente nuevoCliente();
 
+/*Crea un nuevo cliente*/
+producto nuevoProducto();
 
 baseDeDatos *bddNueva(size_t N) {
     baseDeDatos *BDD = (baseDeDatos *) malloc(sizeof(baseDeDatos));
@@ -274,5 +276,31 @@ cliente nuevoCliente() {
     return nuevo;
 }
 
+/*Crea un nuevo cliente*/
+producto nuevoProducto() {
+    int n,aux;
+    producto nuevo;
+    printf("Solicitaremos los datos para añadir un nuevo producto:\n"); //Nombre
+    printf("\nIngrese código:\n");
+    fgets(nuevo.codigo, 20, stdin);
+    /*Añadir comprobación si no se encuentra en la base de datos*/
+    fflush(stdin);
+    //system ("cls");
+
+    printf("\nIngrese descripción del producto:\n"); //corrreo
+    fgets(nuevo.descripcion, 145, stdin);
+    fflush(stdin);
+    //system ("cls");
+
+    printf("\nIngrese el precio:\n"); //Direccion
+    scanf("%f",&nuevo.precio);
+    fflush(stdin);
+    //system ("cls");
+
+    printf("\nIngrese el número de productos en existencia:\n"); //Direccion
+    scanf("%i",&nuevo.stock);
+    fflush(stdin);
+    //system ("cls");
+}
 
 #endif // LOGIN_H_INCLUDED

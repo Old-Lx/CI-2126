@@ -62,6 +62,6 @@ int main() {
         k=0;
     }}while (k<1);
 
-    
+
     return 0;
 }
