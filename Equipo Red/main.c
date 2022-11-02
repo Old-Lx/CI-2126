@@ -13,12 +13,14 @@ int main() {
     printf("\nBienvenido!\n�Estas registrado en nuestra tienda?\n[S] si\n[N] no\nIngrese su respuesta:  \n");
     fgets(answer, 2, stdin);
     fflush(stdin);
+    system ("cls");
 
     if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0) {
         do{
         printf("Quieres Iniciar Sesion?\n[S] si\n[N] no\nIngrese su respuesta:  ");
         fgets(answer, 2, stdin);
         fflush(stdin);
+        system ("cls");
         if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0){
             //ingresar();
             printf("****Funci�n en Mantenimiento, intente de nuevo m�s tarde****");
@@ -40,6 +42,7 @@ int main() {
         printf("Quieres Registrarte?\n[S] si\n[N] no\nIngrese su respuesta:  ");
         fgets(answer, 2, stdin);
         fflush(stdin);
+        system ("cls");
         if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0){
             nuevoCliente();
             k=2;
