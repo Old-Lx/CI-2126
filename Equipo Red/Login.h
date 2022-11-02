@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+
 /*Declaramos una struct para almacenar fechas*/
 typedef struct {
     int dia;
@@ -24,6 +25,19 @@ typedef struct {
         char lugarNacimiento[20];
         char genero[20];
 }cliente ;
+
+/*Declaramos el arreglo de todos los clientes*/
+cliente clientes[100];
+
+/*Declaramos un struct para guardar productos*/
+typedef struct {
+        char codigo[20];
+        char descripcion[145];
+        float precio;
+        int stock;
+}producto ;
+
+producto BDproductos[100];
 
 /*Arreglo din�mico que guarda a los clientes*/
 typedef struct {
@@ -60,8 +74,6 @@ int abrirBDDClientes() {
         printf("Error al abrir la base de datos\n");
         return 1;
     }
-
-    cliente clientes[100];
 
     char buff[1024]; //guarda las primeras 1024 l�neas en un buffer
     int column = 0;
