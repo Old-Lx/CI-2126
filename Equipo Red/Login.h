@@ -36,5 +36,8 @@ int guardarCliente(cliente nuevo);
 /*Inicia sesión*/
 int login();
 
+/*Modifica datos de un cliente*/
+int modificarCliente();
+
 
 #endif // LOGIN_H_INCLUDED

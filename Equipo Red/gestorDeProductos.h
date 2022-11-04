@@ -35,7 +35,4 @@ int guardarProducto(producto nuevo);
 /*Modifica un producto existente*/
 int modificarProducto();
 
-
-
-
 #endif
