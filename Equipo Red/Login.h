@@ -64,6 +64,7 @@ baseDeDatos *bddNueva(size_t N) {
 
 cliente *prueba[100];
 cliente clientes[100];
+int count[1];
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
 cliente *abrirBDDClientes() {
@@ -79,8 +80,8 @@ cliente *abrirBDDClientes() {
 
     char buff[1024]; //guarda las primeras 1024 líneas en un buffer
     int column = 0;
-    int count = 0;
     int i = 0;
+    count[0] = 0;
 
     while (fgets(buff, 1024, bddcsv)) {
 
@@ -138,7 +139,7 @@ cliente *abrirBDDClientes() {
             }
             entrada = strtok(NULL, ";");
             column++;
-            count++;
+            count[0]++;
 
         }
         
@@ -148,6 +149,14 @@ cliente *abrirBDDClientes() {
     };
     
     fclose(bddcsv);
+
+    count[0] = 0;
+
+    bddcsv = fopen("clientes.csv", "r");
+    while (fgets(buff, 1024, bddcsv)) {
+        count[0]++;
+    }
+
 
 }
 
@@ -256,21 +265,8 @@ cliente nuevoCliente() {
 }
 
 /*Guarda un cliente en la base de datos*/
-int guardarCliente( cliente nuevo) {
+int guardarCliente(cliente nuevo) {
     
-
-    /*strcpy(nuevo->nombre, nombre);
-    strcpy(nuevo->correo, correo);
-    strcpy(nuevo->direccion, direccion);
-    nuevo->telefono = 7855;
-    strcpy(nuevo->contactof, contactof);
-    strcpy(nuevo->username, username);
-    strcpy(nuevo->clave, clave);
-    nuevo->fechaNacimiento.dia = 9;
-    nuevo->fechaNacimiento.mes = 9;
-    nuevo->fechaNacimiento.year = 1972;
-    strcpy(nuevo->lugarNacimiento, lugarNacimiento);
-    strcpy(nuevo->genero, genero);*/
 
     FILE *bddcsv;
     bddcsv = fopen("clientes.csv", "r");
@@ -281,17 +277,10 @@ int guardarCliente( cliente nuevo) {
     }
     
     char buff[1024];
-    int count = 0;
-
-    while (fgets(buff, 1024, bddcsv)) {
-
-        count++;
-
-    };
 
     fclose(bddcsv);
 
-    printf("%d\n", count);
+    printf("%d\n", count[0]);
 
     abrirBDDClientes();
     
@@ -299,7 +288,7 @@ int guardarCliente( cliente nuevo) {
     
     printf("%s\n", clientes[0].lugarNacimiento);
 
-    for (int fila = 0; fila < count+2; fila++) {
+    for (int fila = 0; fila < count[0]+2; fila++) {
 
         if (fila == 0) {
             fprintf(bddcsv, 
@@ -316,7 +305,7 @@ int guardarCliente( cliente nuevo) {
             "genero");
         }
 
-        if (fila < count && fila > 0) {
+        if (fila < count[0] && fila > 0) {
             fprintf(bddcsv, 
             "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
             clientes[fila-1].nombre,
@@ -332,9 +321,9 @@ int guardarCliente( cliente nuevo) {
         }; 
         
 
-        if (fila == count) {
+        if (fila == count[0]) {
 
-            if (clientes[count-1].nombre != NULL) {
+            if (clientes[count[0]-1].nombre != NULL) {
             fprintf(bddcsv, "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
             nuevo.nombre,
             nuevo.correo,
