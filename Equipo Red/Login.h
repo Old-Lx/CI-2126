@@ -74,7 +74,7 @@ cliente *abrirBDDClientes() {
     
     if (bddcsv == NULL) {
         printf("Error al abrir la base de datos\n");
-        // return NULL; //Debe retornar cliente o cambiamos el tipo de variable
+        return NULL;
     }
 
     char buff[1024]; //guarda las primeras 1024 líneas en un buffer
