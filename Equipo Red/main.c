@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include "Login.h"
+#include "gestorDeProductos.h"
 /*#include <csv.h>*/
 
 
