@@ -128,7 +128,7 @@ producto nuevoProducto() {
 int guardarProducto(producto nuevo) {
     
     FILE *bddpcsv;
-    bddpcsv = fopen("clientes.csv", "r");
+    bddpcsv = fopen("productos.csv", "r");
 
     if (bddpcsv == NULL) {
         printf("Error al abrir la base de datos\n");
@@ -148,7 +148,7 @@ int guardarProducto(producto nuevo) {
 
     abrirBDDClientes();
     
-    bddpcsv = fopen("clientes.csv", "w");
+    bddpcsv = fopen("productos.csv", "w");
 
 
     for (int fila = 0; fila < count+2; fila++) {
