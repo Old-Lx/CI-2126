@@ -271,7 +271,7 @@ cliente nuevoCliente() {
 }
 
 /*Guarda un cliente en la base de datos*/
-int guardarCliente(nuevoCliente()) {
+int guardarCliente(cliente nuevo) {
     
 
     /*strcpy(nuevo->nombre, nombre);
