@@ -44,7 +44,7 @@ typedef struct {
 baseDeDatos *bddNueva(size_t N);
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
-cliente abrirBDDClientes();
+cliente *abrirBDDClientes();
 
 /*Crea un nuevo cliente*/
 cliente nuevoCliente();
@@ -66,7 +66,7 @@ cliente *prueba[100];
 cliente clientes[100];
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
-cliente abrirBDDClientes() {
+cliente *abrirBDDClientes() {
 
 
     FILE *bddcsv;
