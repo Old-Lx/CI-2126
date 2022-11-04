@@ -9,6 +9,7 @@
 #include <string.h>
 #include <math.h>
 #include "gestorDeProductos.h"
+#include "Login.h"
 
 /*Struct para guardar productos*/
 typedef struct producto;

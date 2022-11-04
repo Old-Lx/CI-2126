@@ -51,29 +51,29 @@ typedef struct {
 baseDeDatos *bddNueva(size_t N);
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
-cliente *abrirBDDClientes();
+cliente abrirBDDClientes();
 
 /*Crea un nuevo cliente*/
 cliente nuevoCliente();
 
 /*Guarda un cliente en la base de datos*/
-int guardarCliente(cliente nuevo)
+int guardarCliente(cliente nuevo);
 
 /*Crea un nuevo cliente*/
 producto nuevoProducto();
 
-/*baseDeDatos *bddNueva(size_t N) {
+baseDeDatos *bddNueva(size_t N) {
     baseDeDatos *BDD = (baseDeDatos *) malloc(sizeof(baseDeDatos));
     BDD->size = N;
     BDD->capacidad = N;
     return BDD;
-}*/
+}
 
 cliente *prueba[100];
 cliente clientes[100];
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
-cliente *abrirBDDClientes() {
+cliente abrirBDDClientes() {
 
 
     FILE *bddcsv;
@@ -81,7 +81,7 @@ cliente *abrirBDDClientes() {
     
     if (bddcsv == NULL) {
         printf("Error al abrir la base de datos\n");
-        return NULL;
+        return NULL; //Debe retornar cliente o cambiamos el tipo de variable
     }
 
     char buff[1024]; //guarda las primeras 1024 líneas en un buffer
@@ -206,17 +206,9 @@ cliente nuevoCliente() {
         //system ("cls");
 
     printf("Ingrese día de nacimiento:\n");
-    scanf("%d", &nuevo.fechaNacimiento.dia);
-    //system ("cls");
-
-    printf("\nIngrese mes de nacimiento:\n");
-    scanf("%d", &nuevo.fechaNacimiento.mes);
-    //system ("cls");
-
-    printf("\nIngrese año de nacimiento:\n");//Fecha de nacimiento
-    scanf("%d", &nuevo.fechaNacimiento.year);
+    fgets(nuevo.lugarNacimiento, 20, stdin);
     fflush(stdin);
-    //system ("cls");
+
     printf("\nIngrese lugar de nacimiento:\n");//Lugar de nacimiento
     fgets(nuevo.lugarNacimiento, 20, stdin);
     fflush(stdin);
@@ -271,7 +263,7 @@ cliente nuevoCliente() {
 }
 
 /*Guarda un cliente en la base de datos*/
-int guardarCliente(cliente nuevo) {
+int guardarCliente( cliente nuevo) {
     
 
     /*strcpy(nuevo->nombre, nombre);
