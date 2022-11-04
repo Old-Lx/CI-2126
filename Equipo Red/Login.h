@@ -13,18 +13,18 @@ typedef struct {
 } fecha ;
 
 /*Declaramos un struct para guardar clientes*/
-typedef struct {
-        char nombre[20];
-        char correo[20];
-        char direccion[30];
-        char telefono[12];
-        char contactof[20];
-        char username[15];
-        char clave[10];
-        fecha fechaNacimiento;
-        char lugarNacimiento[20];
-        char genero[20];
-}cliente ;
+typedef struct {   
+    char nombre[20];
+    char correo[20];
+    char direccion[30];
+    int telefono;
+    char contactof[20];
+    char username[15];
+    char clave[10];
+    char fechaNacimiento[10];
+    char lugarNacimiento[20];
+    char genero[10];
+} cliente ;
 
 /*Declaramos el arreglo de todos los clientes*/
 cliente clientes[100];
@@ -56,6 +56,9 @@ int abrirBDDClientes();
 /*Crea un nuevo cliente*/
 cliente nuevoCliente();
 
+/*Guarda un cliente en la base de datos*/
+int guardarCliente(cliente nuevo)
+
 /*Crea un nuevo cliente*/
 producto nuevoProducto();
 
@@ -66,36 +69,40 @@ baseDeDatos *bddNueva(size_t N) {
     return BDD;
 }
 
+cliente *prueba[100];
+cliente clientes[100];
+
 /*Abre una base de datos de personas guardada en un archivo csv*/
-int abrirBDDClientes() {
+cliente *abrirBDDClientes() {
+
 
     FILE *bddcsv;
     bddcsv = fopen("clientes.csv", "r");
-
+    
     if (bddcsv == NULL) {
         printf("Error al abrir la base de datos\n");
-        return 1;
+        return NULL;
     }
 
-    char buff[1024]; //guarda las primeras 1024 l�neas en un buffer
+    char buff[1024]; //guarda las primeras 1024 líneas en un buffer
     int column = 0;
     int count = 0;
     int i = 0;
 
     while (fgets(buff, 1024, bddcsv)) {
 
-        /*printf("%s\n", buff);*/ //Imprime la l�nea le�da
+        /*printf("%s\n", buff);*/ //Imprime la línea leída
 
         char tempFecha[10];
         char tempTelf[20];
 
         char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
-
+    
         while (entrada) {
 
             if (count != 0) {
-
-
+                
+                
                 if (column == 0) {
                     strcpy(clientes[i-1].nombre, entrada);
                 }
@@ -141,26 +148,13 @@ int abrirBDDClientes() {
             count++;
 
         }
+        
         column = 0;
         i++;
 
     };
-
+    
     fclose(bddcsv);
-
-    /*for (int i = 0; i < 7; i++) {
-        printf("Nombre-> %s correo-> %s direccion-> %s contactofav-> %s username-> %s clave-> %s lugarNac-> %s genero-> %s\n",
-        clientes[i].nombre,
-        clientes[i].correo,
-        clientes[i].direccion,
-        clientes[i].contactof,
-        clientes[i].username,
-        clientes[i].clave,
-        clientes[i].lugarNacimiento,
-        clientes[i].genero);
-    };*/
-
-    printf("\n%d entradas leidas\n\n", count);
 
 }
 
@@ -275,6 +269,129 @@ cliente nuevoCliente() {
         //system ("cls");
     return nuevo;
 }
+
+/*Guarda un cliente en la base de datos*/
+int guardarCliente(nuevoCliente()) {
+    
+
+    /*strcpy(nuevo->nombre, nombre);
+    strcpy(nuevo->correo, correo);
+    strcpy(nuevo->direccion, direccion);
+    nuevo->telefono = 7855;
+    strcpy(nuevo->contactof, contactof);
+    strcpy(nuevo->username, username);
+    strcpy(nuevo->clave, clave);
+    nuevo->fechaNacimiento.dia = 9;
+    nuevo->fechaNacimiento.mes = 9;
+    nuevo->fechaNacimiento.year = 1972;
+    strcpy(nuevo->lugarNacimiento, lugarNacimiento);
+    strcpy(nuevo->genero, genero);*/
+
+    FILE *bddcsv;
+    bddcsv = fopen("clientes.csv", "r");
+
+    if (bddcsv == NULL) {
+        printf("Error al abrir la base de datos\n");
+        return 1;
+    }
+    
+    char buff[1024];
+    int count = 0;
+
+    while (fgets(buff, 1024, bddcsv)) {
+
+        count++;
+
+    };
+
+    fclose(bddcsv);
+
+    printf("%d\n", count);
+
+    abrirBDDClientes();
+    
+    bddcsv = fopen("clientes.csv", "w");
+    
+    printf("%s\n", clientes[0].lugarNacimiento);
+
+    for (int fila = 0; fila < count+2; fila++) {
+
+        if (fila == 0) {
+            fprintf(bddcsv, 
+            "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s\n",
+            "nombre",
+            "correo",
+            "direccion",
+            "telefono",
+            "contactofav",
+            "username",
+            "clave",
+            "fechaNac",
+            "lugarNac",
+            "genero");
+        }
+
+        if (fila < count && fila > 0) {
+            fprintf(bddcsv, 
+            "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
+            clientes[fila-1].nombre,
+            clientes[fila-1].correo,
+            clientes[fila-1].direccion,
+            clientes[fila-1].telefono,
+            clientes[fila-1].contactof,
+            clientes[fila-1].username,
+            clientes[fila-1].clave,
+            "fecha",
+            clientes[fila-1].lugarNacimiento,
+            clientes[fila-1].genero);
+        }; 
+        
+
+        if (fila == count) {
+
+            if (clientes[count-1].nombre != NULL) {
+            fprintf(bddcsv, "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
+            nuevo.nombre,
+            nuevo.correo,
+            nuevo.direccion,
+            nuevo.telefono,
+            nuevo.contactof,
+            nuevo.username,
+            nuevo.clave,
+            nuevo.fechaNacimiento,
+            nuevo.lugarNacimiento,
+            nuevo.genero);
+            } else {
+
+            fprintf(bddcsv, 
+            "\n%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
+            nuevo.nombre,
+            nuevo.correo,
+            nuevo.direccion,
+            nuevo.telefono,
+            nuevo.contactof,
+            nuevo.username,
+            nuevo.clave,
+            nuevo.fechaNacimiento,
+            nuevo.lugarNacimiento,
+            nuevo.genero);
+
+            };
+            
+            
+        };
+        
+        if (ferror(bddcsv)) {
+            printf("No se pudo agregar el cliente\n");
+            return 1;
+        };
+
+    };
+
+    fclose(bddcsv);
+    printf("Se agregó exitosamente a la base de datos\n");
+
+};
 
 /*Crea un nuevo cliente*/
 producto nuevoProducto() {
