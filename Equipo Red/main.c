@@ -62,6 +62,6 @@ int main() {
         printf("Opción invalida, intente de nuevo");
         k=0;
     }}while (k<1);
-    
+
     return 0;
 }
