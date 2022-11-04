@@ -11,11 +11,17 @@
 #include "gestorDeProductos.h"
 #include "Login.h"
 
-/*Struct para guardar productos*/
-typedef struct producto;
+
+/*Declaramos un struct para guardar productos*/
+typedef struct {
+        char codigo[20];
+        char descripcion[145];
+        float precio;
+        int stock;
+}producto ;
 
 /*Lista de productos*/
-producto BDproducto[100];
+producto BDproductos[100];
 
 /*Abre una base de datos de productos guardada en un archivo csv*/
 producto *abrirBDDProductos();

@@ -8,7 +8,7 @@ typedef struct {
     char codigo[20];
     char descripcion[145];
     float precio;
-    int stock
+    int stock;
 } producto ;
 
 producto *prueba[100];

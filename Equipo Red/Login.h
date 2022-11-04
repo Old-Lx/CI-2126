@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "gestorDeProductos.h"
 
 /*Declaramos una struct para almacenar fechas*/
 typedef struct {
@@ -23,21 +24,13 @@ typedef struct {
     char clave[10];
     char fechaNacimiento[10];
     char lugarNacimiento[20];
-    char genero[10];
+    char genero[20];
 } cliente ;
 
 /*Declaramos el arreglo de todos los clientes*/
 cliente clientes[100];
 
-/*Declaramos un struct para guardar productos*/
-typedef struct {
-        char codigo[20];
-        char descripcion[145];
-        float precio;
-        int stock;
-}producto ;
 
-producto BDproductos[100];
 
 /*Arreglo din�mico que guarda a los clientes*/
 typedef struct {
@@ -81,7 +74,7 @@ cliente abrirBDDClientes() {
     
     if (bddcsv == NULL) {
         printf("Error al abrir la base de datos\n");
-        return NULL; //Debe retornar cliente o cambiamos el tipo de variable
+        // return NULL; //Debe retornar cliente o cambiamos el tipo de variable
     }
 
     char buff[1024]; //guarda las primeras 1024 líneas en un buffer
@@ -181,7 +174,7 @@ cliente nuevoCliente() {
     //system ("cls");
 
     printf("\nIngrese número de telefono:\n"); //telefono
-    fgets(nuevo.telefono, 12, stdin);
+    scanf("%d", &nuevo.telefono);
     fflush(stdin);
     //system ("cls");
 
