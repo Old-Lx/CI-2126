@@ -51,7 +51,7 @@ typedef struct {
 baseDeDatos *bddNueva(size_t N);
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
-cliente abrirBDDClientes();
+cliente *abrirBDDClientes();
 
 /*Crea un nuevo cliente*/
 cliente nuevoCliente();
@@ -62,12 +62,12 @@ int guardarCliente(cliente nuevo)
 /*Crea un nuevo cliente*/
 producto nuevoProducto();
 
-baseDeDatos *bddNueva(size_t N) {
+/*baseDeDatos *bddNueva(size_t N) {
     baseDeDatos *BDD = (baseDeDatos *) malloc(sizeof(baseDeDatos));
     BDD->size = N;
     BDD->capacidad = N;
     return BDD;
-}
+}*/
 
 cliente *prueba[100];
 cliente clientes[100];
