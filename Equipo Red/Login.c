@@ -335,6 +335,7 @@ int login() {
     char usuario[20];
     char clave[20];
     scanf("%s", usuario);
+    
     abrirBDDClientes();
     for (int i = 0; i < count[0]; i++) {
         if (!strcmp(usuario, clientes[i].username)) {
@@ -343,12 +344,102 @@ int login() {
             printf("Ahora inserte su clave:\n");
             fflush(stdout);
             scanf("%s", clave);
+            int n = 0;
+            char accionCliente[1];
 
+            
             if (!strcmp(clave, clientes[num_fila[0]].clave)) {
 
-            printf("Sesión iniciada\n¿Qué desea hacer?\n");
+                printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
+                fflush(stdout);
+                
+                do {  
+                    
+                    scanf("%s", accionCliente);
 
+                    if (!strcmp(accionCliente, "1")) {
+
+                        /*modificarCliente();*/
+                        n = 1;
+
+                    } else if (!strcmp(&accionCliente, "2")) {
+
+                        printf("Esta función se encuentra en mantenimiento\n");
+                
+                    } else {
+
+                        printf("Opción inválida");
+
+                    }
+                } while (n == 0);
+            } else if (strcmp(clave, clientes[num_fila[0]].clave)) {
+
+                printf("Clave incorrecta 2 intentos restantes\nIngrese su clave");
+                fflush(stdout);
+                scanf("%s", clave);
+
+                if (!strcmp(clave, clientes[num_fila[0]].clave)) {
+
+                    printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
+                    fflush(stdout);
+                    
+                    do {    
+    
+                        scanf("%s", accionCliente);
+
+                        if (!strcmp(accionCliente, "1")) {
+
+                            /*modificarCliente();*/
+                            n = 1;
+
+                        } else if (!strcmp(accionCliente, "2")) {
+
+                            printf("Esta función se encuentra en mantenimiento\n");
+                    
+                        } else {
+
+                            printf("Opción inválida");
+
+                        }
+                    } while (n == 0);
+                } else if (strcmp(clave, clientes[num_fila[0]].clave)) {
+
+                    printf("Clave incorrecta 1 intentos restantes\nIngrese su clave");
+                    fflush(stdout);
+                    scanf("%s", clave);
+
+                    if (!strcmp(clave, clientes[num_fila[0]].clave)) {
+
+                        printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
+                        fflush(stdout);
+                        
+                        do {  
+
+                            scanf("%s", accionCliente);
+
+                            if (!strcmp(accionCliente, "1")) {
+
+                                /*modificarCliente();*/
+                                n = 1;
+
+                            } else if (!strcmp(accionCliente, "2")) {
+
+                                printf("Esta función se encuentra en mantenimiento\n");
+                        
+                            } else {
+
+                                printf("Opción inválida");
+
+                            }
+                        } while (n == 0);
+                    } else if (strcmp(clave, clientes[num_fila[0]].clave)) {
+
+                        printf("Ha alcanzado el límite de intentos\n");
+                        return 1;
+                    }
+                }
             }
+            
 
         } else if (i == count[0]) {
             
