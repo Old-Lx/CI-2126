@@ -1,8 +1,9 @@
+#include "Login.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "Login.h"
+
 
 
 /*Declaramos un struct para guardar clientes*/
@@ -115,7 +116,7 @@ cliente *abrirBDDClientes() {
     }
 
 
-}
+};
 
 
 /*Crea un nuevo cliente*/
