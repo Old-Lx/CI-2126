@@ -6,7 +6,7 @@
 
 
 /*Declaramos un struct para guardar clientes*/
-typedef struct {   
+/*typedef struct {
     char nombre[20];
     char correo[20];
     char direccion[30];
@@ -17,7 +17,7 @@ typedef struct {
     char fechaNacimiento[10];
     char lugarNacimiento[20];
     char genero[20];
-} cliente ;
+} cliente ;*/
 
 cliente *prueba[100];
 cliente clientes[100];
@@ -29,7 +29,7 @@ cliente *abrirBDDClientes() {
 
     FILE *bddcsv;
     bddcsv = fopen("clientes.csv", "r");
-    
+
     if (bddcsv == NULL) {
         printf("Error al abrir la base de datos\n");
         return NULL;
@@ -48,12 +48,12 @@ cliente *abrirBDDClientes() {
         char tempTelf[20];
 
         char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
-    
+
         while (entrada) {
 
             if (count != 0) {
-                
-                
+
+
                 if (column == 0) {
                     strcpy(clientes[i-1].nombre, entrada);
                 }
@@ -99,12 +99,12 @@ cliente *abrirBDDClientes() {
             count[0]++;
 
         }
-        
+
         column = 0;
         i++;
 
     };
-    
+
     fclose(bddcsv);
 
     count[0] = 0;
@@ -223,7 +223,7 @@ cliente nuevoCliente() {
 
 /*Guarda un cliente en la base de datos*/
 int guardarCliente(cliente nuevo) {
-    
+
 
     FILE *bddcsv;
     bddcsv = fopen("clientes.csv", "r");
@@ -232,7 +232,7 @@ int guardarCliente(cliente nuevo) {
         printf("Error al abrir la base de datos\n");
         return 1;
     }
-    
+
     char buff[1024];
 
     fclose(bddcsv);
@@ -240,15 +240,15 @@ int guardarCliente(cliente nuevo) {
     printf("%d\n", count[0]);
 
     abrirBDDClientes();
-    
+
     bddcsv = fopen("clientes.csv", "w");
-    
+
     printf("%s\n", clientes[0].lugarNacimiento);
 
     for (int fila = 0; fila < count[0]+2; fila++) {
 
         if (fila == 0) {
-            fprintf(bddcsv, 
+            fprintf(bddcsv,
             "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s\n",
             "nombre",
             "correo",
@@ -263,7 +263,7 @@ int guardarCliente(cliente nuevo) {
         }
 
         if (fila < count[0] && fila > 0) {
-            fprintf(bddcsv, 
+            fprintf(bddcsv,
             "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
             clientes[fila-1].nombre,
             clientes[fila-1].correo,
@@ -275,8 +275,8 @@ int guardarCliente(cliente nuevo) {
             "fecha",
             clientes[fila-1].lugarNacimiento,
             clientes[fila-1].genero);
-        }; 
-        
+        };
+
 
         if (fila == count[0]) {
 
@@ -294,7 +294,7 @@ int guardarCliente(cliente nuevo) {
             nuevo.genero);
             } else {
 
-            fprintf(bddcsv, 
+            fprintf(bddcsv,
             "\n%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
             nuevo.nombre,
             nuevo.correo,
@@ -308,10 +308,10 @@ int guardarCliente(cliente nuevo) {
             nuevo.genero);
 
             };
-            
-            
+
+
         };
-        
+
         if (ferror(bddcsv)) {
             printf("No se pudo agregar el cliente\n");
             return 1;
@@ -335,7 +335,7 @@ int login() {
     char usuario[20];
     char clave[20];
     scanf("%s", usuario);
-    
+
     abrirBDDClientes();
     for (int i = 0; i < count[0]; i++) {
         if (!strcmp(usuario, clientes[i].username)) {
@@ -347,14 +347,14 @@ int login() {
             int n = 0;
             char accionCliente[1];
 
-            
+
             if (!strcmp(clave, clientes[num_fila[0]].clave)) {
 
                 printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
                 fflush(stdout);
-                
-                do {  
-                    
+
+                do {
+
                     scanf("%s", accionCliente);
 
                     if (!strcmp(accionCliente, "1")) {
@@ -365,7 +365,7 @@ int login() {
                     } else if (!strcmp(accionCliente, "2")) {
 
                         printf("Esta función se encuentra en mantenimiento\n");
-                
+
                     } else {
 
                         printf("Opción inválida");
@@ -382,9 +382,9 @@ int login() {
 
                     printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
                     fflush(stdout);
-                    
-                    do {    
-    
+
+                    do {
+
                         scanf("%s", accionCliente);
 
                         if (!strcmp(accionCliente, "1")) {
@@ -395,7 +395,7 @@ int login() {
                         } else if (!strcmp(accionCliente, "2")) {
 
                             printf("Esta función se encuentra en mantenimiento\n");
-                    
+
                         } else {
 
                             printf("Opción inválida");
@@ -412,8 +412,8 @@ int login() {
 
                         printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
                         fflush(stdout);
-                        
-                        do {  
+
+                        do {
 
                             scanf("%s", accionCliente);
 
@@ -425,7 +425,7 @@ int login() {
                             } else if (!strcmp(accionCliente, "2")) {
 
                                 printf("Esta función se encuentra en mantenimiento\n");
-                        
+
                             } else {
 
                                 printf("Opción inválida");
@@ -439,10 +439,10 @@ int login() {
                     }
                 }
             }
-            
+
 
         } else if (i == count[0]) {
-            
+
             printf("El usuario no se encuentra registrado\n");
             return 1;
 

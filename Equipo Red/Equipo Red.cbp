@@ -31,10 +31,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Login.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Login.h" />
+		<Unit filename="clientes.csv" />
+		<Unit filename="gestorDeProductos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="gestorDeProductos.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="productos.csv" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

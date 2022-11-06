@@ -4,12 +4,12 @@
 #include <string.h>
 #include <math.h>
 
-typedef struct {
+/*typedef struct {
     char codigo[20];
     char descripcion[145];
     float precio;
     int stock;
-} producto ;
+} producto ;*/
 
 producto *prueba[100];
 producto productos[100];
@@ -20,7 +20,7 @@ producto *abrirBDDProductos() {
 
     FILE *bddpcsv;
     bddpcsv = fopen("productos.csv", "r");
-    
+
     if (bddpcsv == NULL) {
         printf("Error al abrir la base de datos\n");
         return NULL;
@@ -35,12 +35,12 @@ producto *abrirBDDProductos() {
 
 
         char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
-    
+
         while (entrada) {
 
             if (count != 0) {
-                
-                
+
+
                 if (column == 0) {
                     strcpy(productos[i-1].codigo, entrada);
                 }
@@ -62,18 +62,18 @@ producto *abrirBDDProductos() {
                     productos[i-1].stock = (int) tempStock;
                 };
 
-                
+
             entrada = strtok(NULL, ";");
             column++;
             count++;
             };
         };
-        
+
         column = 0;
         i++;
 
     };
-    
+
     fclose(bddpcsv);
 
 };
@@ -82,7 +82,7 @@ producto *abrirBDDProductos() {
 producto nuevoProducto() {
     int n,aux;
     producto nuevo;
-    printf("Solicitaremos los datos para añadir un nuevo producto:\n"); 
+    printf("Solicitaremos los datos para añadir un nuevo producto:\n");
     printf("\nIngrese código:\n");
     fgets(nuevo.codigo, 20, stdin);
 
@@ -91,13 +91,13 @@ producto nuevoProducto() {
     fflush(stdin);
     //system ("cls");
 
-    printf("\nIngrese descripción del producto:\n"); 
+    printf("\nIngrese descripción del producto:\n");
     fgets(nuevo.descripcion, 145, stdin);
     fflush(stdin);
     //system ("cls");
 
     do{
-        printf("\nIngrese el precio:\n"); 
+        printf("\nIngrese el precio:\n");
         scanf("%f",&nuevo.precio);
         if(nuevo.precio <= 0){
             printf("\nOpción invalida, intente de nuevo");
@@ -108,9 +108,9 @@ producto nuevoProducto() {
         fflush(stdin);
         //system ("cls");
     }while (aux < 1);
-    
+
     do{/*¨Comprobación de stock*/
-        printf("\nIngrese la cantidad de productos disponibles:\n"); 
+        printf("\nIngrese la cantidad de productos disponibles:\n");
         scanf("%i",&nuevo.stock);
         if(nuevo.stock <= 0){
             printf("\nOpción invalida, intente de nuevo");
@@ -126,7 +126,7 @@ producto nuevoProducto() {
 
 /*Guarda un producto en la base de datos*/
 int guardarProducto(producto nuevo) {
-    
+
     FILE *bddpcsv;
     bddpcsv = fopen("productos.csv", "r");
 
@@ -134,7 +134,7 @@ int guardarProducto(producto nuevo) {
         printf("Error al abrir la base de datos\n");
         return 1;
     }
-    
+
     char buff[1024];
     int count = 0;
 
@@ -147,14 +147,14 @@ int guardarProducto(producto nuevo) {
     fclose(bddpcsv);
 
     abrirBDDClientes();
-    
+
     bddpcsv = fopen("productos.csv", "w");
 
 
     for (int fila = 0; fila < count+2; fila++) {
 
         if (fila == 0) {
-            fprintf(bddpcsv, 
+            fprintf(bddpcsv,
             "%s;%s;%s;%s\n",
             "codigo",
             "descripcion",
@@ -163,14 +163,14 @@ int guardarProducto(producto nuevo) {
         }
 
         if (fila < count && fila > 0) {
-            fprintf(bddpcsv, 
+            fprintf(bddpcsv,
             "%s;%s;%f;%d",
             productos[fila-1].codigo,
             productos[fila-1].descripcion,
             productos[fila-1].precio,
             productos[fila-1].stock);
-        }; 
-        
+        };
+
 
         if (fila == count) {
 
@@ -182,7 +182,7 @@ int guardarProducto(producto nuevo) {
             nuevo.stock);
             } else {
 
-            fprintf(bddpcsv, 
+            fprintf(bddpcsv,
             "\n%s;%s;%f;%d",
             nuevo.codigo,
             nuevo.descripcion,
@@ -190,10 +190,10 @@ int guardarProducto(producto nuevo) {
             nuevo.stock);
 
             };
-            
-            
+
+
         };
-        
+
         if (ferror(bddpcsv)) {
             printf("No se pudo agregar el cliente\n");
             return 1;
