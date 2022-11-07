@@ -337,7 +337,7 @@ int login() {
     char usuario[20];
     char clave[20];
     scanf("%s", usuario);
-
+    
     abrirBDDClientes();
     for (int i = 0; i < count[0]; i++) {
         if (!strcmp(usuario, clientes[i].username)) {
@@ -349,14 +349,14 @@ int login() {
             int n = 0;
             char accionCliente[1];
 
-
+            
             if (!strcmp(clave, clientes[num_fila[0]].clave)) {
 
                 printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
                 fflush(stdout);
-
-                do {
-
+                
+                do {  
+                    
                     scanf("%s", accionCliente);
 
                     if (!strcmp(accionCliente, "1")) {
@@ -367,10 +367,12 @@ int login() {
                     } else if (!strcmp(accionCliente, "2")) {
 
                         printf("Esta función se encuentra en mantenimiento\n");
-
+                        fflush(stdout);
+                
                     } else {
 
                         printf("Opción inválida");
+                        fflush(stdout);
 
                     }
                 } while (n == 0);
@@ -384,9 +386,9 @@ int login() {
 
                     printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
                     fflush(stdout);
-
-                    do {
-
+                    
+                    do {    
+    
                         scanf("%s", accionCliente);
 
                         if (!strcmp(accionCliente, "1")) {
@@ -397,10 +399,12 @@ int login() {
                         } else if (!strcmp(accionCliente, "2")) {
 
                             printf("Esta función se encuentra en mantenimiento\n");
-
+                            fflush(stdout);
+                    
                         } else {
 
                             printf("Opción inválida");
+                            fflush(stdout);
 
                         }
                     } while (n == 0);
@@ -414,8 +418,8 @@ int login() {
 
                         printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
                         fflush(stdout);
-
-                        do {
+                        
+                        do {  
 
                             scanf("%s", accionCliente);
 
@@ -427,10 +431,12 @@ int login() {
                             } else if (!strcmp(accionCliente, "2")) {
 
                                 printf("Esta función se encuentra en mantenimiento\n");
-
+                                fflush(stdout);
+                        
                             } else {
 
                                 printf("Opción inválida");
+                                fflush(stdout);
 
                             }
                         } while (n == 0);
@@ -441,10 +447,10 @@ int login() {
                     }
                 }
             }
-
+            
 
         } else if (i == count[0]) {
-
+            
             printf("El usuario no se encuentra registrado\n");
             return 1;
 

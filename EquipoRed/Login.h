@@ -34,7 +34,7 @@ cliente nuevoCliente();
 int guardarCliente(cliente nuevo);
 
 /*Inicia sesión*/
-int login();
+int ingresar();
 
 /*Modifica datos de un cliente*/
 int modificarCliente();
