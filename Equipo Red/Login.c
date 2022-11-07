@@ -7,7 +7,7 @@
 
 
 /*Declaramos un struct para guardar clientes*/
-/*typedef struct {
+typedef struct {
     char nombre[20];
     char correo[20];
     char direccion[30];
@@ -18,9 +18,10 @@
     char fechaNacimiento[10];
     char lugarNacimiento[20];
     char genero[20];
-} cliente ;*/
+} cliente ;
 
 cliente *prueba[100];
+
 cliente clientes[100];
 int count[1];
 

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1667571706 source:c:\users\gustavo\documents\github\ci-2126\equipo red\main.c
+1667777158 source:c:\users\gustavo\documents\github\ci-2126\equipo red\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -24,6 +24,13 @@
 
 1667770289 source:c:\users\gustavo\documents\github\ci-2126\equipo red\gestordeproductos.c
 	"gestorDeProductos.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1667777415 source:c:\users\gustavo\documents\github\ci-2126\equipo red\login.c
+	"Login.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
