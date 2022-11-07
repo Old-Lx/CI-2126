@@ -13,6 +13,7 @@
 
 producto *prueba[100];
 producto productos[100];
+int count[1];
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
 producto *abrirBDDProductos() {
@@ -28,8 +29,8 @@ producto *abrirBDDProductos() {
 
     char buff[1024]; //guarda las primeras 1024 líneas en un buffer
     int column = 0;
-    int count = 0;
     int i = 0;
+    count[0] = 0;
 
     while (fgets(buff, 1024, bddpcsv)) {
 
@@ -38,7 +39,7 @@ producto *abrirBDDProductos() {
 
         while (entrada) {
 
-            if (count != 0) {
+            if (count[0] != 0) {
 
 
                 if (column == 0) {
@@ -65,7 +66,7 @@ producto *abrirBDDProductos() {
 
             entrada = strtok(NULL, ";");
             column++;
-            count++;
+            count[0]++;
             };
         };
 
@@ -73,6 +74,14 @@ producto *abrirBDDProductos() {
         i++;
 
     };
+
+    fclose(bddpcsv);
+
+    bddpcsv = fopen("productos.csv", "r");
+
+    while (fgets(buff, 1024, bddpcsv)) {
+        count[0]++;
+    }
 
     fclose(bddpcsv);
 
@@ -128,30 +137,24 @@ producto nuevoProducto() {
 int guardarProducto(producto nuevo) {
 
     FILE *bddpcsv;
-    bddpcsv = fopen("productos.csv", "r");
 
     if (bddpcsv == NULL) {
         printf("Error al abrir la base de datos\n");
         return 1;
     }
 
-    char buff[1024];
-    int count = 0;
-
-    while (fgets(buff, 1024, bddpcsv)) {
-
-        count++;
-
-    };
-
-    fclose(bddpcsv);
 
     abrirBDDClientes();
 
     bddpcsv = fopen("productos.csv", "w");
 
+    if (bddpcsv == NULL) {
+        printf("Error al abrir la base de datos\n");
+        return 1;
+    }
 
-    for (int fila = 0; fila < count+2; fila++) {
+
+    for (int fila = 0; fila < count[0]+2; fila++) {
 
         if (fila == 0) {
             fprintf(bddpcsv,
@@ -162,7 +165,7 @@ int guardarProducto(producto nuevo) {
             "stock");
         }
 
-        if (fila < count && fila > 0) {
+        if (fila < count[0] && fila > 0) {
             fprintf(bddpcsv,
             "%s;%s;%f;%d",
             productos[fila-1].codigo,
@@ -172,9 +175,9 @@ int guardarProducto(producto nuevo) {
         };
 
 
-        if (fila == count) {
+        if (fila == count[0]) {
 
-            if (productos[count-1].codigo != NULL) {
+            if (productos[count[0]-1].codigo != NULL) {
             fprintf(bddpcsv, "%s;%s;%f;%d",
             nuevo.codigo,
             nuevo.descripcion,
