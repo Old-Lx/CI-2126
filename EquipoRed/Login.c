@@ -330,7 +330,7 @@ int guardarCliente(cliente nuevo) {
 int num_fila[1];
 
 /*Inicia sesión*/
-int login() {
+int ingresar() {
 
     printf("Ingresa tu nombre de usuario:\n");
     fflush(stdout);
@@ -352,11 +352,13 @@ int login() {
             
             if (!strcmp(clave, clientes[num_fila[0]].clave)) {
 
-                printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
+                printf("Sesión iniciada\n");
                 fflush(stdout);
                 
                 do {  
                     
+                    printf("¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
+                    fflush(stdout);
                     scanf("%s", accionCliente);
 
                     if (!strcmp(accionCliente, "1")) {
@@ -371,24 +373,26 @@ int login() {
                 
                     } else {
 
-                        printf("Opción inválida");
+                        printf("Opción inválida\n");
                         fflush(stdout);
 
                     }
                 } while (n == 0);
             } else if (strcmp(clave, clientes[num_fila[0]].clave)) {
 
-                printf("Clave incorrecta 2 intentos restantes\nIngrese su clave");
+                printf("Clave incorrecta 2 intentos restantes\nIngrese su clave:\n");
                 fflush(stdout);
                 scanf("%s", clave);
 
                 if (!strcmp(clave, clientes[num_fila[0]].clave)) {
 
-                    printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
+                    printf("Sesión iniciada\n");
                     fflush(stdout);
                     
                     do {    
-    
+                        
+                        printf("¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
+                        fflush(stdout);
                         scanf("%s", accionCliente);
 
                         if (!strcmp(accionCliente, "1")) {
@@ -403,24 +407,26 @@ int login() {
                     
                         } else {
 
-                            printf("Opción inválida");
+                            printf("Opción inválida\n");
                             fflush(stdout);
 
                         }
                     } while (n == 0);
                 } else if (strcmp(clave, clientes[num_fila[0]].clave)) {
 
-                    printf("Clave incorrecta 1 intentos restantes\nIngrese su clave");
+                    printf("Clave incorrecta 1 intentos restantes\nIngrese su clave:\n");
                     fflush(stdout);
                     scanf("%s", clave);
 
                     if (!strcmp(clave, clientes[num_fila[0]].clave)) {
 
-                        printf("Sesión iniciada\n¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
+                        printf("Sesión iniciada\n");
                         fflush(stdout);
                         
                         do {  
 
+                            printf("¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
+                            fflush(stdout);
                             scanf("%s", accionCliente);
 
                             if (!strcmp(accionCliente, "1")) {
@@ -435,7 +441,7 @@ int login() {
                         
                             } else {
 
-                                printf("Opción inválida");
+                                printf("Opción inválida\n");
                                 fflush(stdout);
 
                             }
