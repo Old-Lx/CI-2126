@@ -1,7 +1,6 @@
 nombre;correo;direccion;4219088;contactofav;username;clave;fechaNac;lugarNac;genero
-Luis;lol;lugar;0;correo;lartrax;lol;;1
-;Gus;gmail;alla;0;cel;tavo;a;;1
-;Mava;outlook;de lado;0;palomas;val;e;;2
-;Jor;yahoo;del otro;0;fax;llinas;i;;2
-;Jack;jack@correo.com;Caracas;0;telefono;jskellington;secreta7;;1;
-Benito;bmusso@conejomalo.coMrgta;Mrgta;7855;correo;bbmusso;clave;07/05/2000Bogotá;Bogotá;masculino
+Luis;lol;lugar;0;correo;lartrax;lol;;caracas;1
+Gus;gmail;alla;0;cel;tavo;a;;caracas;1
+Mava;outlook;de lado;0;palomas;val;e;;caracas;2
+Jor;yahoo;del otro;0;fax;llinas;i;;caracas;2
+Jack;jack@correo.com;Caracas;0;telefono;jskellington;secreta7;;Ciudad Bolivar;1

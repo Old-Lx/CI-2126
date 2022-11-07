@@ -228,29 +228,22 @@ int guardarCliente(cliente nuevo) {
 
 
     FILE *bddcsv;
-    bddcsv = fopen("clientes.csv", "r");
+
+
+    abrirBDDClientes();
+    printf("%d\n", count[0]);
+    
+    bddcsv = fopen("clientes.csv", "w");
 
     if (bddcsv == NULL) {
         printf("Error al abrir la base de datos\n");
         return 1;
     }
 
-    char buff[1024];
-
-    fclose(bddcsv);
-
-    printf("%d\n", count[0]);
-
-    abrirBDDClientes();
-
-    bddcsv = fopen("clientes.csv", "w");
-
-    printf("%s\n", clientes[0].lugarNacimiento);
-
     for (int fila = 0; fila < count[0]+2; fila++) {
 
         if (fila == 0) {
-            fprintf(bddcsv,
+            fprintf(bddcsv, 
             "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s\n",
             "nombre",
             "correo",
@@ -265,7 +258,7 @@ int guardarCliente(cliente nuevo) {
         }
 
         if (fila < count[0] && fila > 0) {
-            fprintf(bddcsv,
+            fprintf(bddcsv, 
             "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
             clientes[fila-1].nombre,
             clientes[fila-1].correo,
@@ -274,16 +267,16 @@ int guardarCliente(cliente nuevo) {
             clientes[fila-1].contactof,
             clientes[fila-1].username,
             clientes[fila-1].clave,
-            "fecha",
+            clientes[fila-1].fechaNacimiento,
             clientes[fila-1].lugarNacimiento,
             clientes[fila-1].genero);
-        };
 
+        }; 
+        
 
         if (fila == count[0]) {
 
-            if (clientes[count[0]-1].nombre != NULL) {
-            fprintf(bddcsv, "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
+            fprintf(bddcsv, "\n%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
             nuevo.nombre,
             nuevo.correo,
             nuevo.direccion,
@@ -294,26 +287,10 @@ int guardarCliente(cliente nuevo) {
             nuevo.fechaNacimiento,
             nuevo.lugarNacimiento,
             nuevo.genero);
-            } else {
-
-            fprintf(bddcsv,
-            "\n%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
-            nuevo.nombre,
-            nuevo.correo,
-            nuevo.direccion,
-            nuevo.telefono,
-            nuevo.contactof,
-            nuevo.username,
-            nuevo.clave,
-            nuevo.fechaNacimiento,
-            nuevo.lugarNacimiento,
-            nuevo.genero);
-
-            };
-
-
+            
+            
         };
-
+        
         if (ferror(bddcsv)) {
             printf("No se pudo agregar el cliente\n");
             return 1;
