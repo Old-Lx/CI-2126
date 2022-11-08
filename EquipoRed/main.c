@@ -8,6 +8,7 @@
 
 
 int main() {
+
     int k;
     char answer[2];
     do{
