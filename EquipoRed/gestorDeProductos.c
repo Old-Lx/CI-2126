@@ -92,7 +92,6 @@ producto nuevoProducto() {
     /*Añadir comprobación si no se encuentra en la base de datos*/
 
     fflush(stdin);
-    //system ("cls");
 
     printf("\nIngrese descripción del producto:\n");
     fgets(nuevo.descripcion, 145, stdin);
@@ -103,7 +102,7 @@ producto nuevoProducto() {
         printf("\nIngrese el precio:\n");
         scanf("%f",&nuevo.precio);
         if(nuevo.precio <= 0){
-            printf("\nOpción invalida, intente de nuevo");
+            printf("\nEste precio no puede ingresar, intente de nuevo");
             aux = 0;
         }else{
             aux = 2;
