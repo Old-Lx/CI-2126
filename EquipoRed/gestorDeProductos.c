@@ -86,18 +86,45 @@ producto nuevoProducto() {
     int n,aux;
     producto nuevo;
     printf("Solicitaremos los datos para añadir un nuevo producto:\n");
-    printf("\nIngrese código:\n");
-    fgets(nuevo.codigo, 20, stdin);
+    
+    do /*Comprobación nombre vacio*/
+    {
+        printf("\nIngrese código:\n");
+        fgets(nuevo.codigo, 20, stdin);
+        fflush(stdin);
+        //system ("cls");
+        if(nuevo.codigo[1] != '\0')
+        {
+            n = 1;
+        }
+        else
+        {
+            printf("\nNo puedes ingresar datos vacios");
+            n = 0;
+        }
+    }while (n < 1);
 
     /*Añadir comprobación si no se encuentra en la base de datos*/
 
-    fflush(stdin);
+    do /*Comprobación descripción vacio*/
+    {
+        printf("\nIngrese descripción del producto:\n");
+        fgets(nuevo.descripcion, 145, stdin);
+        fflush(stdin);
+        //system ("cls");
 
-    printf("\nIngrese descripción del producto:\n");
-    fgets(nuevo.descripcion, 145, stdin);
-    fflush(stdin);
-    //system ("cls");
+        if(nuevo.descripcion[1] != '\0')
+        {
+            n = 1;
+        }
+        else
+        {
+            printf("\nNo puedes ingresar datos vacios");
+            n = 0;
+        }
+    }while (n < 1);
 
+    
     do{
         printf("\nIngrese el precio:\n");
         scanf("%f",&nuevo.precio);
