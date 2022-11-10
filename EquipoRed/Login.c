@@ -7,7 +7,7 @@
 
 cliente *prueba[100];
 
-cliente clientes[100];
+
 int count[1];
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
@@ -111,7 +111,7 @@ cliente nuevoCliente() {
     int n, aux, conteo;
     cliente nuevo;
     printf("Bienvenido, solicitaremos tus datos para registrarte\n"); //Nombre
-    
+
     do /*Comprobación nombre vacio*/
     {
         printf("\nIngrese su nombre y apellido:\n");
@@ -128,7 +128,7 @@ cliente nuevoCliente() {
         }
     }while (n < 1);
 
-    
+
 
     do /*Verificación de correo con @ y . */
     {
@@ -153,7 +153,7 @@ cliente nuevoCliente() {
                         {
                             conteo = 0;
                         }
-                    }                                                   
+                    }
                 }
                 else
                 {
@@ -164,7 +164,7 @@ cliente nuevoCliente() {
             {
                 printf("\nCorreo no valido, revisa que tenga el \"@\" y el \".\" ");
                 printf("\n Por favor ingrese un correo Valido\n\n");
-            }            
+            }
         }else
         {
             printf("\nNo puedes ingresar correo vacio");
@@ -173,7 +173,7 @@ cliente nuevoCliente() {
         }
     } while (conteo < 1);
 
-    
+
     do /*Comprobación dirección vacio*/
     {
         printf("\nIngrese direcci�n de habitación:\n"); //Direccion
@@ -206,7 +206,7 @@ cliente nuevoCliente() {
             n = 0;
         }
     }while (n < 1);
-    
+
     do /*Comprobación username vacio*/
     {
         printf("\nIngrese un nombre de usuario:\n"); //nombre de usuario
@@ -228,7 +228,7 @@ cliente nuevoCliente() {
 
     do {/*Coincidan las claves*/
         do{/*No claves Vacias*/
-            printf("\nIngrese una nueva clave de seguridad:\n"); 
+            printf("\nIngrese una nueva clave de seguridad:\n");
             fgets(nuevo.clave, 10, stdin);
             fflush(stdin);
             if(nuevo.clave[1] != '\0')
@@ -248,7 +248,7 @@ cliente nuevoCliente() {
                 printf("\nNo puedes ingresar datos vacios");
                 n = 0;
             }
-        }while (n < 1);            
+        }while (n < 1);
     }while (n < 1);
 
 
