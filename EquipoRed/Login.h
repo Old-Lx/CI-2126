@@ -8,7 +8,18 @@
 
 
 /*Declaramos un struct para guardar clientes*/
-typedef cliente ;
+typedef struct {   
+    char nombre[20];
+    char correo[20];
+    char direccion[30];
+    int telefono;
+    char contactof[20];
+    char username[15];
+    char clave[10];
+    char fechaNacimiento[10];
+    char lugarNacimiento[20];
+    char genero[20];
+} cliente ;
 
 /*Declaramos el arreglo de todos los clientes*/
 cliente clientes[100];
