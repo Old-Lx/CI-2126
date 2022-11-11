@@ -2,17 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "Login.c"
+#include "Login.h"
 #include "gestorDeProductos.h"
 
 
 int main() {
-    print("Si eres administrador inserte clave si no, inserte [n]\n");
+    printf("Si eres administrador inserte clave si no, inserte [n]\n");
     fflush(stdin);
-    char clave_adm[1];
-    scanf("%s", clave_adm);
+    char clave_adm[10];
+    scanf("%s", &clave_adm);
+    fflush(stdin);
 
-    if (strcmp(clave_adm, "n") || strcmp(clave_adm, "N")) {
+    if (strcmp(clave_adm, "n") == 0 || strcmp(clave_adm, "N") == 0) {
         int k;
         char answer[2];
         do{
@@ -68,12 +69,13 @@ int main() {
         }}while (k<1);
 
         return 0;
-    } else if (strcmp(clave_adm, "n") || strcmp(clave_adm, "N")) {
+    } else if (strcmp(clave_adm, "admin\n") == 0 || strcmp(clave_adm, "admin") == 0) {
 
         printf("¿Que desea hacer?\n[1] Agregar producto al inventario\n[2] Actualizar informacion de un producto\n");
         fflush(stdout);
         int acc_adm;
-        scanf("%d", acc_adm);
+        scanf("%d", &acc_adm);
+        fflush(stdin);
         switch (acc_adm)
         {
         case 1:
@@ -88,6 +90,8 @@ int main() {
             break;
         }
 
+    }else {
+        printf("Opción Invalida");
     }
     return 0;
 }

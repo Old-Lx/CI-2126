@@ -353,7 +353,7 @@ cliente nuevoCliente() {
 }
 
 /*Guarda un cliente en la base de datos*/
-guardarCliente(cliente nuevo) {
+int guardarCliente(cliente nuevo) {
 
 
     FILE *bddcsv;
