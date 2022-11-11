@@ -24,7 +24,7 @@ int main() {
         fflush(stdin);
         //system ("cls");
         if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0){
-            //ingresar();
+            ingresar();
             printf("****Función en Mantenimiento, intente de nuevo más tarde****");
             k=2;
             }
