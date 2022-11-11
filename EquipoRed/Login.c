@@ -451,12 +451,12 @@ int ingresar() {
 
                     if (!strcmp(accionCliente, "1")) {
 
-                        /*modificarCliente();*/
+                        modificarCliente();
                         n = 1;
 
                     } else if (!strcmp(accionCliente, "2")) {
 
-                        printf("Esta función se encuentra en mantenimiento\n");
+                        printf("****Esta función se encuentra en mantenimiento****\n");
                         fflush(stdout);
 
                     } else {

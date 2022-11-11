@@ -25,7 +25,6 @@ int main() {
         //system ("cls");
         if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0){
             ingresar();
-            printf("****Función en Mantenimiento, intente de nuevo más tarde****");
             k=2;
             }
          else if (strcmp(answer, "N") == 0 || strcmp(answer, "n") == 0)
