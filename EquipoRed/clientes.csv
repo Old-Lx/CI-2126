@@ -1,6 +1,12 @@
-nombre;correo;direccion;telefono;contactofav;username;clave;fechaNac;lugNac;Genero
-Luis;lol@gmail.com;La Trinidad;4129853317;correo;lartrax;lol;07-06-2002;caracas;1
-Gustavo;gus@gmail.com;Chacao;4245492856;telefono;gus;a;04-01-2002;caracas;1
-Maria;mava@outlook;San Luis;4147593048;correo;val;e;05-03-2001;caracas;2
-Jorbelys;jor@gmail.com;El Hatillo;4127580049;telefono;jor;i;08-12-2003;caracas;2
-Jack;jack@correo.com;Caracas;+584121937753;telefono;jskellington;secreta7;12-08-1998;Ciudad Bolivar;1
+nombre;correo;direccion;telefono;contactofav;username;clave;fechaNac;lugarNac;genero
+Luis;lol@gmail.com;La Trinidad;0;correo;lartrax;lol;;caracas;1
+Gustavo;gus@gmail.com;Chacao;0;telefono;gus;a;;caracas;1
+Maria;mava@outlook;San Luis;0;correo;val;e;;caracas;2
+Jorbelys;jor@gmail.com;El Hatillo;0;telefono;jor;i;;caracas;2
+Jack;jack@correo.com;Caracas;0;telefono;jskellington;secreta7;;Ciudad Bolivar;1Nombre1
+;Correo1@gmail.com
+;Direccion de habitaci¢n
+;414111111;Correo;Username 1
+;clave1
+;1/01/1999;LNacimeinto 1
+;Sin especificar

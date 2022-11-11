@@ -10,7 +10,7 @@
 /*Declaramos un struct para guardar clientes*/
 typedef struct {   
     char nombre[20];
-    char correo[20];
+    char correo[30];
     char direccion[30];
     int telefono;
     char contactof[20];
