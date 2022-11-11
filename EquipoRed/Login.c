@@ -72,7 +72,7 @@ cliente *abrirBDDClientes() {
                 }
 
                 else if (column == 7) {
-                    strcpy(tempFecha, entrada);
+                    strcpy(clientes[i-1].fechaNacimiento, entrada);
                 }
 
                 else if (column == 8) {
