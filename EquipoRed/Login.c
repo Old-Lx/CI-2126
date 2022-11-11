@@ -101,7 +101,7 @@ cliente *abrirBDDClientes() {
         count[0]++;
     }
 
-
+    return 0;
 };
 
 
@@ -355,7 +355,7 @@ int guardarCliente(cliente nuevo) {
 
         if (fila == 0) {
             fprintf(bddcsv,
-            "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s\n",
+            "%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
             "nombre",
             "correo",
             "direccion",
@@ -411,7 +411,7 @@ int guardarCliente(cliente nuevo) {
 
     fclose(bddcsv);
     printf("Se agregó exitosamente a la base de datos\n");
-
+    return 0;
 };
 
 /*Fila donde se encuentra almacenado el usuario*/
@@ -550,6 +550,7 @@ int ingresar() {
 
         }
     };
+    return 0;
 }
 
 /*Modifica datos de un cliente*/
@@ -587,7 +588,7 @@ int modificarCliente(){
             break;
         case 4:
             printf("\nIngrese nuevo número de telefono:\n"); //telefono
-            fgets(clientes[num_fila[1]].telefono,12, stdin);
+            scanf("%d", &clientes[num_fila[1]].telefono);
             fflush(stdin);
             n=2;
             break;

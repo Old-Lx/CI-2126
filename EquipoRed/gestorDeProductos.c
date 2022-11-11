@@ -78,7 +78,7 @@ producto *abrirBDDProductos() {
     }
 
     fclose(bddpcsv);
-
+    return 0;
 };
 
 /*Devuelve un producto agregado*/
@@ -86,7 +86,7 @@ producto nuevoProducto() {
     int n,aux;
     producto nuevo;
     printf("Solicitaremos los datos para añadir un nuevo producto:\n");
-    
+
     do /*Comprobación nombre vacio*/
     {
         printf("\nIngrese código:\n");
@@ -124,7 +124,7 @@ producto nuevoProducto() {
         }
     }while (n < 1);
 
-    
+
     do{
         printf("\nIngrese el precio:\n");
         scanf("%f",&nuevo.precio);
@@ -150,6 +150,7 @@ producto nuevoProducto() {
         fflush(stdin);
         //system ("cls");
     }while (aux < 1);
+    return nuevo;
 }
 
 
@@ -226,5 +227,5 @@ int guardarProducto(producto nuevo) {
 
     fclose(bddpcsv);
     printf("Se agregó exitosamente a la base de datos\n");
-
+    return 0;
 };
