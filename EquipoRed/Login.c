@@ -355,7 +355,7 @@ int guardarCliente(cliente nuevo) {
 
         if (fila == 0) {
             fprintf(bddcsv,
-            "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s\n",
+            "%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
             "nombre",
             "correo",
             "direccion",
