@@ -551,3 +551,157 @@ int ingresar() {
         }
     };
 }
+
+/*Modifica datos de un cliente*/
+int modificarCliente(){
+    int cambiar;
+    int dato;
+    int n, aux;
+    char comprClave[10];
+    printf("\nDesea cambiar un dato?:\n [1] SI\n [2] NO\n");
+    scanf("%d", &cambiar);
+    if (cambiar==1)
+    {
+
+        do{
+        printf("\nQue dato quiere cambiar?:\n [1] Nombre\n [2] Correo\n [3] Direccion\n [4] Telefono\n [5] Contactof\n [6] Username\n [7] Clave\n [8] Fecha de Nacimiento\n [9] Lugar de Nacimiento\n [10] Genero");
+        scanf("%d", &dato);
+        switch (dato){
+        case 1:
+            printf("\nIngrese su nuevo nombre y apellido");
+            fgets(clientes[num_fila[1]].nombre,20, stdin);
+            fflush(stdin);
+            n=2;
+            break;
+        case 2:
+            printf("\nIngrese nueva direccion de correo electrónico:\n"); //Falta comprobacion si esta en la base de datos ya
+            fgets(clientes[num_fila[1]].correo,20, stdin);
+            fflush(stdin);
+            n=2;
+            break;
+        case 3:
+            printf("\nIngrese nueva dirección de habitación:\n"); //Direccion
+            fgets(clientes[num_fila[1]].direccion,20, stdin);
+            fflush(stdin);
+            n=2;
+            break;
+        case 4:
+            printf("\nIngrese nuevo número de telefono:\n"); //telefono
+            fgets(clientes[num_fila[1]].telefono,12, stdin);
+            fflush(stdin);
+            n=2;
+            break;
+        case 5:
+            do{// Modo de contacto favorito mediante menu
+            printf("\nSeleccione metodo de comunicación preferido:\nTelefono[1]\nCorreo[2]\n");
+            scanf("%d", &aux);
+            switch (aux)
+            {
+                case 1:
+                    strcpy(clientes[num_fila[1]].contactof, "Telefono");
+                    n=2;
+                    break;
+                case 2:
+                    strcpy(clientes[num_fila[1]].contactof, "Correo");
+                    n=2;
+                    break;
+                default:
+                    printf("\n No ingresaste una opcion valida, selecciona nuevamente:");
+                    n=0;
+                    break;
+            }
+            }while (n<1 );
+                fflush(stdin);
+                n=2;
+                break;
+        case 6:
+            printf("\nIngrese nuevo Nombre de usuario:\n");//Falta comprobacion si esta en la base de datos ya
+            fgets(clientes[num_fila[1]].username,20, stdin);
+            fflush(stdin);
+            n=2;
+            break;
+        case 7:
+               do {/*Coincidan las claves*/
+                do{/*No claves Vacias*/
+                    printf("\nIngrese una nueva clave de seguridad:\n");
+                    fgets(clientes[num_fila[1]].clave, 10, stdin);
+                    fflush(stdin);
+                    if(clientes[num_fila[1]].clave[1] != '\0')
+                    {
+                        printf("\nCompruebe su clave de seguridad:\n");
+                        fgets(comprClave, 10, stdin);
+                        fflush(stdin);
+                        if (strcmp(clientes[num_fila[1]].clave, comprClave) == 0) {
+                            n=2;
+                        } else {
+                            printf("\n\nLas claves NO son iguales, por favor ingresa de nuevo\n");
+                            n=0;
+                        }
+                    }
+                    else
+                    {
+                        printf("\nNo puedes ingresar datos vacios");
+                        n = 0;
+                    }
+                }while (n < 1);
+            }while (n < 1);
+            n=2;
+            break;
+        case 8:
+             do /*Comprobación dia de nacimiento vacio*/
+            {
+                printf("Ingrese nueva fecha de nacimiento:\n");
+                fgets(clientes[num_fila[1]].fechaNacimiento, 10, stdin);
+                fflush(stdin);
+                if(clientes[num_fila[1]].fechaNacimiento[1] != '\0')
+                {
+                    n = 1;
+                }
+                else
+                {
+                    printf("\nNo puedes ingresar datos vacios");
+                    n = 0;
+                }
+            }while (n < 1);
+        case 9:
+            printf("\nIngrese nuevo lugar de nacimiento:\n");
+            fgets(clientes[num_fila[1]].lugarNacimiento,20, stdin);
+            fflush(stdin);
+            n=2;
+            break;
+        case 10:
+            do{
+            printf("\nSeleccione su género:\nFemenino[1]\nMasculino[2]\nNo especificar[3]\n"); //Género mediante menu
+            scanf("%d", &aux);
+            switch (aux)
+            {
+            case 1:
+                strcpy(clientes[num_fila[1]].genero,"Femenino");
+                n=2;
+                break;
+            case 2:
+                strcpy(clientes[num_fila[1]].genero,"Masculino");
+                n=2;
+                break;
+            case 3:
+                strcpy(clientes[num_fila[1]].genero,"Sin especificar");
+                n=2;
+                break;
+            default:
+                printf("\n No ingresaste una opcion valida, selecciona nuevamente:");
+                n=0;
+                break;
+            }
+            }while (n<1 );
+            fflush(stdin);
+            n=2;
+            break;
+        default:
+            printf("\nNo es una de las opciones");
+            n=0;
+            }
+        } while (n<1 );
+
+    }
+        return 0;
+}
