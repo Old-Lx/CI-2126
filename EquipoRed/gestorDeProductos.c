@@ -73,6 +73,8 @@ producto *abrirBDDProductos() {
 
     bddpcsv = fopen("productos.csv", "r");
 
+    count[0] = 0;
+
     while (fgets(buff, 1024, bddpcsv)) {
         count[0]++;
     }
@@ -165,7 +167,7 @@ int guardarProducto(producto nuevo) {
     }
 
 
-    abrirBDDClientes();
+    abrirBDDProductos();
 
     bddpcsv = fopen("productos.csv", "w");
 
@@ -175,7 +177,7 @@ int guardarProducto(producto nuevo) {
     }
 
 
-    for (int fila = 0; fila < count[0]+2; fila++) {
+    for (int fila = 0; fila < count_p[0]+2; fila++) {
 
         if (fila == 0) {
             fprintf(bddpcsv,

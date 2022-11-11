@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "Login.h"
-#include "gestorDeProductos.h"
-/*#include <csv.h>*/
+#include "Login.c"
 
 
 int main() {

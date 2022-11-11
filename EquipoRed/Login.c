@@ -6,9 +6,8 @@
 
 
 cliente *prueba[100];
-
-
 int count[1];
+
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
 cliente *abrirBDDClientes() {
@@ -336,7 +335,7 @@ cliente nuevoCliente() {
 }
 
 /*Guarda un cliente en la base de datos*/
-int guardarCliente(cliente nuevo) {
+guardarCliente(cliente nuevo) {
 
 
     FILE *bddcsv;
@@ -451,7 +450,7 @@ int ingresar() {
 
                     if (!strcmp(accionCliente, "1")) {
 
-                        modificarCliente();
+                        /*modificarCliente();*/
                         n = 1;
 
                     } else if (!strcmp(accionCliente, "2")) {
