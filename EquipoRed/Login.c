@@ -343,7 +343,6 @@ int guardarCliente(cliente nuevo) {
 
 
     abrirBDDClientes();
-    printf("%d\n", count[0]);
 
     bddcsv = fopen("clientes.csv", "w");
 
@@ -388,7 +387,7 @@ int guardarCliente(cliente nuevo) {
 
         if (fila == count[0]) {
 
-            fprintf(bddcsv, "\n%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
+            fprintf(bddcsv, "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
             nuevo.nombre,
             nuevo.correo,
             nuevo.direccion,
