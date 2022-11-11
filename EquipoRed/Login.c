@@ -463,11 +463,11 @@ int ingresar() {
 
                     printf("¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n");
                     fflush(stdout);
-                    scanf("%s", accionCliente);
+                    scanf("%s", &accionCliente);
 
                     if (!strcmp(accionCliente, "1")) {
 
-                        /*modificarCliente();*/
+                        modificarCliente();
                         n = 1;
 
                     } else if (!strcmp(accionCliente, "2")) {
@@ -586,25 +586,25 @@ int modificarCliente(){
         switch (dato){
         case 1:
             printf("\nIngrese su nuevo nombre y apellido");
-            fgets(clientes[num_fila[1]].nombre,20, stdin);
+            fgets(clientes[num_fila[0]].nombre,20, stdin);
             fflush(stdin);
             n=2;
             break;
         case 2:
             printf("\nIngrese nueva direccion de correo electrónico:\n"); //Falta comprobacion si esta en la base de datos ya
-            fgets(clientes[num_fila[1]].correo,20, stdin);
+            fgets(clientes[num_fila[0]].correo,20, stdin);
             fflush(stdin);
             n=2;
             break;
         case 3:
             printf("\nIngrese nueva dirección de habitación:\n"); //Direccion
-            fgets(clientes[num_fila[1]].direccion,20, stdin);
+            fgets(clientes[num_fila[0]].direccion,20, stdin);
             fflush(stdin);
             n=2;
             break;
         case 4:
             printf("\nIngrese nuevo número de telefono:\n"); //telefono
-            scanf("%d", &clientes[num_fila[1]].telefono);
+            scanf("%d", &clientes[num_fila[0]].telefono);
             fflush(stdin);
             n=2;
             break;
@@ -615,11 +615,11 @@ int modificarCliente(){
             switch (aux)
             {
                 case 1:
-                    strcpy(clientes[num_fila[1]].contactof, "Telefono");
+                    strcpy(clientes[num_fila[0]].contactof, "Telefono");
                     n=2;
                     break;
                 case 2:
-                    strcpy(clientes[num_fila[1]].contactof, "Correo");
+                    strcpy(clientes[num_fila[0]].contactof, "Correo");
                     n=2;
                     break;
                 default:
@@ -633,7 +633,7 @@ int modificarCliente(){
                 break;
         case 6:
             printf("\nIngrese nuevo Nombre de usuario:\n");//Falta comprobacion si esta en la base de datos ya
-            fgets(clientes[num_fila[1]].username,20, stdin);
+            fgets(clientes[num_fila[0]].username,20, stdin);
             fflush(stdin);
             n=2;
             break;
@@ -641,14 +641,14 @@ int modificarCliente(){
                do {/*Coincidan las claves*/
                 do{/*No claves Vacias*/
                     printf("\nIngrese una nueva clave de seguridad:\n");
-                    fgets(clientes[num_fila[1]].clave, 10, stdin);
+                    fgets(clientes[num_fila[0]].clave, 10, stdin);
                     fflush(stdin);
-                    if(clientes[num_fila[1]].clave[1] != '\0')
+                    if(clientes[num_fila[0]].clave[1] != '\0')
                     {
                         printf("\nCompruebe su clave de seguridad:\n");
                         fgets(comprClave, 10, stdin);
                         fflush(stdin);
-                        if (strcmp(clientes[num_fila[1]].clave, comprClave) == 0) {
+                        if (strcmp(clientes[num_fila[0]].clave, comprClave) == 0) {
                             n=2;
                         } else {
                             printf("\n\nLas claves NO son iguales, por favor ingresa de nuevo\n");
@@ -668,9 +668,9 @@ int modificarCliente(){
              do /*Comprobación dia de nacimiento vacio*/
             {
                 printf("Ingrese nueva fecha de nacimiento:\n");
-                fgets(clientes[num_fila[1]].fechaNacimiento, 10, stdin);
+                fgets(clientes[num_fila[0]].fechaNacimiento, 10, stdin);
                 fflush(stdin);
-                if(clientes[num_fila[1]].fechaNacimiento[1] != '\0')
+                if(clientes[num_fila[0]].fechaNacimiento[1] != '\0')
                 {
                     n = 1;
                 }
@@ -682,7 +682,7 @@ int modificarCliente(){
             }while (n < 1);
         case 9:
             printf("\nIngrese nuevo lugar de nacimiento:\n");
-            fgets(clientes[num_fila[1]].lugarNacimiento,20, stdin);
+            fgets(clientes[num_fila[0]].lugarNacimiento,20, stdin);
             fflush(stdin);
             n=2;
             break;
@@ -693,15 +693,15 @@ int modificarCliente(){
             switch (aux)
             {
             case 1:
-                strcpy(clientes[num_fila[1]].genero,"Femenino");
+                strcpy(clientes[num_fila[0]].genero,"Femenino");
                 n=2;
                 break;
             case 2:
-                strcpy(clientes[num_fila[1]].genero,"Masculino");
+                strcpy(clientes[num_fila[0]].genero,"Masculino");
                 n=2;
                 break;
             case 3:
-                strcpy(clientes[num_fila[1]].genero,"Sin especificar");
+                strcpy(clientes[num_fila[0]].genero,"Sin especificar");
                 n=2;
                 break;
             default:
