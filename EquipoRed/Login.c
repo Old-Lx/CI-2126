@@ -8,6 +8,9 @@
 cliente *prueba[100];
 int count[1];
 
+/*Fila donde se encuentra almacenado el usuario*/
+int num_fila[1];
+
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
 cliente *abrirBDDClientes() {
@@ -413,8 +416,7 @@ guardarCliente(cliente nuevo) {
     return 0;
 };
 
-/*Fila donde se encuentra almacenado el usuario*/
-int num_fila[1];
+
 
 /*Inicia sesión*/
 int ingresar() {
