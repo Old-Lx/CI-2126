@@ -243,6 +243,7 @@ int modificarProducto(){
     if (modificar==1)
     {
         do{
+
         printf("\nQue dato quiere modificar?:\n [1] Codigo\n [2] Descripcion\n [3] Precio\n [4] Stock\n");
         scanf("%d", &cambio);
         switch (cambio){

@@ -58,14 +58,14 @@
 	<math.h>
 	"gestorDeProductos.h"
 
-1668174632 source:c:\users\gustavo\documents\github\ci-2126\equipored\gestordeproductos.c
+1668181464 source:c:\users\gustavo\documents\github\ci-2126\equipored\gestordeproductos.c
 	"gestorDeProductos.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<math.h>
 
-1668178438 source:c:\users\gustavo\documents\github\ci-2126\equipored\login.c
+1668178805 source:c:\users\gustavo\documents\github\ci-2126\equipored\login.c
 	"Login.h"
 	<stdio.h>
 	<stdlib.h>
