@@ -93,6 +93,7 @@ producto nuevoProducto() {
     {
         printf("\nIngrese código:\n");
         fgets(nuevo.codigo, 20, stdin);
+        nuevo.codigo[strcspn(nuevo.codigo,"\n")] = 0;
         fflush(stdin);
         //system ("cls");
         if(nuevo.codigo[1] != '\0')
@@ -112,6 +113,7 @@ producto nuevoProducto() {
     {
         printf("\nIngrese descripción del producto:\n");
         fgets(nuevo.descripcion, 145, stdin);
+        nuevo.descripcion[strcspn(nuevo.descripcion,"\n")] = " ";
         fflush(stdin);
         //system ("cls");
 
@@ -177,7 +179,7 @@ int guardarProducto(producto nuevo) {
     }
 
 
-    for (int fila = 0; fila < count_p[0]+2; fila++) {
+    for (int fila = 0; fila < count[0]+2; fila++) {
 
         if (fila == 0) {
             fprintf(bddpcsv,
@@ -231,3 +233,94 @@ int guardarProducto(producto nuevo) {
     printf("Se agregó exitosamente a la base de datos\n");
     return 0;
 };
+
+/*Modifica un producto existente*/
+int modificarProducto(){
+    int cambio;
+    int modificar, n, aux;
+    printf("\nDesea modificar un producto?:\n [1] SI\n [2] NO\n");
+    scanf("%d", &modificar);
+    if (modificar==1)
+    {
+        do{
+        printf("\nQue dato quiere modificar?:\n [1] Codigo\n [2] Descripcion\n [3] Precio\n [4] Stock\n");
+        scanf("%d", &cambio);
+        switch (cambio){
+        case 1:
+                do /*Comprobación nombre vacio*/
+        {
+                printf("\nIngrese nuevo código:\n");
+                fgets(productos[count[0]].codigo, 20, stdin);
+                fflush(stdin);
+        if(productos[count[0]].codigo != '\0')
+        {
+            n = 1;
+        }
+        else
+        {
+            printf("\nNo puedes ingresar datos vacios");
+            n = 0;
+        }
+        }while (n < 1);
+            n=2;
+            break;
+        case 2:
+            do
+        {
+        printf("\nIngrese nueva descripción del producto:\n");
+        fgets(productos[count[0]].descripcion, 145, stdin);
+        fflush(stdin);
+        //system ("cls");
+
+        if(productos[count[0]].descripcion[1] != '\0')
+        {
+            n = 1;
+        }
+        else
+        {
+            printf("\nNo puedes ingresar datos vacios");
+            n = 0;
+        }
+        }while (n < 1);
+            n=2;
+            break;
+        case 3:
+            do{
+        printf("\nIngrese el nuevo precio:\n");
+        scanf("%f",&productos[count[0]].precio);
+        if(productos[count[0]].precio <= 0){
+            printf("\nEste precio no puede ingresar, intente de nuevo");
+            aux = 0;
+        }else{
+            aux = 2;
+        };
+        fflush(stdin);
+        //system ("cls");
+        }while (aux < 1);
+            n=2;
+            break;
+        case 4:
+            do{/*¨Comprobación de stock*/
+        printf("\nIngrese la nueva cantidad de productos disponibles:\n");
+        scanf("%i",&productos[count[0]].stock);
+        if(productos[count[0]].stock <= 0){
+            printf("\nOpción invalida, intente de nuevo");
+            aux = 0;
+        }else{
+            aux = 2;
+        };
+        fflush(stdin);
+        //system ("cls");
+    }while (aux < 1);
+            n=2;
+            break;
+        default:
+            printf("\nNo es una de las opciones");
+            n=0;
+            }
+        } while (n<1 );
+
+    }
+        return 0;
+
+}

@@ -117,7 +117,9 @@ cliente nuevoCliente() {
     do /*Comprobación nombre vacio*/
     {
         printf("\nIngrese su nombre y apellido:\n");
+        fflush(stdin);
         fgets(nuevo.nombre, 20, stdin);
+        nuevo.nombre[strcspn(nuevo.nombre,"\n")] = 0;
         fflush(stdin);
         if(nuevo.nombre[1] != '\0')
         {
@@ -135,7 +137,9 @@ cliente nuevoCliente() {
     do /*Verificación de correo con @ y . */
     {
         printf("\nIngrese direccion de correo electrónico:\n"); //corrreo
+        fflush(stdin);
         fgets(nuevo.correo, 30, stdin);
+        nuevo.correo[strcspn(nuevo.correo,"\n")] = 0;
         fflush(stdin);
         if(nuevo.correo[1] != '\0')
         {
@@ -179,7 +183,9 @@ cliente nuevoCliente() {
     do /*Comprobación dirección vacio*/
     {
         printf("\nIngrese direcci�n de habitación:\n"); //Direccion
+        fflush(stdin);
         fgets(nuevo.direccion, 30, stdin);
+        nuevo.direccion[strcspn(nuevo.direccion,"\n")] = 0;
         fflush(stdin);
         if(nuevo.direccion[1] != '\0')
         {
@@ -195,6 +201,7 @@ cliente nuevoCliente() {
     do /*Comprobación telefono vacio*/
     {
         printf("\nIngrese número de telefono (Solo números):\n"); //telefono
+        fflush(stdin);
         scanf("%d", &nuevo.telefono);
         fflush(stdin);
         //system ("cls");
@@ -212,7 +219,9 @@ cliente nuevoCliente() {
     do /*Comprobación username vacio*/
     {
         printf("\nIngrese un nombre de usuario:\n"); //nombre de usuario
+        fflush(stdin);
         fgets(nuevo.username, 15, stdin);
+        nuevo.username[strcspn(nuevo.username,"\n")] = 0;
         fflush(stdin);
         //system ("cls");
         if(nuevo.username[1] != '\0')
@@ -231,6 +240,7 @@ cliente nuevoCliente() {
     do {/*Coincidan las claves*/
         do{/*No claves Vacias*/
             printf("\nIngrese una nueva clave de seguridad:\n");
+            fflush(stdin);
             fgets(nuevo.clave, 10, stdin);
             fflush(stdin);
             if(nuevo.clave[1] != '\0')
@@ -240,6 +250,7 @@ cliente nuevoCliente() {
                 fflush(stdin);
                 if (strcmp(nuevo.clave, comprClave) == 0) {
                     n=2;
+                    nuevo.clave[strcspn(nuevo.clave,"\n")] = 0;
                 } else {
                     printf("\n\nLas claves NO son iguales, por favor ingresa de nuevo\n");
                     n=0;
@@ -251,13 +262,16 @@ cliente nuevoCliente() {
                 n = 0;
             }
         }while (n < 1);
+
     }while (n < 1);
 
 
     do /*Comprobación dia de nacimiento vacio*/
     {
         printf("Ingrese fecha de nacimiento:\n");
+        fflush(stdin);
         fgets(nuevo.fechaNacimiento, 10, stdin);
+        nuevo.fechaNacimiento[strcspn(nuevo.fechaNacimiento,"\n")] = 0;
         fflush(stdin);
         if(nuevo.fechaNacimiento[1] != '\0')
         {
@@ -274,6 +288,7 @@ cliente nuevoCliente() {
     {
         printf("\nIngrese lugar de nacimiento:\n");//Lugar de nacimiento
         fgets(nuevo.lugarNacimiento, 20, stdin);
+        nuevo.lugarNacimiento[strcspn(nuevo.lugarNacimiento,"\n")] = 0;
         fflush(stdin);
         if(nuevo.lugarNacimiento[1] != '\0')
         {
