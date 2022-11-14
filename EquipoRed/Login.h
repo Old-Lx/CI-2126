@@ -776,9 +776,9 @@ int ingresar() {
             }
 
 
-        } else if (i == count_c[0]) {
+        } else if (i == count_c[0]-1) {
 
-            printf("El usuario no se encuentra registrado\n");
+            printf("El usuario '%s' no se encuentra registrado\n", usuario);
             return 1;
 
         }
