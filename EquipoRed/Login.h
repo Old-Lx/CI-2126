@@ -12,7 +12,7 @@ typedef struct {
     char nombre[20];
     char correo[20];
     char direccion[30];
-    long telefono;
+    unsigned long telefono;
     char contactof[20];
     char username[15];
     char clave[10];
@@ -75,7 +75,7 @@ cliente *abrirBDDClientes() {
 
                 else if (column == 3) {
                     strcpy(tempTelf, entrada);
-                    clientes[i-1].telefono = ( long) tempTelf;
+                    clientes[i-1].telefono = ( unsigned long) tempTelf;
                 }
 
                 else if (column == 4) {
@@ -221,7 +221,7 @@ cliente nuevoCliente() {
     {
         printf("\nIngrese número de telefono (Solo números):\n"); //telefono
         fflush(stdout);
-        scanf("%Ld", &nuevo.telefono);
+        scanf("%lu", &nuevo.telefono);
         fflush(stdin);
         //system ("cls");
         if(nuevo.telefono != '\0')
@@ -410,7 +410,7 @@ int guardarCliente(cliente nuevo) {
 
         if (fila < count_c[0] && fila > 0) {
             fprintf(bddcsv,
-            "%s;%s;%s;%Ld;%s;%s;%s;%s;%s;%s",
+            "%s;%s;%s;%lu;%s;%s;%s;%s;%s;%s",
             clientes[fila-1].nombre,
             clientes[fila-1].correo,
             clientes[fila-1].direccion,
@@ -427,7 +427,7 @@ int guardarCliente(cliente nuevo) {
 
         if (fila == count_c[0]) {
 
-            fprintf(bddcsv, "\n%s;%s;%s;%Ld;%s;%s;%s;%s;%s;%s",
+            fprintf(bddcsv, "\n%s;%s;%s;%lu;%s;%s;%s;%s;%s;%s",
             nuevo.nombre,
             nuevo.correo,
             nuevo.direccion,
@@ -491,7 +491,7 @@ int modificarCliente(){
             break;
         case 4:
             printf("\nIngrese nuevo número de telefono:\n"); //telefono
-            scanf("%d", &clientes[num_fila[0]].telefono);
+            scanf("%lu", &clientes[num_fila[0]].telefono);
             fflush(stdin);
             n=2;
             break;
@@ -613,7 +613,7 @@ int modificarCliente(){
 
 /*Muestra los datos del cliente*/
 void mostrarDatosCliente(int filaDelCliente) {
-    printf("Estos son tus datos:\nNombre: %s\nCorreo: %s\nDirección: %s\nTeléfono: %d\nMétodo de contacto preferido: %s\n"
+    printf("Estos son tus datos:\nNombre: %s\nCorreo: %s\nDirección: %s\nTeléfono: %lu\nMétodo de contacto preferido: %s\n"
     "Nombre de usuario: %s\nClave: %s\nFecha de nacimiento: %s\nLugar de Nacimiento: %s\nGénero: %s\n",
     clientes[filaDelCliente].nombre,
     clientes[filaDelCliente].correo,

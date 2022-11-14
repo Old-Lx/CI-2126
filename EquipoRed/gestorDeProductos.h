@@ -61,7 +61,7 @@ producto *abrirBDDProductos() {
 
                     char temp[20];
                     strcpy(temp, entrada);
-                    productos[i-1].precio = (int) temp;
+                    productos[i-1].precio = ( int) temp;
                 }
 
                 else if (column == 3) {
@@ -166,6 +166,7 @@ producto nuevoProducto() {
     do{/*¨Comprobación de stock*/
         printf("\nIngrese la cantidad de productos disponibles: %d\n", nuevo.stock);
         fflush(stdout);
+        fflush(stdin);
         scanf("%d", &nuevo.stock);
         fflush(stdin);
         if(nuevo.stock > 10){
