@@ -189,12 +189,6 @@ int guardarProducto(producto nuevo) {
 
     FILE *bddpcsv;
 
-    if (bddpcsv == NULL) {
-        printf("Error al abrir la base de datos\n");
-        return 1;
-    }
-
-
     abrirBDDProductos();
 
     bddpcsv = fopen("productos.csv", "w");
