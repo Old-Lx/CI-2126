@@ -38,6 +38,7 @@ producto *abrirBDDProductos() {
     int column = 0;
     int i = 0;
     count[0] = 0;
+    char tempPrecio[20];
 
     while (fgets(buff, 1024, bddpcsv)) {
 
@@ -59,9 +60,8 @@ producto *abrirBDDProductos() {
 
                 else if (column == 2) {
 
-                    char temp[20];
-                    strcpy(temp, entrada);
-                    productos[i-1].precio = ( int) temp;
+                    strcpy(tempPrecio, entrada);
+                    productos[i-1].precio = ( double) atof(tempPrecio);
                 }
 
                 else if (column == 3) {
