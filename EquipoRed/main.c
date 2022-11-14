@@ -8,6 +8,7 @@
 
 int main() {
     printf("Si eres administrador inserte clave si no, inserte [n]\n");
+    fflush(stdout);
     fflush(stdin);
     char clave_adm[10];
     scanf("%s", &clave_adm);
@@ -18,6 +19,7 @@ int main() {
         char answer[2];
         do{
         printf("\nBienvenido!\nEstas registrado en nuestra tienda?\n[S] si\n[N] no\nIngrese su respuesta:  \n");
+        fflush(stdout);
         fgets(answer, 2, stdin);
         fflush(stdin);
         //system ("cls");
@@ -25,6 +27,7 @@ int main() {
         if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0) {
             do{
             printf("Quieres Iniciar Sesion?\n[S] si\n[N] no\nIngrese su respuesta:  ");
+            fflush(stdout);
             fgets(answer, 2, stdin);
             fflush(stdin);
             //system ("cls");
@@ -46,6 +49,7 @@ int main() {
         else if (strcmp(answer, "N") == 0 || strcmp(answer, "n") == 0){
             do{
             printf("Quieres Registrarte?\n[S] si\n[N] no\nIngrese su respuesta:  ");
+            fflush(stdout);
             fgets(answer, 2, stdin);
             fflush(stdin);
             //system ("cls");
