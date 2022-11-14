@@ -12,7 +12,7 @@ typedef struct {
     char nombre[20];
     char correo[20];
     char direccion[30];
-    int telefono;
+    long telefono;
     char contactof[20];
     char username[15];
     char clave[10];
@@ -75,7 +75,7 @@ cliente *abrirBDDClientes() {
 
                 else if (column == 3) {
                     strcpy(tempTelf, entrada);
-                    clientes[i-1].telefono = ( int) tempTelf;
+                    clientes[i-1].telefono = ( long) tempTelf;
                 }
 
                 else if (column == 4) {
@@ -221,7 +221,7 @@ cliente nuevoCliente() {
     {
         printf("\nIngrese número de telefono (Solo números):\n"); //telefono
         fflush(stdout);
-        scanf("%d", &nuevo.telefono);
+        scanf("%Ld", &nuevo.telefono);
         fflush(stdin);
         //system ("cls");
         if(nuevo.telefono != '\0')
@@ -410,7 +410,7 @@ int guardarCliente(cliente nuevo) {
 
         if (fila < count_c[0] && fila > 0) {
             fprintf(bddcsv,
-            "%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
+            "%s;%s;%s;%Ld;%s;%s;%s;%s;%s;%s",
             clientes[fila-1].nombre,
             clientes[fila-1].correo,
             clientes[fila-1].direccion,
@@ -427,7 +427,7 @@ int guardarCliente(cliente nuevo) {
 
         if (fila == count_c[0]) {
 
-            fprintf(bddcsv, "\n%s;%s;%s;%d;%s;%s;%s;%s;%s;%s",
+            fprintf(bddcsv, "\n%s;%s;%s;%Ld;%s;%s;%s;%s;%s;%s",
             nuevo.nombre,
             nuevo.correo,
             nuevo.direccion,

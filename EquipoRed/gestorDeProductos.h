@@ -167,6 +167,7 @@ producto nuevoProducto() {
         printf("\nIngrese la cantidad de productos disponibles: %d\n", nuevo.stock);
         fflush(stdout);
         scanf("%d", &nuevo.stock);
+        fflush(stdin);
         if(nuevo.stock > 10){
             printf("\nOpción invalida, intente de nuevo");
             n = 0;
