@@ -612,7 +612,7 @@ int modificarCliente(){
 
 
 /*Muestra los datos del cliente*/
-void mostrarDatos(int filaDelCliente) {
+void mostrarDatosCliente(int filaDelCliente) {
     printf("Estos son tus datos:\nNombre: %s\nCorreo: %s\nDirección: %s\nTeléfono: %d\nMétodo de contacto preferido: %s\n"
     "Nombre de usuario: %s\nClave: %s\nFecha de nacimiento: %s\nLugar de Nacimiento: %s\nGénero: %s\n",
     clientes[filaDelCliente].nombre,
@@ -648,7 +648,7 @@ void operacionCliente() {
 
                 } else if (!strcmp(accionCliente, "3")) {
 
-                    mostrarDatos(num_fila[0]);
+                    mostrarDatosCliente(num_fila[0]);
                     fflush(stdout);
 
                 } else {
