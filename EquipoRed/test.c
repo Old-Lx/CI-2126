@@ -1,15 +1,7 @@
-///
-///Gestor de productos
-///
-
-#ifndef _gestorDeProductos_h_
-#define _gestorDeProductos_h_
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "gestorDeProductos.h"
-
 
 /*Declaramos un struct para guardar productos*/
 typedef struct {
@@ -19,8 +11,9 @@ typedef struct {
         int stock;
 }producto ;
 
-int count[1];
+producto *prueba[100];
 producto productos[100];
+int count[1];
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
 producto *abrirBDDProductos() {
@@ -38,7 +31,6 @@ producto *abrirBDDProductos() {
     int column = 0;
     int i = 0;
     count[0] = 0;
-    char tempPrecio[20];
 
     while (fgets(buff, 1024, bddpcsv)) {
 
@@ -60,8 +52,9 @@ producto *abrirBDDProductos() {
 
                 else if (column == 2) {
 
-                    strcpy(tempPrecio, entrada);
-                    productos[i-1].precio = ( double) atof(tempPrecio);
+                    char temp[20];
+                    strcpy(temp, entrada);
+                    productos[i-1].precio = (int) temp;
                 }
 
                 else if (column == 3) {
@@ -69,15 +62,14 @@ producto *abrirBDDProductos() {
                     strcpy(tempStock, entrada);
                     productos[i-1].stock = (int) tempStock;
                 };
-                column++;
-                count[0]++;
-            };
+
+
             entrada = strtok(NULL, ";");
+            column++;
+            count[0]++;
+            };
         };
-        printf("%s, %s, %f, %d\n", productos[i-1].codigo,
-        productos[i-1].descripcion,
-        productos[i-1].precio,
-        productos[i-1].stock);
+
         column = 0;
         i++;
 
@@ -99,14 +91,13 @@ producto *abrirBDDProductos() {
 
 /*Devuelve un producto agregado*/
 producto nuevoProducto() {
-    int n;
+    int n,aux;
     producto nuevo;
     printf("Solicitaremos los datos para añadir un nuevo producto:\n");
 
     do /*Comprobación nombre vacio*/
     {
         printf("\nIngrese código:\n");
-        fflush(stdout);
         fgets(nuevo.codigo, 20, stdin);
         nuevo.codigo[strcspn(nuevo.codigo,"\n")] = 0;
         fflush(stdin);
@@ -127,9 +118,8 @@ producto nuevoProducto() {
     do /*Comprobación descripción vacio*/
     {
         printf("\nIngrese descripción del producto:\n");
-        fflush(stdout);
         fgets(nuevo.descripcion, 145, stdin);
-        nuevo.descripcion[strcspn(nuevo.descripcion,"\n")] = 0;
+        nuevo.descripcion[strcspn(nuevo.descripcion,"\n")] = " ";
         fflush(stdin);
         //system ("cls");
 
@@ -147,42 +137,43 @@ producto nuevoProducto() {
 
     do{
         printf("\nIngrese el precio:\n");
-        fflush(stdout);
         scanf("%f",&nuevo.precio);
-        fflush(stdin);
-        if(nuevo.precio > 10){
-            printf("\nEste precio no puede ingresar, intente de nuevo\n");
-            fflush(stdout);
-            n = 0;
+        if(nuevo.precio <= 0){
+            printf("\nEste precio no puede ingresar, intente de nuevo");
+            aux = 0;
         }else{
-            n = 2;
+            aux = 2;
         };
+        fflush(stdin);
         //system ("cls");
-    }while (n < 1);
+    }while (aux < 1);
 
-    /*¨Comprobación de stock*/
-    do{
-        printf("\nIngrese la cantidad de productos disponibles: %d\n", nuevo.stock);
-        fflush(stdout);
-        fflush(stdin);
-        scanf("%d", &nuevo.stock);
-        fflush(stdin);
-        if(nuevo.stock > 10){
+    do{/*¨Comprobación de stock*/
+        printf("\nIngrese la cantidad de productos disponibles:\n");
+        scanf("%i",&nuevo.stock);
+        if(nuevo.stock <= 0){
             printf("\nOpción invalida, intente de nuevo");
-            n = 0;
+            aux = 0;
         }else{
-            n = 2;
+            aux = 2;
         };
+        fflush(stdin);
         //system ("cls");
-    }while (n < 1);
-
+    }while (aux < 1);
     return nuevo;
 }
 
 
 /*Guarda un producto en la base de datos*/
 int guardarProducto(producto nuevo) {
+
     FILE *bddpcsv;
+
+    if (bddpcsv == NULL) {
+        printf("Error al abrir la base de datos\n");
+        return 1;
+    }
+
 
     abrirBDDProductos();
 
@@ -214,7 +205,16 @@ int guardarProducto(producto nuevo) {
             productos[fila-1].stock);
         };
 
+
         if (fila == count[0]) {
+
+            if (productos[count[0]-1].codigo != NULL) {
+            fprintf(bddpcsv, "%s;%s;%f;%d",
+            nuevo.codigo,
+            nuevo.descripcion,
+            nuevo.precio,
+            nuevo.stock);
+            } else {
 
             fprintf(bddpcsv,
             "\n%s;%s;%f;%d",
@@ -222,6 +222,9 @@ int guardarProducto(producto nuevo) {
             nuevo.descripcion,
             nuevo.precio,
             nuevo.stock);
+
+            };
+
 
         };
 
@@ -328,4 +331,3 @@ int modificarProducto(){
 
 }
 
-#endif
