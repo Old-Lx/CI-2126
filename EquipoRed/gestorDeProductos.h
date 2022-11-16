@@ -160,7 +160,7 @@ producto nuevoProducto() {
 
     /*¨Comprobación de stock*/
     do{
-        printf("\nIngrese la cantidad de productos disponibles: %d\n", nuevo.stock);
+        printf("\nIngrese la cantidad de productos disponibles:\n");
         fflush(stdout);
         fflush(stdin);
         scanf("%d", &nuevo.stock);
