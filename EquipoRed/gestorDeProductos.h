@@ -43,39 +43,34 @@ producto *abrirBDDProductos() {
     while (fgets(buff, 1024, bddpcsv)) {
 
         char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
-        count_p[0]++;
         while (entrada) {
 
             if (count_p[0] != 0) {
 
-                printf("Columna: %d\n", column);
                 if (column == 0) {
-                    strcpy(productos[i-1].codigo, entrada);
+                    strcpy(productos[i].codigo, entrada);
                 }
 
                 else if (column == 1) {
-                    strcpy(productos[i-1].descripcion, entrada);
+                    strcpy(productos[i].descripcion, entrada);
                 }
 
                 else if (column == 2) {
 
                     strcpy(tempPrecio, entrada);
-                    productos[i-1].precio = ( double) atof(tempPrecio);
+                    productos[i].precio = atof(tempPrecio);
                 }
 
                 else if (column == 3) {
                     char tempStock[20];
                     strcpy(tempStock, entrada);
-                    productos[i-1].stock = (int) tempStock;
+                    productos[i].stock = atoi(tempStock);
                 };
             };
             column++;
             entrada = strtok(NULL, ";");
+            count_p[0]++;
         };
-        /*printf("%s, %s, %f, %d\n", productos[i-1].codigo,
-        productos[i-1].descripcion,
-        productos[i-1].precio,
-        productos[i-1].stock);*/
         column = 0;
         i++;
 
@@ -206,10 +201,10 @@ int guardarProducto(producto nuevo) {
         if (fila < count_p[0] && fila > 0) {
             fprintf(bddpcsv,
             "%s;%s;%f;%d",
-            productos[fila-1].codigo,
-            productos[fila-1].descripcion,
-            productos[fila-1].precio,
-            productos[fila-1].stock);
+            productos[fila].codigo,
+            productos[fila].descripcion,
+            productos[fila].precio,
+            productos[fila].stock);
         };
 
         if (fila == count_p[0]) {
