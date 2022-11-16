@@ -631,7 +631,7 @@ void operacionCliente() {
 
     int n = 0;
     char accionCliente[1];
-    printf("¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n[3] Ver mis datos");
+    printf("¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n[3] Ver mis datos\n");
                 fflush(stdout);
                 scanf("%s", &accionCliente);
 
@@ -775,9 +775,9 @@ int ingresar() {
             }
 
 
-        } else if (i == count_c[0]-1) {
+        } else if (i == count_c[0]-1 && strcmp(usuario, clientes[num_fila[0]].username)) {
 
-            printf("El usuario '%s' no se encuentra registrado\n", usuario);
+            printf("El usuario '%s' no se encuentra registrado %s\n", usuario);
             return 1;
 
         }
