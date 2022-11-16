@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "gestorDeProductos.h"
 
 
 /*Declaramos un struct para guardar clientes*/
@@ -56,48 +55,48 @@ cliente *abrirBDDClientes() {
 
         while (entrada) {
 
-            if (count_c != 0) {
+            if (count_c[0] != 0) {
 
 
                 if (column == 0) {
-                    strcpy(clientes[i-1].nombre, entrada);
+                    strcpy(clientes[i].nombre, entrada);
                 }
 
                 else if (column == 1) {
-                    strcpy(clientes[i-1].correo, entrada);
+                    strcpy(clientes[i].correo, entrada);
                 }
 
                 else if (column == 2) {
-                    strcpy(clientes[i-1].direccion, entrada);
+                    strcpy(clientes[i].direccion, entrada);
                 }
 
                 else if (column == 3) {
                     strcpy(tempTelf, entrada);
-                    clientes[i-1].telefono = atoi(tempTelf);
+                    clientes[i].telefono = atoi(tempTelf);
                 }
 
                 else if (column == 4) {
-                    strcpy(clientes[i-1].contactof, entrada);
+                    strcpy(clientes[i].contactof, entrada);
                 }
 
                 else if (column == 5) {
-                    strcpy(clientes[i-1].username, entrada);
+                    strcpy(clientes[i].username, entrada);
                 }
 
                 else if (column == 6) {
-                    strcpy(clientes[i-1].clave, entrada);
+                    strcpy(clientes[i].clave, entrada);
                 }
 
                 else if (column == 7) {
-                    strcpy(clientes[i-1].fechaNacimiento, entrada);
+                    strcpy(clientes[i].fechaNacimiento, entrada);
                 }
 
                 else if (column == 8) {
-                    strcpy(clientes[i-1].lugarNacimiento, entrada);
+                    strcpy(clientes[i].lugarNacimiento, entrada);
                 }
 
                 else if (column == 9) {
-                    strcpy(clientes[i-1].genero, entrada);
+                    strcpy(clientes[i].genero, entrada);
                 }
             }
             entrada = strtok(NULL, ";");
@@ -107,7 +106,11 @@ cliente *abrirBDDClientes() {
         }
 
         column = 0;
-        i++;
+        if (count_c[0] >= 20) {
+            
+            i++;
+
+        }
 
     };
 

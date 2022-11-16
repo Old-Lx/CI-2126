@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "gestorDeProductos.h"
+#include "Login.h"
 
 
 /*Declaramos un struct para guardar productos*/
@@ -335,20 +336,38 @@ void mostrarBDDProductos() {
     }
 }
 
+/*Muestra base de datos de Clientes*/
+void mostrarBDDClientes() {
+    
+    abrirBDDClientes();
+    for (int i = 0; i < count_c[0]; i++) {
+
+        printf("%s  %s  %s  %lu  %s  %s  %s  %s  %s  %s\n",
+        clientes[i].nombre,
+        clientes[i].correo,
+        clientes[i].direccion,
+        clientes[i].telefono,
+        clientes[i].contactof,
+        clientes[i].username,
+        clientes[i].clave,
+        clientes[i].fechaNacimiento,
+        clientes[i].lugarNacimiento,
+        clientes[i].genero);
+
+    }
+}
+
 /*Ejecuta una operación para un administrador*/
 void operacionProductos() {
 
-    int n = 0;
     char accionCliente[1];
-    printf("¿Qué desea hacer?\n[1] Ver catálogo de productos\n[2] Modificar un producto\n[3] Agregar un producto\n");
+    printf("¿Qué desea hacer?\n[1] Ver catálogo de productos\n[2] Modificar un producto\n[3] Agregar un producto\n[4] Ver clientes\n");
                 fflush(stdout);
                 scanf("%s", &accionCliente);
 
                 if (!strcmp(accionCliente, "1")) {
 
                     mostrarBDDProductos();
-                    fflush(stdout);
-                    n = 1;
 
                 } else if (!strcmp(accionCliente, "2")) {
 
@@ -359,6 +378,11 @@ void operacionProductos() {
 
                     guardarProducto(nuevoProducto());
                     fflush(stdout);
+
+                } else if (!strcmp(accionCliente, "4")) {
+
+                    mostrarBDDClientes();
+                
 
                 } else {
 
