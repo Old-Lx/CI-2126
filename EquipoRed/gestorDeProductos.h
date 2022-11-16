@@ -19,7 +19,7 @@ typedef struct {
         int stock;
 }producto ;
 
-int count[1];
+int count_p[1];
 producto productos[100];
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
@@ -37,19 +37,18 @@ producto *abrirBDDProductos() {
     char buff[1024]; //guarda las primeras 1024 líneas en un buffer
     int column = 0;
     int i = 0;
-    count[0] = 0;
+    count_p[0] = 0;
     char tempPrecio[20];
 
     while (fgets(buff, 1024, bddpcsv)) {
 
-
         char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
-
+        count_p[0]++;
         while (entrada) {
 
-            if (count[0] != 0) {
+            if (count_p[0] != 0) {
 
-
+                printf("Columna: %d\n", column);
                 if (column == 0) {
                     strcpy(productos[i-1].codigo, entrada);
                 }
@@ -69,15 +68,14 @@ producto *abrirBDDProductos() {
                     strcpy(tempStock, entrada);
                     productos[i-1].stock = (int) tempStock;
                 };
-                column++;
-                count[0]++;
             };
+            column++;
             entrada = strtok(NULL, ";");
         };
-        printf("%s, %s, %f, %d\n", productos[i-1].codigo,
+        /*printf("%s, %s, %f, %d\n", productos[i-1].codigo,
         productos[i-1].descripcion,
         productos[i-1].precio,
-        productos[i-1].stock);
+        productos[i-1].stock);*/
         column = 0;
         i++;
 
@@ -87,10 +85,10 @@ producto *abrirBDDProductos() {
 
     bddpcsv = fopen("productos.csv", "r");
 
-    count[0] = 0;
+    count_p[0] = 0;
 
     while (fgets(buff, 1024, bddpcsv)) {
-        count[0]++;
+        count_p[0]++;
     }
 
     fclose(bddpcsv);
@@ -194,7 +192,7 @@ int guardarProducto(producto nuevo) {
     }
 
 
-    for (int fila = 0; fila < count[0]+2; fila++) {
+    for (int fila = 0; fila < count_p[0]+2; fila++) {
 
         if (fila == 0) {
             fprintf(bddpcsv,
@@ -205,7 +203,7 @@ int guardarProducto(producto nuevo) {
             "stock");
         }
 
-        if (fila < count[0] && fila > 0) {
+        if (fila < count_p[0] && fila > 0) {
             fprintf(bddpcsv,
             "%s;%s;%f;%d",
             productos[fila-1].codigo,
@@ -214,7 +212,7 @@ int guardarProducto(producto nuevo) {
             productos[fila-1].stock);
         };
 
-        if (fila == count[0]) {
+        if (fila == count_p[0]) {
 
             fprintf(bddpcsv,
             "\n%s;%s;%f;%d",
@@ -253,9 +251,9 @@ int modificarProducto(){
                 do /*Comprobación nombre vacio*/
         {
                 printf("\nIngrese nuevo código:\n");
-                fgets(productos[count[0]].codigo, 20, stdin);
+                fgets(productos[count_p[0]].codigo, 20, stdin);
                 fflush(stdin);
-        if(productos[count[0]].codigo != '\0')
+        if(productos[count_p[0]].codigo != '\0')
         {
             n = 1;
         }
@@ -271,11 +269,11 @@ int modificarProducto(){
             do
         {
         printf("\nIngrese nueva descripción del producto:\n");
-        fgets(productos[count[0]].descripcion, 145, stdin);
+        fgets(productos[count_p[0]].descripcion, 145, stdin);
         fflush(stdin);
         //system ("cls");
 
-        if(productos[count[0]].descripcion[1] != '\0')
+        if(productos[count_p[0]].descripcion[1] != '\0')
         {
             n = 1;
         }
@@ -290,8 +288,8 @@ int modificarProducto(){
         case 3:
             do{
         printf("\nIngrese el nuevo precio:\n");
-        scanf("%f",&productos[count[0]].precio);
-        if(productos[count[0]].precio <= 0){
+        scanf("%f",&productos[count_p[0]].precio);
+        if(productos[count_p[0]].precio <= 0){
             printf("\nEste precio no puede ingresar, intente de nuevo");
             aux = 0;
         }else{
@@ -305,8 +303,8 @@ int modificarProducto(){
         case 4:
             do{/*¨Comprobación de stock*/
         printf("\nIngrese la nueva cantidad de productos disponibles:\n");
-        scanf("%i",&productos[count[0]].stock);
-        if(productos[count[0]].stock <= 0){
+        scanf("%i",&productos[count_p[0]].stock);
+        if(productos[count_p[0]].stock <= 0){
             printf("\nOpción invalida, intente de nuevo");
             aux = 0;
         }else{

@@ -12,7 +12,7 @@ typedef struct {
     char nombre[20];
     char correo[20];
     char direccion[30];
-    unsigned long telefono;
+    unsigned int telefono;
     char contactof[20];
     char username[15];
     char clave[10];
@@ -21,7 +21,6 @@ typedef struct {
     char genero[20];
 } cliente ;
 
-cliente *prueba[100];
 int count_c[1];
 
 /*Fila donde se encuentra almacenado el usuario*/
@@ -75,7 +74,7 @@ cliente *abrirBDDClientes() {
 
                 else if (column == 3) {
                     strcpy(tempTelf, entrada);
-                    clientes[i-1].telefono = ( unsigned long) tempTelf;
+                    clientes[i-1].telefono = atoi(tempTelf);
                 }
 
                 else if (column == 4) {
