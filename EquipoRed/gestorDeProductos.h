@@ -72,7 +72,12 @@ producto *abrirBDDProductos() {
             count_p[0]++;
         };
         column = 0;
-        i++;
+        
+        if (count_p[0] >= 8) {
+            
+            i++;
+        
+        }
 
     };
 
@@ -200,17 +205,17 @@ int guardarProducto(producto nuevo) {
 
         if (fila < count_p[0] && fila > 0) {
             fprintf(bddpcsv,
-            "%s;%s;%f;%d",
-            productos[fila].codigo,
-            productos[fila].descripcion,
-            productos[fila].precio,
-            productos[fila].stock);
+            "%s;%s;%f;%d\n",
+            productos[fila-1].codigo,
+            productos[fila-1].descripcion,
+            productos[fila-1].precio,
+            productos[fila-1].stock);
         };
 
         if (fila == count_p[0]) {
 
             fprintf(bddpcsv,
-            "\n%s;%s;%f;%d",
+            "%s;%s;%f;%d",
             nuevo.codigo,
             nuevo.descripcion,
             nuevo.precio,
@@ -325,7 +330,7 @@ int modificarProducto(){
 void mostrarBDDProductos() {
     
     abrirBDDProductos();
-    for (int i = 0; i < count_p[0]; i++) {
+    for (int i = 0; i < count_p[0]-1; i++) {
 
         printf("%s, %s, %f, %d\n",
         productos[i].codigo,
