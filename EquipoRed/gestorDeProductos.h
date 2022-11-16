@@ -321,4 +321,77 @@ int modificarProducto(){
 
 }
 
+/*Muestra base de datos del producto*/
+void mostrarBDDProductos() {
+    
+    abrirBDDProductos();
+    for (int i = 0; i < count_p[0]; i++) {
+
+        printf("%s, %s, %f, %d\n",
+        productos[i].codigo,
+        productos[i].descripcion,
+        productos[i].precio,
+        productos[i].stock);
+
+    }
+}
+
+/*Ejecuta una operación para un administrador*/
+void operacionProductos() {
+
+    int n = 0;
+    char accionCliente[1];
+    printf("¿Qué desea hacer?\n[1] Ver catálogo de productos\n[2] Modificar un producto\n[3] Agregar un producto\n");
+                fflush(stdout);
+                scanf("%s", &accionCliente);
+
+                if (!strcmp(accionCliente, "1")) {
+
+                    mostrarBDDProductos();
+                    fflush(stdout);
+                    n = 1;
+
+                } else if (!strcmp(accionCliente, "2")) {
+
+                    modificarProducto();
+                
+
+                } else if (!strcmp(accionCliente, "3")) {
+
+                    guardarProducto(nuevoProducto());
+                    fflush(stdout);
+
+                } else {
+
+                    printf("Opción inválida\n");
+                    fflush(stdout);
+
+                }
+    
+}
+
+void ingresarAdmin() {
+
+    int n = 0;
+    char operacion[2];
+    do {
+                    printf("¿Deseas realizar alguna operación? [S]Sí [N]No\n");
+                    fflush(stdout);
+                    scanf("%s", operacion);
+                    
+                    if (!strcmp("s", operacion) || !strcmp("S", operacion)) {
+
+                        operacionProductos();
+
+                    } else if (!strcmp("n", operacion) || !strcmp("N", operacion)) {
+
+                        n = 1;
+
+                    } else {
+
+                        printf("Ingrese [S] para realizar una operacion y [N] para cerrar sesión\n");
+                    }
+        } while (n == 0);
+}
+
 #endif

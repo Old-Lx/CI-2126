@@ -7,14 +7,14 @@
 
 
 int main() {
-    printf("Si eres administrador inserte clave si no, inserte [n]\n");
+    printf("¿Eres administrador de la tienda? [S] Sí [N] No\n");
     fflush(stdout);
     fflush(stdin);
-    char clave_adm[10];
-    scanf("%s", &clave_adm);
+    char resp[10];
+    scanf("%s", &resp);
     fflush(stdin);
 
-    if (strcmp(clave_adm, "n") == 0 || strcmp(clave_adm, "N") == 0) {
+    if (strcmp(resp, "n") == 0 || strcmp(resp, "N") == 0) {
         int k;
         char answer[2];
         do{
@@ -73,25 +73,19 @@ int main() {
         }}while (k<1);
 
         return 0;
-    } else if (strcmp(clave_adm, "admin\n") == 0 || strcmp(clave_adm, "admin") == 0) {
+    } else if (strcmp(resp, "s") == 0 || strcmp(resp, "S") == 0) {
 
-        printf("¿Que desea hacer?\n[1] Agregar producto al inventario\n[2] Actualizar informacion de un producto\n");
+        printf("Ingrese clave de administrador:\n");
         fflush(stdout);
-        int acc_adm;
-        scanf("%d", &acc_adm);
         fflush(stdin);
-        switch (acc_adm)
-        {
-        case 1:
-            guardarProducto(nuevoProducto());
-            break;
+        char clave_adm[10];
+        scanf("%s", &clave_adm);
+        fflush(stdin);
 
-        case 2:
-            modificarProducto();
-            break;
-        default:
-            printf("Opcion invalida");
-            break;
+        if (strcmp(clave_adm, "admin") == 0 || strcmp(clave_adm, "admin") == 0) {
+
+            ingresarAdmin();
+            
         }
 
     }else {
