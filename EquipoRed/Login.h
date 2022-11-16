@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "gestorDeProductos.h"
 
 /*Declaramos un struct para guardar clientes*/
 typedef struct {   
@@ -644,7 +644,7 @@ void operacionCliente() {
 
                 } else if (!strcmp(accionCliente, "2")) {
 
-                    printf("****Esta función se encuentra en mantenimiento****\n");
+                    mostrarBDDProductos();
                     fflush(stdout);
 
                 } else if (!strcmp(accionCliente, "3")) {
@@ -752,8 +752,8 @@ int ingresar() {
                         do {
 
                             printf("¿Deseas realizar alguna operación? [S]Sí [N]No\n");
-                        fflush(stdout);
-                        scanf("%s", operacion[0]);
+                            fflush(stdout);
+                            scanf("%s", operacion[0]);
                         
                         if (!strcmp("s", operacion) || !strcmp("S", operacion)) {
 

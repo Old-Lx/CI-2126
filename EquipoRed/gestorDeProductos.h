@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "gestorDeProductos.h"
 #include "Login.h"
 
 
@@ -344,7 +343,8 @@ void mostrarBDDProductos() {
 /*Muestra base de datos de Clientes*/
 void mostrarBDDClientes() {
     
-    abrirBDDClientes();
+    printf("Esta función se encuentra en mantenimiento\n");
+    /*abrirBDDClientes();
     for (int i = 0; i < count_c[0]; i++) {
 
         printf("%s  %s  %s  %lu  %s  %s  %s  %s  %s  %s\n",
@@ -359,7 +359,7 @@ void mostrarBDDClientes() {
         clientes[i].lugarNacimiento,
         clientes[i].genero);
 
-    }
+    }*/
 }
 
 /*Ejecuta una operación para un administrador*/
