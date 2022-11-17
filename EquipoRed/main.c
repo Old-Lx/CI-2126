@@ -4,6 +4,7 @@
 #include <math.h>
 #include "Login.h"
 #include "gestorDeProductos.h"
+#include "gestorDeOrdenes.h"
 
 
 int main() {
@@ -85,7 +86,7 @@ int main() {
         if (strcmp(clave_adm, "admin") == 0 || strcmp(clave_adm, "admin") == 0) {
 
             ingresarAdmin();
-            
+
         }
 
     }else {

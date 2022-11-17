@@ -36,6 +36,10 @@
 		</Unit>
 		<Unit filename="Login.h" />
 		<Unit filename="clientes.csv" />
+		<Unit filename="gestorDeOrdenes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="gestorDeOrdenes.h" />
 		<Unit filename="gestorDeProductos.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -43,6 +47,7 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="ordenes.csv" />
 		<Unit filename="productos.csv" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
