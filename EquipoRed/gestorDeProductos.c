@@ -20,7 +20,7 @@ producto *abrirBDDProductos() {
         return NULL;
     }
 
-    char buff[1024]; //guarda las primeras 1024 líneas en un buffer
+    char buff[1024]; //guarda las primeras 1024 lï¿½neas en un buffer
     int column = 0;
     int i = 0;
     count_p[0] = 0;
@@ -83,21 +83,30 @@ producto *abrirBDDProductos() {
 
 /*Devuelve un producto agregado*/
 producto nuevoProducto() {
-    int n;
+    int n,i;
     producto nuevo;
-    printf("Solicitaremos los datos para añadir un nuevo producto:\n");
+    abrirBDDProductos();
+    printf("\n\nSolicitaremos los datos para agregar un nuevo producto:\n");
 
-    do /*Comprobación nombre vacio*/
-    {
-        printf("\nIngrese código:\n");
+    do /*Comprobacion nombre vacio*/
+    {   
+        
+        printf("\nIngrese codigo: ");
         fflush(stdout);
-        fgets(nuevo.codigo, 20, stdin);
-        nuevo.codigo[strcspn(nuevo.codigo,"\n")] = 0;
         fflush(stdin);
-        //system ("cls");
+        fgets(nuevo.codigo, 20, stdin);
+        fflush(stdin);
         if(nuevo.codigo[1] != '\0')
         {
+            nuevo.codigo[strcspn(nuevo.codigo,"\n")] = 0;
             n = 1;
+            for(i=0; i<100 ;i++){
+                if(strcmp(nuevo.codigo,productos[i].codigo)==0){
+                    printf("\nEste codigo ya esta registrado\n");
+                    n=0;
+                    i=100;
+                }
+            }         
         }
         else
         {
@@ -106,31 +115,38 @@ producto nuevoProducto() {
         }
     }while (n < 1);
 
-    /*Añadir comprobación si no se encuentra en la base de datos*/
+    /*Aï¿½adir comprobaciï¿½n si no se encuentra en la base de datos*/
 
-    do /*Comprobación descripción vacio*/
+    do /*Comprobaciï¿½n descripciï¿½n vacio*/
     {
-        printf("\nIngrese descripción del producto:\n");
+        printf("\nIngrese descripcion del producto: ");
         fflush(stdout);
         fgets(nuevo.descripcion, 145, stdin);
-        nuevo.descripcion[strcspn(nuevo.descripcion,"\n")] = 0;
         fflush(stdin);
         //system ("cls");
 
         if(nuevo.descripcion[1] != '\0')
         {
+            nuevo.descripcion[strcspn(nuevo.descripcion,"\n")] = 0;
             n = 1;
+            for(i=0; i<100 ;i++){
+                if(strcmp(nuevo.descripcion,productos[i].descripcion)==0){
+                    printf("\nEsta descripcion ya esta registrada\n");
+                    n=0;
+                    i=100;
+                }
+            }  
         }
         else
         {
-            printf("\nNo puedes ingresar datos vacios");
+            printf("\nNo puedes ingresar datos vacios\n");
             n = 0;
         }
     }while (n < 1);
 
 
     do{
-        printf("\nIngrese el precio:\n");
+        printf("\nIngrese el precio: ");
         fflush(stdout);
         scanf("%f",&nuevo.precio);
         fflush(stdin);
@@ -144,15 +160,15 @@ producto nuevoProducto() {
         //system ("cls");
     }while (n < 1);
 
-    /*¨Comprobación de stock*/
+    /*ï¿½Comprobaciï¿½n de stock*/
     do{
-        printf("\nIngrese la cantidad de productos disponibles:\n");
+        printf("\nIngrese la cantidad de productos disponibles: ");
         fflush(stdout);
         fflush(stdin);
         scanf("%d", &nuevo.stock);
         fflush(stdin);
         if(nuevo.stock > 10){
-            printf("\nOpción invalida, intente de nuevo");
+            printf("\nOpcion invalida, intente de nuevo\n");
             n = 0;
         }else{
             n = 2;
@@ -217,7 +233,7 @@ int guardarProducto(producto nuevo) {
     };
 
     fclose(bddpcsv);
-    printf("Se agregó exitosamente a la base de datos\n");
+    printf("Se agregï¿½ exitosamente a la base de datos\n");
     return 0;
 };
 
@@ -234,9 +250,9 @@ int modificarProducto(){
         scanf("%d", &cambio);
         switch (cambio){
         case 1:
-                do /*Comprobación nombre vacio*/
+                do /*Comprobaciï¿½n nombre vacio*/
         {
-                printf("\nIngrese nuevo código:\n");
+                printf("\nIngrese nuevo cï¿½digo:\n");
                 fgets(productos[count_p[0]].codigo, 20, stdin);
                 fflush(stdin);
         if(productos[count_p[0]].codigo != '\0')
@@ -254,7 +270,7 @@ int modificarProducto(){
         case 2:
             do
         {
-        printf("\nIngrese nueva descripción del producto:\n");
+        printf("\nIngrese nueva descripciï¿½n del producto:\n");
         fgets(productos[count_p[0]].descripcion, 145, stdin);
         fflush(stdin);
         //system ("cls");
@@ -287,11 +303,11 @@ int modificarProducto(){
             n=2;
             break;
         case 4:
-            do{/*¨Comprobación de stock*/
+            do{/*ï¿½Comprobaciï¿½n de stock*/
         printf("\nIngrese la nueva cantidad de productos disponibles:\n");
         scanf("%i",&productos[count_p[0]].stock);
         if(productos[count_p[0]].stock <= 0){
-            printf("\nOpción invalida, intente de nuevo");
+            printf("\nOpciï¿½n invalida, intente de nuevo");
             aux = 0;
         }else{
             aux = 2;
@@ -316,25 +332,25 @@ int modificarProducto(){
 void mostrarBDDProductos() {
 
     abrirBDDProductos();
+    printf("\nCodigo\tDescripcion\tPrecio\t\tStock\n");
     for (int i = 0; i < count_p[0]-1; i++) {
 
-        printf("%s, %s, %f, %d\n",
+        printf("%s\t%s\t\t%f\t%d\n",
         productos[i].codigo,
         productos[i].descripcion,
         productos[i].precio,
         productos[i].stock);
-
     }
 }
 
 /*Muestra base de datos de Clientes*/
 void mostrarBDDClientes() {
 
-    printf("Esta función se encuentra en mantenimiento\n");
-    /*abrirBDDClientes();
-    for (int i = 0; i < count_c[0]; i++) {
-
-        printf("%s  %s  %s  %lu  %s  %s  %s  %s  %s  %s\n",
+    printf("Esta funciï¿½n se encuentra en mantenimiento\n");
+    abrirBDDClientes();
+    for (int i = 0; i < count_c[0]-1; i++) {
+        printf("****************\nUsuario [%i]\n", i);
+        printf("Nombre: %s\nCorreo: %s\nDireccion: %s\nTelefono: %lu\nModo de contacto Favorito: %s\n UserName: %s\n Clave: %s\nFecha de Nacimeinto: %s\n Lugar de nacimiento: %s\nGenero: %s\n\n",
         clientes[i].nombre,
         clientes[i].correo,
         clientes[i].direccion,
@@ -346,65 +362,48 @@ void mostrarBDDClientes() {
         clientes[i].lugarNacimiento,
         clientes[i].genero);
 
-    }*/
+    }
 }
 
-/*Ejecuta una operación para un administrador*/
+/*Ejecuta una operaciÃ³n para un administrador*/
 void operacionProductos() {
-
-    char accionCliente[1];
-    printf("¿Qué desea hacer?\n[1] Ver catálogo de productos\n[2] Modificar un producto\n[3] Agregar un producto\n[4] Ver clientes\n");
-                fflush(stdout);
-                scanf("%s", &accionCliente);
-
-                if (!strcmp(accionCliente, "1")) {
-
-                    mostrarBDDProductos();
-
-                } else if (!strcmp(accionCliente, "2")) {
-
-                    modificarProducto();
-
-
-                } else if (!strcmp(accionCliente, "3")) {
-
-                    guardarProducto(nuevoProducto());
-                    fflush(stdout);
-
-                } else if (!strcmp(accionCliente, "4")) {
-
-                    mostrarBDDClientes();
-
-
-                } else {
-
-                    printf("Opción inválida\n");
-                    fflush(stdout);
-
-                }
-
+    
+    int accionCliente,n;
+    do{
+        printf("\nQue desea hacer?\n [1] Ver catalogo de productos\n [2] Modificar un producto\n [3] Agregar un producto\n [4] Ver clientes\n [5] Salir\nIngrese su respuesta: ");
+        fflush(stdout);
+        scanf("%i", &accionCliente);
+        fflush(stdout);
+        fflush(stdin);
+        switch (accionCliente)
+        {
+        case 1: mostrarBDDProductos();n=0 ;break;
+        case 2: modificarProducto(); n=0 ;break; //Por completar
+        case 3: guardarProducto(nuevoProducto()); fflush(stdout);n=0 ;break; //Por completar comprobaciÃ³n
+        case 4: mostrarBDDClientes(); n=0 ;break; 
+        case 5: n=1; break;
+        default: printf("\n\nOpcion invalida\n"); n=0 ;break;
+        }
+    }while(n==0);
+ 
 }
 
 void ingresarAdmin() {
 
     int n = 0;
-    char operacion[2];
-    do {
-                    printf("¿Deseas realizar alguna operación? [S]Sí [N]No\n");
-                    fflush(stdout);
-                    scanf("%s", operacion);
+    int operacion;
+    do
+    {
+        printf("\nDeseas realizar alguna operacion?\n [1] Si \n [2] No\nIngrese su respuesta: ");
+        fflush(stdout);
+        scanf("%i", &operacion);
+        switch (operacion)
+        {
+        case 1: operacionProductos(); break;
+        case 2: n=1; break;
+        default: printf("\nOpcion invalida \n"); n=0; break;
+        }
 
-                    if (!strcmp("s", operacion) || !strcmp("S", operacion)) {
-
-                        operacionProductos();
-
-                    } else if (!strcmp("n", operacion) || !strcmp("N", operacion)) {
-
-                        n = 1;
-
-                    } else {
-
-                        printf("Ingrese [S] para realizar una operacion y [N] para cerrar sesión\n");
-                    }
-        } while (n == 0);
+    } while (n == 0);
+    
 }

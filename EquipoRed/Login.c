@@ -10,6 +10,7 @@
 /*Struct de datos de clientes*/
 cliente clientes[100];
 
+
 /*Abre una base de datos de personas guardada en un archivo csv*/
 cliente *abrirBDDClientes() {
 
@@ -113,13 +114,130 @@ cliente *abrirBDDClientes() {
 /*Crea un nuevo cliente*/
 cliente nuevoCliente() {
     char comprClave[10];
-    int n, aux, conteo;
+    int n, aux, conteo, i, comp;
     cliente nuevo;
-    printf("Bienvenido, solicitaremos tus datos para registrarte\n"); //Nombre
+    printf("\nBienvenido, solicitaremos tus datos para registrarte\n"); //Nombre
+    abrirBDDClientes();
+
+    do /*Comprobación username vacio*/
+    {   
+        printf("\nIngrese un nombre de usuario: "); //nombre de usuario
+        fflush(stdout);
+        fgets(nuevo.username, 15, stdin);
+        if(nuevo.username[1] != '\0'){
+            nuevo.username[strcspn(nuevo.username,"\n")] = 0;
+            conteo=1;
+            for(i=0;i<100;i++){//Comprobacion en base de datos
+                if(strcmp(nuevo.username, clientes[i].username)==0)
+                {
+                    printf("\nEste nombre de usuarios se encuentra registrado\n");
+                    i=100;
+                    conteo=0;
+                }
+            }
+        }   
+        else{   
+                printf("Vacio NO");
+                conteo = 0;
+            }     
+
+    }while(conteo == 0);
+
+
+
+        
+
+
+    do /*Verificación de correo con @ y . */
+    {
+        printf("\nIngrese direccion de correo electrónico: "); //correo
+        fflush(stdout);
+        fgets(nuevo.correo, 30, stdin);
+        fflush(stdin);
+        if(nuevo.correo[1] != '\0')
+        {
+            for (n = 0 ; n < 30 ; n++)
+            {
+                if (nuevo.correo[n] == '@')
+                {
+                    for (aux = n + 1 ; aux < 30 ; aux++ )
+                    {
+                        if (nuevo.correo[aux] == '.')
+                        {
+                            nuevo.correo[strcspn(nuevo.correo,"\n")] = 0;
+                            conteo = 3;
+                            aux = 30;
+                            n = 30;
+                            for(i=0;i<100;i++){//Comprobacion en base de datos
+                                if(strcmp(nuevo.correo, clientes[i].correo)==0)
+                                {
+                                    printf("\nEste corre se encuentra registrado\n");
+                                    i=100;
+                                    conteo=1;
+                                }
+                            }
+                            
+                        }
+                        else
+                        {
+                            conteo = 0;
+                        }
+                    }
+                }
+                else
+                {
+                    conteo = 0;
+                }
+            }
+            if (conteo == 0)
+            {
+                printf("\nCorreo no valido, revisa que tenga el \"@\" y el \".\" ");
+                printf("\n Por favor ingrese un correo Valido\n\n");
+            }
+        }else
+        {
+            printf("\nNo puedes ingresar correo vacio\n");
+            conteo = 0;
+            printf("\n Por favor ingrese un correo Valido\n\n");
+        }
+    } while (conteo < 2);
+
+    do {/*Coincidan las claves*/
+        do{/*No claves Vacias*/
+            printf("\nIngrese una nueva clave de seguridad: ");
+            fflush(stdout);
+            fgets(nuevo.clave, 10, stdin);
+            fflush(stdin);
+            if(nuevo.clave[1] != '\0')
+            {
+                printf("\nCompruebe su clave de seguridad: ");
+                fflush(stdout);
+                fgets(comprClave, 10, stdin);
+                fflush(stdin);
+                if (strcmp(nuevo.clave, comprClave) == 0) {
+                    n=2;
+                    nuevo.clave[strcspn(nuevo.clave,"\n")] = 0;
+                } else {
+                    printf("\n\nLas claves NO son iguales, por favor ingresa de nuevo\n");
+                    n=0;
+                }
+            }
+            else
+            {
+                printf("\nNo puedes ingresar datos vacios\n");
+                n = 0;
+            }
+        }while (n < 1);
+
+    }while (n < 1);
+
+
+
+
 
     do /*Comprobación nombre vacio*/
     {
-        printf("\nIngrese su nombre y apellido:\n");
+        printf("\nIngrese su nombre y apellido: ");
         fflush(stdout);
         fgets(nuevo.nombre, 20, stdin);
         nuevo.nombre[strcspn(nuevo.nombre,"\n")] = 0;
@@ -137,55 +255,9 @@ cliente nuevoCliente() {
 
 
 
-    do /*Verificación de correo con @ y . */
-    {
-        printf("\nIngrese direccion de correo electrónico:\n"); //corrreo
-        fflush(stdout);
-        fgets(nuevo.correo, 30, stdin);
-        nuevo.correo[strcspn(nuevo.correo,"\n")] = 0;
-        fflush(stdin);
-        if(nuevo.correo[1] != '\0')
-        {
-            for (n = 0 ; n < 30 ; n++)
-            {
-                if (nuevo.correo[n] == '@')
-                {
-                    for (aux = n + 1 ; aux < 30 ; aux++ )
-                    {
-                        if (nuevo.correo[aux] == '.')
-                        {
-                                conteo = 1;
-                                aux = 30;
-                                n = 30;
-                        }
-                        else
-                        {
-                            conteo = 0;
-                        }
-                    }
-                }
-                else
-                {
-                    conteo = 0;
-                }
-            }
-            if (conteo != 1)
-            {
-                printf("\nCorreo no valido, revisa que tenga el \"@\" y el \".\" ");
-                printf("\n Por favor ingrese un correo Valido\n\n");
-            }
-        }else
-        {
-            printf("\nNo puedes ingresar correo vacio");
-            conteo = 0;
-            printf("\n Por favor ingrese un correo Valido\n\n");
-        }
-    } while (conteo < 1);
-
-
     do /*Comprobación dirección vacio*/
     {
-        printf("\nIngrese direcci�n de habitación:\n"); //Direccion
+        printf("\nIngrese direccion de habitacion: "); //Direccion
         fflush(stdout);
         fgets(nuevo.direccion, 30, stdin);
         nuevo.direccion[strcspn(nuevo.direccion,"\n")] = 0;
@@ -196,14 +268,14 @@ cliente nuevoCliente() {
         }
         else
         {
-            printf("\nNo puedes ingresar datos vacios");
+            printf("\nNo puedes ingresar datos vaciosn");
             n = 0;
         }
     }while (n < 1);
 
     do /*Comprobación telefono vacio*/
     {
-        printf("\nIngrese número de telefono (Solo números):\n"); //telefono
+        printf("\nIngrese numero de telefono (Solo numeros): "); //telefono
         fflush(stdout);
         scanf("%lu", &nuevo.telefono);
         fflush(stdin);
@@ -214,65 +286,16 @@ cliente nuevoCliente() {
         }
         else
         {
-            printf("\nNo puedes ingresar datos vacios");
+            printf("\nNo puedes ingresar datos vacios\n");
             n = 0;
         }
     }while (n < 1);
 
-    do /*Comprobación username vacio*/
-    {
-        printf("\nIngrese un nombre de usuario:\n"); //nombre de usuario
-        fflush(stdout);
-        fgets(nuevo.username, 15, stdin);
-        nuevo.username[strcspn(nuevo.username,"\n")] = 0;
-        fflush(stdin);
-        //system ("cls");
-        if(nuevo.username[1] != '\0')
-        {
-            n = 1;
-        }
-        else
-        {
-            printf("\nNo puedes ingresar datos vacios");
-            n = 0;
-        }
-    }while (n < 1);
-
-
-
-    do {/*Coincidan las claves*/
-        do{/*No claves Vacias*/
-            printf("\nIngrese una nueva clave de seguridad:\n");
-            fflush(stdout);
-            fgets(nuevo.clave, 10, stdin);
-            fflush(stdin);
-            if(nuevo.clave[1] != '\0')
-            {
-                printf("\nCompruebe su clave de seguridad:\n");
-                fflush(stdout);
-                fgets(comprClave, 10, stdin);
-                fflush(stdin);
-                if (strcmp(nuevo.clave, comprClave) == 0) {
-                    n=2;
-                    nuevo.clave[strcspn(nuevo.clave,"\n")] = 0;
-                } else {
-                    printf("\n\nLas claves NO son iguales, por favor ingresa de nuevo\n");
-                    n=0;
-                }
-            }
-            else
-            {
-                printf("\nNo puedes ingresar datos vacios");
-                n = 0;
-            }
-        }while (n < 1);
-
-    }while (n < 1);
 
 
     do /*Comprobación dia de nacimiento vacio*/
     {
-        printf("Ingrese fecha de nacimiento:\n");
+        printf("Ingrese fecha de nacimiento: ");
         fflush(stdout);
         fgets(nuevo.fechaNacimiento, 10, stdin);
         nuevo.fechaNacimiento[strcspn(nuevo.fechaNacimiento,"\n")] = 0;
@@ -283,14 +306,14 @@ cliente nuevoCliente() {
         }
         else
         {
-            printf("\nNo puedes ingresar datos vacios");
+            printf("\nNo puedes ingresar datos vacios\n");
             n = 0;
         }
     }while (n < 1);
 
     do /*Comprobación lugar de nacimiento vacio*/
     {
-        printf("\nIngrese lugar de nacimiento:\n");//Lugar de nacimiento
+        printf("\nIngrese lugar de nacimiento: ");//Lugar de nacimiento
         fflush(stdout);
         fgets(nuevo.lugarNacimiento, 20, stdin);
         nuevo.lugarNacimiento[strcspn(nuevo.lugarNacimiento,"\n")] = 0;
@@ -301,7 +324,7 @@ cliente nuevoCliente() {
         }
         else
         {
-            printf("\nNo puedes ingresar datos vacios");
+            printf("\nNo puedes ingresar datos vacios\n");
             n = 0;
         }
     }while (n < 1);
@@ -328,7 +351,7 @@ cliente nuevoCliente() {
             n=2;
             break;
         default:
-            printf("\n No ingresaste una opcion valida, selecciona nuevamente:");
+            printf("\n No ingresaste una opcion valida, selecciona nuevamente: ");
             n=0;
             break;
         }
@@ -358,6 +381,7 @@ cliente nuevoCliente() {
         //system ("cls");
     return nuevo;
 }
+
 
 /*Guarda un cliente en la base de datos*/
 int guardarCliente(cliente nuevo) {
@@ -437,7 +461,6 @@ int guardarCliente(cliente nuevo) {
     printf("Se agregó exitosamente a la base de datos\n");
     return 0;
 };
-
 
 
 /*Modifica datos de un cliente*/
@@ -615,34 +638,23 @@ void mostrarDatosCliente(int filaDelCliente) {
 void operacionCliente() {
 
     int n = 0;
-    char accionCliente[1];
-    printf("¿Qué desea hacer?\n[1] Modificar datos\n[2] Ver catálogo de compra\n[3] Ver mis datos\n");
+    int accionCliente;
+    do{
+    printf("¿Qué desea hacer?\n [1] Modificar datos\n [2] Ver catálogo de compra\n [3] Ver mis datos\n [4] Salir\nIngrese su respuesta: ");
                 fflush(stdout);
-                scanf("%s", &accionCliente);
-
-                if (!strcmp(accionCliente, "1")) {
-
-                    modificarCliente();
-                    n = 1;
-
-                } else if (!strcmp(accionCliente, "2")) {
-
-                    mostrarBDDProductos();
-                    fflush(stdout);
-
-                } else if (!strcmp(accionCliente, "3")) {
-
-                    mostrarDatosCliente(num_fila[0]);
-                    fflush(stdout);
-
-                } else {
-
-                    printf("Opción inválida\n");
-                    fflush(stdout);
-
-                }
-
+                scanf("%i", &accionCliente);
+    switch (accionCliente)
+    {
+        case 1: modificarCliente(); n = 0; break;
+        case 2: mostrarBDDProductos(); fflush(stdout); n= 0; break;
+        case 3: mostrarDatosCliente(num_fila[0]); fflush(stdout); n= 0; break;
+        case 4: n= 1; break;
+        default: printf("\nOpción invalida\n"); n= 0; break;
+    };
+    }while (n==0);
+    
 }
+
 
 /*Inicia sesión*/
 int ingresar() {
@@ -668,6 +680,7 @@ int ingresar() {
             if (!strcmp(clave, clientes[num_fila[0]].clave)) {
 
                 printf("Sesión iniciada\n");
+                //menuUsuario()
                 fflush(stdout);
 
                 do {
@@ -769,5 +782,3 @@ int ingresar() {
     };
     return 0;
 }
-
-

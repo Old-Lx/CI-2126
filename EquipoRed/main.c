@@ -7,90 +7,77 @@
 #include "gestorDeOrdenes.h"
 
 
+
+
 int main() {
-    printf("¿Eres administrador de la tienda? [S] Sí [N] No\n");
-    fflush(stdout);
-    fflush(stdin);
-    char resp[10];
-    scanf("%s", &resp);
-    fflush(stdin);
+    char ClaveAdmin[10] = "admin" ;
+    int menuPrincipal,menu2,resp;
 
-    if (strcmp(resp, "n") == 0 || strcmp(resp, "N") == 0) {
-        int k;
-        char answer[2];
+    do
+    {
+        printf("Eres administrador de la tienda? \n [1] Si \n [2] No\nIngrese su respuesta: ");
+        fflush(stdout);
+        fflush(stdin);
+        scanf("%i", &resp);
+        fflush(stdin);
+        switch (resp)
+        {
+        case 1:
+            printf("\nIngrese clave de administrador: ");
+            fflush(stdout);
+            fflush(stdin);
+            char clave_adm[10];
+            scanf("%s", &clave_adm);
+            fflush(stdin);
+
+            if (strcmp(clave_adm, ClaveAdmin) == 0 ) {
+                ingresarAdmin();
+                menuPrincipal = 2;
+            }else {
+                printf("\n \nClave invalida\n \n");
+                menuPrincipal = 0;
+            };
+            break;
+        case 2:
         do{
-        printf("\nBienvenido!\nEstas registrado en nuestra tienda?\n[S] si\n[N] no\nIngrese su respuesta:  \n");
-        fflush(stdout);
-        fgets(answer, 2, stdin);
-        fflush(stdin);
-        //system ("cls");
-
-        if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0) {
-            do{
-            printf("Quieres Iniciar Sesion?\n[S] si\n[N] no\nIngrese su respuesta:  ");
-            fflush(stdout);
-            fgets(answer, 2, stdin);
+            printf("\nBienvenido!\nEstas registrado en nuestra tienda?\n [1] Si\n [2] No\nIngrese su respuesta:  \n");
+            scanf("%i", &resp);
             fflush(stdin);
-            //system ("cls");
-            if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0){
-                ingresar();
-                k=2;
-                }
-            else if (strcmp(answer, "N") == 0 || strcmp(answer, "n") == 0)
-            {printf("*****Ingresaste como Invitado*****");
-                k=2;
+            switch (resp)
+            {
+            case 1:
+                do{
+                    printf("\nQuieres Iniciar Sesion?\n[1] Si\n[2] No\nIngrese su respuesta:  ");
+                    scanf("%i", &resp);
+                    fflush(stdin);
+                   switch (resp)
+                   {
+                   case 1: ingresar(); menuPrincipal=2; break;
+                   case 2: printf("*****Ingresaste como Invitado*****"); menuPrincipal=2; break;
+                   default: printf("\n\nOpcion invalida, intente de nuevo\n\n"); menuPrincipal=0; break;
+                   }
+                } while (menuPrincipal == 0);
+                break;
+            case 2:
+                do{
+                    printf("Quieres Registrarte?\n[1] Si\n[2] No\nIngrese su respuesta:  ");
+                    scanf("%i", &resp);
+                    fflush(stdin);
+                   switch (resp)
+                   {
+                   case 1: guardarCliente(nuevoCliente()); ingresar(); menuPrincipal = 2; break;
+                   case 2: printf("\n*****Ingresaste como Invitado*****\n"); menuPrincipal = 2; break;
+                   default: printf("\n\nOpcion invalida, intente de nuevo\n\n"); menuPrincipal=0; break;
+                   }
+                } while (menuPrincipal == 0);
+                break;
+            default:
+                printf("\n\nOpcion invalida, intente de nuevo\n\n"); menuPrincipal = 0; break;
             }
-            else {
-                printf("Opción invalida, intente de nuevo");
-                k=0;
-            };
-            }while (k<1);
+        }while (menuPrincipal == 0);break;
+        
+        default: printf("\n\nOpcion invalida, intente de nuevo\n\n"); menuPrincipal=0; break;
 
         }
-        else if (strcmp(answer, "N") == 0 || strcmp(answer, "n") == 0){
-            do{
-            printf("Quieres Registrarte?\n[S] si\n[N] no\nIngrese su respuesta:  ");
-            fflush(stdout);
-            fgets(answer, 2, stdin);
-            fflush(stdin);
-            //system ("cls");
-            if (strcmp(answer, "S") == 0 || strcmp(answer, "s") == 0){
-                guardarCliente(nuevoCliente());
-                k=2;
-                }
-            else if (strcmp(answer, "N") == 0 || strcmp(answer, "n") == 0)
-            {printf("*****Ingresaste como Invitado*****");
-                k=2;
-            }
-            else {
-                printf("Opción invalida, intente de nuevo");
-                k=0;
-            };
-            }while (k<1);
-
-        }else {
-            printf("Opción invalida, intente de nuevo");
-            k=0;
-        }}while (k<1);
-
-        return 0;
-    } else if (strcmp(resp, "s") == 0 || strcmp(resp, "S") == 0) {
-
-        printf("Ingrese clave de administrador:\n");
-        fflush(stdout);
-        fflush(stdin);
-        char clave_adm[10];
-        scanf("%s", &clave_adm);
-        fflush(stdin);
-
-        if (strcmp(clave_adm, "admin") == 0 || strcmp(clave_adm, "admin") == 0) {
-
-            ingresarAdmin();
-
-        }
-
-    }else {
-        printf("Opción Invalida");
-    }
-    return 0;
+    }while (menuPrincipal == 0);
 }
