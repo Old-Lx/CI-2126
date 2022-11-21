@@ -36,7 +36,8 @@ cliente *abrirBDDClientes() {
         char tempTelf[20];
 
         char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
-
+        clientes[i].posCli = i;
+        
         while (entrada) {
 
             if (count_c[0] != 0) {
@@ -382,6 +383,30 @@ cliente nuevoCliente() {
     return nuevo;
 }
 
+/*Devuelve el índice de un cliente*/
+int buscarCliente(const char username[20], cliente clienteL[100]) {
+
+    int i = 0;
+    while (strcmp(username, clienteL[i].username)) {
+
+        printf("Buscando cliente...\n\n");
+        i++;
+        if (i == 100) {
+
+            printf("El cliente no se encontró\n\n");
+            break;
+        }
+
+    }
+
+    if (!strcmp(username, clienteL[i].username))
+    {
+        return clienteL[i].posCli;
+    } else {
+        return -1;
+    }
+    
+}
 
 /*Guarda un cliente en la base de datos*/
 int guardarCliente(cliente nuevo) {

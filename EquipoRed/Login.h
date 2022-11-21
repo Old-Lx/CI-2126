@@ -17,6 +17,7 @@ typedef struct {
     char fechaNacimiento[10];
     char lugarNacimiento[20];
     char genero[20];
+    int posCli;
 } cliente ;
 
 int count_c[1];

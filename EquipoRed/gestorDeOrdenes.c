@@ -7,8 +7,8 @@
 #include "gestorDeOrdenes.h"
 
 
-/*Abre base de datos de órdenes en csv*/
-int abrirBDDOrdenes() {
+/*Abre base de datos de ï¿½rdenes en csv*/
+int abrirBDOrdenes() {
 
  FILE *bddocsv;
     bddocsv = fopen("ordenes.csv", "r");
@@ -18,7 +18,7 @@ int abrirBDDOrdenes() {
         return NULL;
     }
 
-    char buff[1024]; //guarda las primeras 1024 líneas en un buffer
+    char buff[1024]; //guarda las primeras 1024 lï¿½neas en un buffer
     int column = 0;
     int i = 0;
     count_o[0] = 0;
@@ -86,7 +86,7 @@ int abrirBDDOrdenes() {
 }
 
 
-/*Inicializa un arreglo dinámico de órdenes*/
+/*Inicializa un arreglo dinï¿½mico de ï¿½rdenes*/
 DynaOrden *dynaOrden(orden listaDeOrdenes[100]) {
 
     DynaOrden *ordenesL = (DynaOrden *) malloc(sizeof(DynaOrden));
