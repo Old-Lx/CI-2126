@@ -16,6 +16,7 @@ typedef struct {
         char descripcion[145];
         float precio;
         int stock;
+        int posProd;
 }producto ;
 
 int count_p[1];

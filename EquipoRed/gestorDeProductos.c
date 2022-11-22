@@ -28,6 +28,7 @@ producto *abrirBDDProductos() {
 
     while (fgets(buff, 1024, bddpcsv)) {
 
+        productos[i].posProd = i;
         char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
         while (entrada) {
 
@@ -179,6 +180,30 @@ producto nuevoProducto() {
     return nuevo;
 }
 
+/*Devuelve el índice de un producto*/
+int buscarProducto(const char codigo[20], producto productoL[100]) {
+
+    int i = 0;
+    while (strcmp(codigo, productoL[i].codigo)) {
+
+        printf("Buscando cliente...\n\n");
+        i++;
+        if (i == 100) {
+
+            printf("El cliente no se encontró\n\n");
+            break;
+        }
+
+    }
+
+    if (!strcmp(codigo, productoL[i].codigo))
+    {
+        return productoL[i].posProd;
+    } else {
+        return -1;
+    }
+    
+}
 
 /*Guarda un producto en la base de datos*/
 int guardarProducto(producto nuevo) {
