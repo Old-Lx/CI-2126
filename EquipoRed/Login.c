@@ -493,31 +493,40 @@ int modificarCliente(){
     int cambiar;
     int dato;
     int n, aux;
+    char nuevo[20];
     char comprClave[10];
     printf("\nDesea cambiar un dato?:\n [1] SI\n [2] NO\n");
     scanf("%d", &cambiar);
+    fflush(stdin);
     if (cambiar==1)
     {
 
         do{
         printf("\nQue dato quiere cambiar?:\n [1] Nombre\n [2] Correo\n [3] Direccion\n [4] Telefono\n [5] Contactof\n [6] Username\n [7] Clave\n [8] Fecha de Nacimiento\n [9] Lugar de Nacimiento\n [10] Genero");
         scanf("%d", &dato);
+        fflush(stdin);
         switch (dato){
         case 1:
             printf("\nIngrese su nuevo nombre y apellido");
-            fgets(clientes[num_fila[0]].nombre,20, stdin);
+            fgets(nuevo,20, stdin);
+            nuevo[strcspn(nuevo,"\n")] = 0;
+            strcpy(clientes[num_fila[0]].nombre, nuevo);
             fflush(stdin);
             n=2;
             break;
         case 2:
             printf("\nIngrese nueva direccion de correo electrónico:\n"); //Falta comprobacion si esta en la base de datos ya
-            fgets(clientes[num_fila[0]].correo,20, stdin);
+            fgets(nuevo,20, stdin);
+            nuevo[strcspn(nuevo,"\n")] = 0;
+            strcpy(clientes[num_fila[0]].correo, nuevo);
             fflush(stdin);
             n=2;
             break;
         case 3:
             printf("\nIngrese nueva dirección de habitación:\n"); //Direccion
-            fgets(clientes[num_fila[0]].direccion,20, stdin);
+             fgets(nuevo,20, stdin);
+            nuevo[strcspn(nuevo,"\n")] = 0;
+            strcpy(clientes[num_fila[0]].direccion, nuevo);
             fflush(stdin);
             n=2;
             break;
@@ -552,7 +561,9 @@ int modificarCliente(){
                 break;
         case 6:
             printf("\nIngrese nuevo Nombre de usuario:\n");//Falta comprobacion si esta en la base de datos ya
-            fgets(clientes[num_fila[0]].username,20, stdin);
+            fgets(nuevo,20, stdin);
+            nuevo[strcspn(nuevo,"\n")] = 0;
+            strcpy(clientes[num_fila[0]].username, nuevo);
             fflush(stdin);
             n=2;
             break;
@@ -560,12 +571,15 @@ int modificarCliente(){
                do {/*Coincidan las claves*/
                 do{/*No claves Vacias*/
                     printf("\nIngrese una nueva clave de seguridad:\n");
-                    fgets(clientes[num_fila[0]].clave, 10, stdin);
+                    fgets(nuevo,20, stdin);
+                    nuevo[strcspn(nuevo,"\n")] = 0;
+                    strcpy(clientes[num_fila[0]].clave, nuevo);
                     fflush(stdin);
                     if(clientes[num_fila[0]].clave[1] != '\0')
                     {
                         printf("\nCompruebe su clave de seguridad:\n");
                         fgets(comprClave, 10, stdin);
+                        comprClave[strcspn(comprClave,"\n")] = 0;
                         fflush(stdin);
                         if (strcmp(clientes[num_fila[0]].clave, comprClave) == 0) {
                             n=2;
@@ -587,7 +601,9 @@ int modificarCliente(){
              do /*Comprobación dia de nacimiento vacio*/
             {
                 printf("Ingrese nueva fecha de nacimiento:\n");
-                fgets(clientes[num_fila[0]].fechaNacimiento, 10, stdin);
+                fgets(nuevo,20, stdin);
+                nuevo[strcspn(nuevo,"\n")] = 0;
+                strcpy(clientes[num_fila[0]].fechaNacimiento, nuevo);
                 fflush(stdin);
                 if(clientes[num_fila[0]].fechaNacimiento[1] != '\0')
                 {
@@ -601,7 +617,9 @@ int modificarCliente(){
             }while (n < 1);
         case 9:
             printf("\nIngrese nuevo lugar de nacimiento:\n");
-            fgets(clientes[num_fila[0]].lugarNacimiento,20, stdin);
+            fgets(nuevo,20, stdin);
+            nuevo[strcspn(nuevo,"\n")] = 0;
+            strcpy(clientes[num_fila[0]].lugarNacimiento, nuevo);
             fflush(stdin);
             n=2;
             break;
@@ -639,7 +657,9 @@ int modificarCliente(){
         } while (n<1 );
 
     }
+        actualizarBDClientes();
         return 0;
+
 }
 
 
@@ -683,6 +703,7 @@ void operacionCliente() {
 
 /*Inicia sesión*/
 int ingresar() {
+
 
     printf("Ingresa tu nombre de usuario:\n");
     fflush(stdout);
@@ -807,3 +828,61 @@ int ingresar() {
     };
     return 0;
 }
+
+/*Actualiza la base de datos con datos modificados*/
+int actualizarBDClientes() {
+
+    FILE *bddcsv;
+
+
+    bddcsv = fopen("clientes.csv", "w");
+
+    if (bddcsv == NULL) {
+        printf("Error al abrir la base de datos\n");
+        return 1;
+    }
+
+    for (int fila = 0; fila < count_c[0]+2; fila++) {
+
+        if (fila == 0) {
+            fprintf(bddcsv,
+            "%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
+            "nombre",
+            "correo",
+            "direccion",
+            "telefono",
+            "contactofav",
+            "username",
+            "clave",
+            "fechaNac",
+            "lugarNac",
+            "genero");
+        }
+
+        if (fila < count_c[0] && fila > 0) {
+            fprintf(bddcsv,
+            "%s;%s;%s;%lu;%s;%s;%s;%s;%s;%s",
+            clientes[fila-1].nombre,
+            clientes[fila-1].correo,
+            clientes[fila-1].direccion,
+            clientes[fila-1].telefono,
+            clientes[fila-1].contactof,
+            clientes[fila-1].username,
+            clientes[fila-1].clave,
+            clientes[fila-1].fechaNacimiento,
+            clientes[fila-1].lugarNacimiento,
+            clientes[fila-1].genero);
+
+        };
+
+        if (ferror(bddcsv)) {
+            printf("No se pudo agregar el cliente\n");
+            return 1;
+        };
+
+    };
+
+    fclose(bddcsv);
+    printf("\nSe actualizo exitosamente a la base de datos\n");
+    return 0;
+};

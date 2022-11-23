@@ -49,4 +49,7 @@ void operacionCliente();
 /*Inicia sesión*/
 int ingresar();
 
+/*Actualiza la base de datos con datos modificados*/
+int actualizarBDClientes();
+
 #endif // LOGIN_H_INCLUDED
