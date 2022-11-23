@@ -6,11 +6,13 @@
 #include "gestorDeProductos.h"
 #include "gestorDeOrdenes.h"
 
+/*Carga los codigos productos de cada orden*/
+
 
 /*Abre base de datos de �rdenes en csv*/
 orden *abrirBDOrdenes() {
 
- FILE *bddocsv;
+    FILE *bddocsv;
     bddocsv = fopen("ordenes.csv", "r");
 
     if (bddocsv == NULL) {
@@ -72,6 +74,14 @@ orden *abrirBDOrdenes() {
 
     fclose(bddocsv);
 
+
+    if (bddocsv == NULL) {
+        printf("Error al abrir la base de datos\n");
+        return NULL;
+    }
+
+    char buff[1024];
+
     bddocsv = fopen("ordenes.csv", "r");
 
     count_o[0] = 0;
@@ -84,6 +94,8 @@ orden *abrirBDOrdenes() {
     return listaO;
 
 }
+
+
 
 
 /*Inicializa un arreglo din�mico de �rdenes*/
@@ -254,6 +266,26 @@ DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2) {
     return resultado;
 }
 
+/*Agrega un producto a la orden determinada*/
+void aggProducto(const char *codigoOrden, producto nuevo, int cant, DynaOrden *dynaOrden) {
+    int tam = dynaOrden->tamano;
+    for (int i = 0; i < tam; i++) {
+        if (!strcmp(codigoOrden, dynaOrden->ordenes[i].codigoOrden)) {
+            int j = 0;
+            while(dynaOrden->ordenes[i].codigoOrden[j]) {
+                strcpy(dynaOrden->ordenes[i].codigoProducto[i],dynaOrden->ordenes[i].codigoProducto[i]);
+                j++;
+                break;
+            }
+            if (!dynaOrden->ordenes[i].codigoOrden[j]) {
+                strcpy(dynaOrden->ordenes[i].codigoProducto[i],nuevo.codigo);
+            }   
+        }
+    }
+    int prod = buscarProducto(nuevo.codigo, productos);
+    productos[prod].stock = productos[prod].stock - cant;
+
+}
 
 /*Crea una orden en la base de datos*/
 int crearOrd(orden nuevo) {
@@ -315,23 +347,4 @@ int crearOrd(orden nuevo) {
     return 0;
 };
 
-/*Agrega un producto a la orden determinada*/
-void aggProducto(const char *codigoOrden, producto nuevo, int cant, DynaOrden *dynaOrden) {
-    int tam = dynaOrden->tamano;
-    for (int i = 0; i < tam; i++) {
-        if (!strcmp(codigoOrden, dynaOrden->ordenes[i].codigoOrden)) {
-            int j = 0;
-            while(dynaOrden->ordenes[i].codigoOrden[j]) {
-                strcpy(dynaOrden->ordenes[i].codigoProducto[i],dynaOrden->ordenes[i].codigoProducto[i]);
-                j++;
-                break;
-            }
-            if (!dynaOrden->ordenes[i].codigoOrden[j]) {
-                strcpy(dynaOrden->ordenes[i].codigoProducto[i],nuevo.codigo);
-            }   
-        }
-    }
-    int prod = buscarProducto(nuevo.codigo, productos);
-    productos[prod].stock = productos[prod].stock - cant;
-    
-}
+
