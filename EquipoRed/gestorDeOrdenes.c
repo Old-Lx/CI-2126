@@ -6,8 +6,6 @@
 #include "gestorDeProductos.h"
 #include "gestorDeOrdenes.h"
 
-/*Carga los codigos productos de cada orden*/
-
 
 /*Abre base de datos de �rdenes en csv*/
 orden *abrirBDOrdenes() {
@@ -114,6 +112,67 @@ DynaOrden *dynaOrden(orden listaDeOrdenes[100]) {
 
     return ordenesL;
 };
+
+/*Carga los codigos de los productos de cada orden*/
+const char *abrirProdPorOrd() {
+
+    FILE *bddPorOrd;
+    bddPorOrd = fopen("codOrd.csv", "r");
+    DynaOrden *listaO= dynaOrden(abrirBDOrdenes);
+
+    const char ordProd[20][20][20];
+
+    if (bddPorOrd == NULL) {
+        printf("Error al abrir la base de datos\n");
+        return NULL;
+    }
+    char buff[1024]; //guarda las primeras 1024 l�neas en un buffer
+    int i = 0;
+
+    while (fgets(buff, 1024, bddPorOrd)) {
+        
+        char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
+        int fila = 0;
+
+        while (entrada) {
+            switch (fila) {
+                case 1:
+                    strcpy(ordProd[fila][i], entrada);
+                    break;
+
+                case 2:
+                    strcpy(ordProd[fila][i], entrada);
+                    break;
+
+                case 3:
+                    strcpy(ordProd[fila][i], entrada);
+                    break;
+
+                case 4:
+                    strcpy(ordProd[fila][i], entrada);
+                    break;
+                
+                case 5:
+                    strcpy(ordProd[fila][i], entrada);
+                    break;
+
+                case 6:
+                    strcpy(ordProd[fila][i], entrada);
+                    break;
+
+                case 7:
+                    strcpy(ordProd[fila][i], entrada);
+                    break;
+
+                default:
+                    strcpy(ordProd[fila][i], entrada);
+                    break;
+            }
+        }
+        i++;
+    }
+    
+}
 
 /*Devuelve la orden en el indice i*/
 orden valorOrd(int i, const DynaOrden *dynaOrden) {
