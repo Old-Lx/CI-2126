@@ -28,6 +28,9 @@ producto *abrirBDDProductos() ;
 /*Devuelve un producto agregado*/
 producto nuevoProducto() ;
 
+/*Devuelve el índice de un producto*/
+int buscarProducto(const char codigo[20], producto productoL[100]);
+
 /*Guarda un producto en la base de datos*/
 int guardarProducto(producto nuevo);
 
@@ -43,6 +46,7 @@ void mostrarBDDClientes();
 /*Ejecuta una operación para un administrador*/
 void operacionProductos() ;
 
+/*Ingresa como administrador*/
 void ingresarAdmin();
 
 #endif

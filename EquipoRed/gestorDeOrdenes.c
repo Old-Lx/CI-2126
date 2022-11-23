@@ -316,7 +316,7 @@ int crearOrd(orden nuevo) {
 };
 
 /*Agrega un producto a la orden determinada*/
-void aggProducto(const char *codigoOrden, producto nuevo, DynaOrden *dynaOrden) {
+void aggProducto(const char *codigoOrden, producto nuevo, int cant, DynaOrden *dynaOrden) {
     int tam = dynaOrden->tamano;
     for (int i = 0; i < tam; i++) {
         if (!strcmp(codigoOrden, dynaOrden->ordenes[i].codigoOrden)) {
@@ -331,4 +331,7 @@ void aggProducto(const char *codigoOrden, producto nuevo, DynaOrden *dynaOrden) 
             }   
         }
     }
+    int prod = buscarProducto(nuevo.codigo, productos);
+    productos[prod].stock = productos[prod].stock - cant;
+    
 }
