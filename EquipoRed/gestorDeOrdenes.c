@@ -269,21 +269,25 @@ DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2) {
 /*Agrega un producto a la orden determinada*/
 void aggProducto(const char *codigoOrden, producto nuevo, int cant, DynaOrden *dynaOrden) {
     int tam = dynaOrden->tamano;
-    for (int i = 0; i < tam; i++) {
-        if (!strcmp(codigoOrden, dynaOrden->ordenes[i].codigoOrden)) {
-            int j = 0;
-            while(dynaOrden->ordenes[i].codigoOrden[j]) {
-                strcpy(dynaOrden->ordenes[i].codigoProducto[i],dynaOrden->ordenes[i].codigoProducto[i]);
-                j++;
-                break;
+    if (nuevo.stock >= cant) {
+        for (int i = 0; i < tam; i++) {
+            if (!strcmp(codigoOrden, dynaOrden->ordenes[i].codigoOrden)) {
+                int j = 0;
+                while(dynaOrden->ordenes[i].codigoOrden[j]) {
+                    strcpy(dynaOrden->ordenes[i].codigoProducto[i],dynaOrden->ordenes[i].codigoProducto[i]);
+                    j++;
+                    break;
+                }
+                if (!dynaOrden->ordenes[i].codigoOrden[j]) {
+                    strcpy(dynaOrden->ordenes[i].codigoProducto[i],nuevo.codigo);
+                }   
             }
-            if (!dynaOrden->ordenes[i].codigoOrden[j]) {
-                strcpy(dynaOrden->ordenes[i].codigoProducto[i],nuevo.codigo);
-            }   
         }
+        int prod = buscarProducto(nuevo.codigo, productos);
+        productos[prod].stock = productos[prod].stock - cant;
+    } else {
+        printf("No hay suficientes unidades de %s para tu pedido, intenta disminuyendo la cantidad\n", nuevo.descripcion);
     }
-    int prod = buscarProducto(nuevo.codigo, productos);
-    productos[prod].stock = productos[prod].stock - cant;
 
 }
 
