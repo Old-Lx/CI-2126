@@ -109,7 +109,6 @@ DynaOrden *dynaOrden(orden listaDeOrdenes[100]) {
             ordenesL->tamano++;
         } 
     }
-
     return ordenesL;
 };
 
