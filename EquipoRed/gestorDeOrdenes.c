@@ -127,14 +127,22 @@ const char *abrirProdPorOrd() {
     }
     char buff[1024]; //guarda las primeras 1024 l�neas en un buffer
     int i = 0;
+    int fila = 0;
+    char cliFila[100][2][20];
 
     while (fgets(buff, 1024, bddPorOrd)) {
         
         char *entrada = strtok(buff, ";"); //divide el buffer por entrada de datos
-        int fila = 0;
+        i = 0;
 
         while (entrada) {
+    
             switch (fila) {
+                case 0 :
+                    strcpy(cliFila[i][0], entrada);
+                    strcpy(cliFila[i][1], (const char*) fila);
+                    break;
+
                 case 1:
                     strcpy(ordProd[fila][i], entrada);
                     break;
@@ -167,10 +175,23 @@ const char *abrirProdPorOrd() {
                     strcpy(ordProd[fila][i], entrada);
                     break;
             }
+            fila++;
+            entrada = strtok(NULL, ";");
         }
         i++;
     }
-    
+    fclose(bddPorOrd);
+    for (int j = 0; j < fila; j++) {
+        for (int k = 0; k < i; k++) {
+            for (int x = 0; x < 100; x++) {
+                if (!strcmp(cliFila[x][0], listaO[x].ordenes->codigoCliente)) {
+                    if (!strcmp(cliFila[x][1], (const char *) j)) {
+                        strcpy(listaO[x].ordenes->codigoProducto[fila][k], ordProd[fila][k]);
+                    }
+                }
+            }
+        }
+    }
 }
 
 /*Devuelve la orden en el indice i*/
