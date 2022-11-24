@@ -10,7 +10,7 @@ typedef struct {
     char nombre[20];
     char correo[20];
     char direccion[30];
-    unsigned int telefono;
+    long unsigned int telefono;
     char contactof[20];
     char username[15];
     char clave[10];
