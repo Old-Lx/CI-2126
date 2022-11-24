@@ -181,7 +181,6 @@ orden valorOrd(int i, const DynaOrden *dynaOrden) {
     } else {
         return dynaOrden->ordenes[i];
     }
-
 }
 
 /*Cambia el valor de la orden en el indice i*/
