@@ -78,8 +78,6 @@ orden *abrirBDOrdenes() {
         return NULL;
     }
 
-    char buff[1024];
-
     bddocsv = fopen("ordenes.csv", "r");
 
     count_o[0] = 0;
@@ -117,9 +115,9 @@ const char *abrirProdPorOrd() {
 
     FILE *bddPorOrd;
     bddPorOrd = fopen("codOrd.csv", "r");
-    DynaOrden *listaO= dynaOrden(abrirBDOrdenes);
+    DynaOrden *listaO= dynaOrden(abrirBDOrdenes());
 
-    const char ordProd[20][20][20];
+    char ordProd[20][20][20];
 
     if (bddPorOrd == NULL) {
         printf("Error al abrir la base de datos\n");
@@ -198,7 +196,7 @@ const char *abrirProdPorOrd() {
 void guardarOrden(orden nueva) {
     FILE *bddOrd;
     bddOrd = fopen("codOrd.csv", "w");
-    DynaOrden *listaO= dynaOrden(abrirBDOrdenes);
+    DynaOrden *listaO= dynaOrden(abrirBDOrdenes());
 
     if (bddOrd == NULL) {
         printf("Error al abrir la base de datos\n");
@@ -389,7 +387,7 @@ DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2) {
 }
 
 /*Agrega un producto a la orden determinada*/
-void aggProducto(const char *codigoOrden, producto nuevo, int cant, DynaOrden *dynaOrden) {
+/*void aggProducto(const char *codigoOrden, producto nuevo, int cant, DynaOrden *dynaOrden) {
     int tam = dynaOrden->tamano;
     if (nuevo.stock >= cant) {
         for (int i = 0; i < tam; i++) {
@@ -410,8 +408,7 @@ void aggProducto(const char *codigoOrden, producto nuevo, int cant, DynaOrden *d
     } else {
         printf("No hay suficientes unidades de %s para tu pedido, intenta disminuyendo la cantidad\n", nuevo.descripcion);
     }
-
-}
+}*/
 
 /*Crea una orden en la base de datos*/
 int crearOrd(orden nuevo) {
