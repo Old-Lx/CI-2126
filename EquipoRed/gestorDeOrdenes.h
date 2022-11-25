@@ -37,6 +37,12 @@ int abrirBDDOrdenes() ;
 /*Inicializa un arreglo dinámico de órdenes*/
 DynaOrden *dynaOrden(orden listaDeOrdenes[100]);
 
+/*Carga los codigos de los productos de cada orden*/
+const char *abrirProdPorOrd()
+
+/*Guarda una orden en la base de datos*/
+void guardarOrden(orden nueva);
+
 /*Devuelve la orden en el indice i*/
 orden valorOrd(int i, const DynaOrden *dynaOrden);
 
