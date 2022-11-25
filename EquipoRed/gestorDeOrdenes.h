@@ -32,7 +32,7 @@ orden listaO[100];
 int count_o[1];
 
 /*Abre base de datos de órdenes en csv*/
-int abrirBDDOrdenes() ;
+int abrirBDOrdenes() ;
 
 /*Inicializa un arreglo dinámico de órdenes*/
 DynaOrden *dynaOrden(orden listaDeOrdenes[100]);
