@@ -194,6 +194,50 @@ const char *abrirProdPorOrd() {
     }
 }
 
+/*Guarda una orden en la base de datos*/
+void guardarOrden(orden nueva) {
+    FILE *bddOrd;
+    bddOrd = fopen("codOrd.csv", "w");
+    DynaOrden *listaO= dynaOrden(abrirBDOrdenes);
+
+    if (bddOrd == NULL) {
+        printf("Error al abrir la base de datos\n");
+        return;
+    }
+
+    for (int fila = 0; fila < listaO->tamano + 2; fila++) {
+        if (fila == 0) {
+            fprintf(bddOrd,
+            "%s;%s;%s;%s;%s\n",
+            "Codigo cliente",
+            "Codigo producto",
+            "Codigo orden",
+            "cantidad",
+            "descuento");
+        } else if (fila < listaO->tamano && fila > 0) {
+            fprintf(bddOrd,
+            "%s;%s;%d;%d\n",
+            listaO[fila - 1].ordenes->codigoCliente,
+            listaO[fila - 1].ordenes->codigoProducto,
+            listaO[fila - 1].ordenes->cantidad,
+            listaO[fila - 1].ordenes->descuento);
+        } else if (fila == listaO->tamano) {
+            fprintf(bddOrd,
+            "%s;%s;%d;%d\n",
+            nueva.codigoCliente,
+            nueva.codigoProducto,
+            nueva.cantidad,
+            nueva.descuento);
+        } else if (ferror(bddOrd)) {
+            printf("No se pudo agregar el cliente\n");
+            return;
+        }
+    }
+    fclose(bddOrd);
+    printf("Se agreg� exitosamente a la base de datos\n");
+    return;
+}
+
 /*Devuelve la orden en el indice i*/
 orden valorOrd(int i, const DynaOrden *dynaOrden) {
     if (dynaOrden->tamano <= i) {
