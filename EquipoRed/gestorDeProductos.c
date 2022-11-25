@@ -212,7 +212,7 @@ int buscarProducto(const char codigo[20], producto productoL[100])
         {
 
             printf("El cliente no se encontró\n\n");
-            break;
+            return 0;
         }
     }
 

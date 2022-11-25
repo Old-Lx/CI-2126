@@ -34,6 +34,9 @@ cliente *abrirBDDClientes();
 /*Crea un nuevo cliente*/
 cliente nuevoCliente();
 
+/*Devuelve el índice de un cliente*/
+int buscarCliente(const char username[20], cliente clienteL[100]);
+
 /*Guarda un cliente en la base de datos*/
 int guardarCliente(cliente nuevo);
 

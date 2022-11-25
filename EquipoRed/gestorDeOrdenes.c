@@ -209,6 +209,160 @@ const char *abrirProdPorOrd()
     }
 }
 
+/*Devuelve la columna de productos de una orden*/
+int columnOrd(DynaOrden *dynaOrden, char codOrd) {
+    for (int i = 0; i < dynaOrden->tamano; i++) {
+        for (int j = 0; j < 20; j++) {
+            if (!strcmp(dynaOrden->ordenes[i].codigoProducto[0][j], codOrd)) {
+                return j;
+            }
+        }
+    } 
+}
+
+/*Crea orden nueva*/
+orden nuevaOrden() {
+    int n, i;
+    orden nueva;
+    DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
+    abrirProdPorOrd();
+    abrirBDDClientes();
+    abrirBDDProductos();
+
+    printf("\n\nSolicitaremos los datos para agregar un nuevo producto:\n");
+
+    do /*Comprobacion usuario está en base de datoss*/
+    {
+
+        printf("\nIngrese nombre de usuario: ");
+        fflush(stdout);
+        fflush(stdin);
+        fgets(nueva.codigoCliente, 20, stdin);
+        fflush(stdin);
+        if (nueva.codigoCliente[1] != '\0')
+        {
+            nueva.codigoCliente[strcspn(nueva.codigoCliente, "\n")] = 0;
+            n = 1;
+            for (i = 0; i < 100; i++)
+            {
+                if (!buscarCliente(nueva.codigoCliente, clientes))
+                {
+                    printf("\nEl usuario no se encuentra en nuestra base de datos\n");
+                    n = 0;
+                    i = 100;
+                }
+            }
+        }
+        else
+        {
+            printf("\nNo puedes ingresar datos vacios");
+            n = 0;
+        }
+    } while (n < 1);
+
+
+    do /*Comprobaci�n orden vacio*/
+    {
+        printf("\nIngrese codigo de la orden: ");
+        fflush(stdout);
+        fgets(nueva.codigoOrden, 20, stdin);
+        fflush(stdin);
+        // system ("cls");
+
+        if (nueva.codigoOrden[1] != '\0')
+        {
+            nueva.codigoOrden[strcspn(nueva.codigoOrden, "\n")] = 0;
+            n = 1;
+            for (i = 0; i < 100; i++)
+            {
+                if (strcmp(nueva.codigoOrden, listaO->ordenes[i].codigoOrden))
+                {
+                    printf("\nEste codigo ya esta registrado\n");
+                    n = 0;
+                    i = 100;
+                }
+            }
+        }
+        else
+        {
+            printf("\nNo puedes ingresar datos vacios\n");
+            n = 0;
+        }
+    } while (n < 1);
+
+    do
+    {
+        mostrarBDDProductos();
+        int numProductos;
+        printf("\nIngrese cuantos tipos de producto desea: ");
+        fflush(stdout);
+        scanf("%d", numProductos);
+        fflush(stdin);
+
+        for (int i = 0; i < numProductos; i++) {
+
+            printf("\nIngrese cuales productos desea: ");
+            fflush(stdout);
+            fgets(nueva.codigoProducto[i][columnOrd(listaO, nueva.codigoOrden)], 20, stdin);
+            fflush(stdin);
+            if (buscarProducto(nueva.codigoProducto[i][columnOrd(listaO, nueva.codigoOrden)], productos[columnOrd(listaO, nueva.codigoOrden)]))
+            {
+                printf("\nEse producto no se encuentra disponible\n");
+                fflush(stdout);
+                n = 0;
+            }
+            else
+            {
+                n = 2;
+            }
+        }
+
+        
+        // system ("cls");
+    } while (n < 1);
+
+
+    do
+    {
+        printf("\nIngrese la cantidad del producto: ");
+        fflush(stdout);
+        scanf("%d", &nueva.cantidad);
+        fflush(stdin);
+        if (nueva.cantidad <= 0 || nueva.cantidad > productos[buscarProducto(nueva.codigoProducto, nueva.codigoProducto[i][columnOrd(listaO, nueva.codigoOrden)])].stock) {
+                printf("\nNo hay suficientes unidades\n");
+                fflush(stdout);
+                n = 0;
+        }
+        else
+        {
+            n = 2;
+        };
+        // system ("cls");
+    } while (n < 1);
+
+    /*�Comprobaci�n de stock*/
+    do
+    {
+        printf("\nIngrese la cantidad de productos disponibles: ");
+        fflush(stdout);
+        fflush(stdin);
+        scanf("%d", &nuevo.stock);
+        fflush(stdin);
+        if (nuevo.stock < 0)
+        {
+            printf("\nOpcion invalida, intente de nuevo\n");
+            n = 0;
+        }
+        else
+        {
+            n = 2;
+        };
+        // system ("cls");
+    } while (n < 1);
+
+    return nueva;
+}
+
 /*Guarda una orden en la base de datos*/
 void guardarOrden(orden nueva)
 {
