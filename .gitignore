@@ -54,3 +54,6 @@ prueba.c
 
 #database files
 *.txt
+
+#Archivo de arreglos dinámicos
+dinarreglo.c
