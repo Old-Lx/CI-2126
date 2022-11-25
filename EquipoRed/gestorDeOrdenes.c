@@ -305,7 +305,7 @@ orden nuevaOrden() {
             fflush(stdout);
             fgets(nueva.codigoProducto[i][columnOrd(listaO, nueva.codigoOrden)], 20, stdin);
             fflush(stdin);
-            if (buscarProducto(nueva.codigoProducto[i][columnOrd(listaO, nueva.codigoOrden)], productos[columnOrd(listaO, nueva.codigoOrden)]))
+            if (buscarProducto(nueva.codigoProducto[i][columnOrd(listaO, nueva.codigoOrden)], productos))
             {
                 printf("\nEse producto no se encuentra disponible\n");
                 fflush(stdout);
