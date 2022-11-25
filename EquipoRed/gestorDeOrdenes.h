@@ -13,7 +13,7 @@
 /*Declaramos un struct para guardar ordenes*/
 typedef struct {
     char codigoCliente[20];
-    char codigoProducto[20][20][20];
+    char codigoProducto[20][20][20]; ///Hacerlo como struct incluyendo cantidad
     char codigoOrden[20];
     unsigned int cantidad;
     unsigned int descuento;
