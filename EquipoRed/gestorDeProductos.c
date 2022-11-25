@@ -291,7 +291,7 @@ int guardarProducto(producto nuevo)
 int modificarProducto()
 {
     int cambio;
-    int modificar, n, aux, i, fila;
+    int modificar, n, aux, i, fila,compr;
     char nuevo[20];
     int nuevoStock;
     int dat=0;
@@ -310,11 +310,14 @@ int modificarProducto()
         {
             printf("\nCodigo encontrado\n");
             count_p[1] = fila;
+            compr = 1;
             printf("\nModificara el producto\t**%s**\n", productos[count_p[1]].descripcion);
             fila = 100;
+        }else{
+            compr=0;
         }
     }
-    if (count_p[1] >= 0)
+    if (compr != 0)
     {
 
         do
@@ -398,7 +401,7 @@ int modificarProducto()
                 break;
             case 4:
                 do
-                { /*�Comprobaci�n de stock*/ 
+                { /*�Comprobaci�n de stock*/
                     printf("\nIngrese la nueva cantidad de productos disponibles:\n");
                     fflush(stdin);
                     scanf("%i", &nuevoStock);
@@ -429,7 +432,7 @@ int modificarProducto()
         return 0;
     }
     else{
-        printf("\nEste codigo no se encuentra registrado\n");
+        printf("\nEste codigo no se encuentra registrado\n");//No esta entrando
         return 0;
     }
 }
