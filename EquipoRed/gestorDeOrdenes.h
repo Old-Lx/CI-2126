@@ -41,6 +41,12 @@ DynaOrden *dynaOrden(orden listaDeOrdenes[100]);
 /*Carga los codigos de los productos de cada orden*/
 const char *abrirProdPorOrd();
 
+/*Devuelve la columna de productos de una orden*/
+int columnOrd(DynaOrden *dynaOrden, char codOrd);
+
+/*Crea orden nueva*/
+orden nuevaOrden();
+
 /*Guarda una orden en la base de datos*/
 void guardarOrden(orden nueva);
 

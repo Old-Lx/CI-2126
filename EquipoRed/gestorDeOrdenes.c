@@ -245,7 +245,7 @@ orden nuevaOrden() {
             n = 1;
             for (i = 0; i < 100; i++)
             {
-                if (!buscarCliente(nueva.codigoCliente, clientes))
+                if (buscarCliente(nueva.codigoCliente, clientes))
                 {
                     printf("\nEl usuario no se encuentra en nuestra base de datos\n");
                     n = 0;
@@ -340,8 +340,9 @@ orden nuevaOrden() {
         // system ("cls");
     } while (n < 1);
 
-    /*�Comprobaci�n de stock*/
-    do
+    nueva.descuento = 0;
+    /*Comprobaci�n de descuento*/
+    /*do
     {
         printf("\nIngrese la cantidad de productos disponibles: ");
         fflush(stdout);
@@ -358,7 +359,7 @@ orden nuevaOrden() {
             n = 2;
         };
         // system ("cls");
-    } while (n < 1);
+    } while (n < 1);*/
 
     return nueva;
 }

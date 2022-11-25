@@ -837,7 +837,7 @@ void operacionCliente()
             n = 0;
             break;
         case 4:
-            printf("Se realizaria un pedido");
+            crearOrd(nuevaOrden());
             n = 0;
             break;
         case 5:
