@@ -837,7 +837,8 @@ void operacionCliente()
             n = 0;
             break;
         case 4:
-            crearOrd(nuevaOrden());
+            printf("\n\n**Operacion en construccion**\n\n");
+            //crearOrd(nuevaOrden());
             n = 0;
             break;
         case 5:
