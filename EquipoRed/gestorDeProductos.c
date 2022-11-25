@@ -306,20 +306,20 @@ int modificarProducto()
 
     for (int fila = 0; fila < 100; fila++)
     {
-        printf("%s\n", productos[fila].codigo);
         if (strcmp(nuevo, productos[fila].codigo) == 0)
         {
             printf("\nCodigo encontrado\n");
             count_p[1] = fila;
+            printf("\nModificara el producto\t**%s**\n", productos[count_p[1]].descripcion);
             fila = 100;
         }
     }
-    if (count_p[1] != 0)
+    if (count_p[1] >= 0)
     {
 
         do
         {
-            printf("\nQue dato quiere modificar?\n [1] Codigo\n [2] Descripcion\n [3] Precio\n [4] Stock\n");
+            printf("\nQue dato quiere modificar?\n [1] Codigo\n [2] Descripcion\n [3] Precio\n [4] Stock\n [5] Regresar\n");
             scanf("%d", &cambio);
             fflush(stdin);
             switch (cambio)
@@ -327,7 +327,6 @@ int modificarProducto()
             case 1:
                 do /*Comprobacion nombre vacio*/
                 {
-
                     printf("\nIngrese codigo: ");
                     fflush(stdout);
                     fflush(stdin);
@@ -399,9 +398,10 @@ int modificarProducto()
                 break;
             case 4:
                 do
-                { /*�Comprobaci�n de stock*/
+                { /*�Comprobaci�n de stock*/ 
                     printf("\nIngrese la nueva cantidad de productos disponibles:\n");
-                    scanf("%i", nuevoStock);
+                    fflush(stdin);
+                    scanf("%i", &nuevoStock);
                     if (nuevoStock <= 0)
                     {
                         printf("\nOpcion invalida, intente de nuevo");
@@ -416,6 +416,9 @@ int modificarProducto()
                 } while (aux < 1);
                 productos[count_p[1]].stock = nuevoStock;
                 n = 2;
+                break;
+            case 5:
+                n=2;
                 break;
             default:
                 printf("\nNo es una de las opciones");
