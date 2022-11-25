@@ -52,4 +52,10 @@ int ingresar();
 /*Actualiza la base de datos con datos modificados*/
 int actualizarBDClientes();
 
+/*Inicia sesión Invitado*/
+int ingresarInvitado();
+
+/*Inicia sesión NuevoRegistro*/
+int ingresarNuevoRegistro();
+
 #endif // LOGIN_H_INCLUDED

@@ -49,4 +49,7 @@ void operacionProductos() ;
 /*Ingresa como administrador*/
 void ingresarAdmin();
 
+/*Actualiza la base de datos de productos*/
+int actualizarBDProductos();
+
 #endif

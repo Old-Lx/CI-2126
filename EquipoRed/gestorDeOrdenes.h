@@ -7,10 +7,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "gestorDeOrdenes.h"
+#include "gestorDeProductos.h"
+#include "Login.h"
 
 /*Declaramos un struct para guardar ordenes*/
-typedef struct orden {
+typedef struct {
     char codigoCliente[20];
     char codigoProducto[20][20][20];
     char codigoOrden[20];
@@ -32,13 +33,13 @@ orden listaO[100];
 int count_o[1];
 
 /*Abre base de datos de órdenes en csv*/
-int abrirBDOrdenes() ;
+orden *abrirBDOrdenes() ;
 
 /*Inicializa un arreglo dinámico de órdenes*/
 DynaOrden *dynaOrden(orden listaDeOrdenes[100]);
 
 /*Carga los codigos de los productos de cada orden*/
-const char *abrirProdPorOrd()
+const char *abrirProdPorOrd();
 
 /*Guarda una orden en la base de datos*/
 void guardarOrden(orden nueva);
@@ -71,7 +72,7 @@ void elimOrden(DynaOrden *dynaOrden, int pos);
 int indOrdAlfa(int i, int j, const char *a[]);
 
 /*Cambia la posición de dos ordenes*/
-static void cambOrd(int i, int j, DynaOrden *dynaOrden);
+void cambOrd(int i, int j, DynaOrden *dynaOrden);
 
 /*Reordena de menor a mayor las ordenes segun su codigo*/
 void sortOrd(DynaOrden *dynaOrden);

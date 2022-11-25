@@ -10,74 +10,42 @@
 
 
 int main() {
-    char ClaveAdmin[10] = "admin" ;
-    int menuPrincipal,menu2,resp;
+    int aux,n;
+    printf("\n\n***Bienvenido a Nuestro Sistema***\n\n");
 
-    do
-    {
-        printf("Eres administrador de la tienda? \n [1] Si \n [2] No\nIngrese su respuesta: ");
-        fflush(stdout);
+    do{
+        printf("\nQue deseas Realizar? \n");
+        printf(" [1] Registrarte\n [2] Iniciar Sesion\n [3] Ingresar como administrador\n [4] Ingresar como invitado\n [5] Salir\n");
+        printf(" Ingresa tu opcion:\t");
+        scanf("%d", &aux);
         fflush(stdin);
-        scanf("%i", &resp);
-        fflush(stdin);
-        switch (resp)
+        switch (aux)
         {
         case 1:
-            printf("\nIngrese clave de administrador: ");
-            fflush(stdout);
-            fflush(stdin);
-            char clave_adm[10];
-            scanf("%s", &clave_adm);
-            fflush(stdin);
-
-            if (strcmp(clave_adm, ClaveAdmin) == 0 ) {
-                ingresarAdmin();
-                menuPrincipal = 2;
-            }else {
-                printf("\n \nClave invalida\n \n");
-                menuPrincipal = 0;
-            };
+            guardarCliente(nuevoCliente());
+            ingresarNuevoRegistro();
+            n=0;
             break;
         case 2:
-        do{
-            printf("\nBienvenido!\nEstas registrado en nuestra tienda?\n [1] Si\n [2] No\nIngrese su respuesta:  \n");
-            scanf("%i", &resp);
-            fflush(stdin);
-            switch (resp)
-            {
-            case 1:
-                do{
-                    printf("\nQuieres Iniciar Sesion?\n[1] Si\n[2] No\nIngrese su respuesta:  ");
-                    scanf("%i", &resp);
-                    fflush(stdin);
-                   switch (resp)
-                   {
-                   case 1: ingresar(); menuPrincipal=2; break;
-                   case 2: printf("*****Ingresaste como Invitado*****"); menuPrincipal=2; break;
-                   default: printf("\n\nOpcion invalida, intente de nuevo\n\n"); menuPrincipal=0; break;
-                   }
-                } while (menuPrincipal == 0);
-                break;
-            case 2:
-                do{
-                    printf("Quieres Registrarte?\n[1] Si\n[2] No\nIngrese su respuesta:  ");
-                    scanf("%i", &resp);
-                    fflush(stdin);
-                   switch (resp)
-                   {
-                   case 1: guardarCliente(nuevoCliente()); ingresar(); menuPrincipal = 2; break;
-                   case 2: printf("\n*****Ingresaste como Invitado*****\n"); menuPrincipal = 2; break;
-                   default: printf("\n\nOpcion invalida, intente de nuevo\n\n"); menuPrincipal=0; break;
-                   }
-                } while (menuPrincipal == 0);
-                break;
-            default:
-                printf("\n\nOpcion invalida, intente de nuevo\n\n"); menuPrincipal = 0; break;
-            }
-        }while (menuPrincipal == 0);break;
-        
-        default: printf("\n\nOpcion invalida, intente de nuevo\n\n"); menuPrincipal=0; break;
-
+            ingresar();
+            n=0;
+            break;
+        case 3:
+            ingresarAdmin();
+            n=0;
+            break;
+        case 4:
+            ingresarInvitado();
+            n=0;
+            break;
+        case 5:
+            exit(0);
+            n=0;
+            break;
+        default:
+            printf("\n\nOpcion Invalida\n\n");
+            n=0;
+            break;
         }
-    }while (menuPrincipal == 0);
+    }while (n==0);
 }
