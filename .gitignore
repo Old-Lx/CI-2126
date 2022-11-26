@@ -58,3 +58,6 @@ prueba.c
 #Archivo de arreglos dinámicos
 dinarreglo.c
 dinarreglo.h
+
+#LabyrinthSolver
+LabyrinthSolver.c
