@@ -55,9 +55,8 @@ prueba.c
 #database files
 *.txt
 
-#Archivo de arreglos dinámicos
-dinarreglo.c
-dinarreglo.h
+#Carpeta de arreglos dinámicos
+C:\Users\Ludy\Desktop\Universidad\Programación\CI-2126\ArreglosDinamicos\
 
-#LabyrinthSolver
-LabyrinthSolver.c
+#Carpeta de LabyrinthSolver
+C:\Users\Ludy\Desktop\Universidad\Programación\CI-2126\Parcial1\
