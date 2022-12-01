@@ -283,7 +283,7 @@ int guardarProducto(producto nuevo)
     };
 
     fclose(bddpcsv);
-    printf("Se agreg� exitosamente a la base de datos\n");
+    printf("Se agrego exitosamente a la base de datos\n");
     return 0;
 };
 
@@ -322,13 +322,13 @@ int modificarProducto()
 
         do
         {
-            printf("\nQue dato quiere modificar?\n [1] Codigo\n [2] Descripcion\n [3] Precio\n [4] Stock\n [5] Regresar\n");
+            printf("\nQue dato quiere modificar?\n [1] Descripcion\n [2] Precio\n [3] Stock\n [4] Regresar\n");
             scanf("%d", &cambio);
             fflush(stdin);
             switch (cambio)
             {
-            case 1:
-                do /*Comprobacion nombre vacio*/
+            /*case 1:
+                do //Comprobacion nombre vacio
                 {
                     printf("\nIngrese codigo: ");
                     fflush(stdout);
@@ -357,8 +357,8 @@ int modificarProducto()
                 } while (n < 1);
                 strcpy(productos[count_p[1]].codigo, nuevo);
                 n = 2;
-                break;
-            case 2:
+                break;*/
+            case 1:
                 do
                 {
                     printf("\nIngrese nueva descripcion del producto:\n");
@@ -380,7 +380,7 @@ int modificarProducto()
                 strcpy(productos[count_p[1]].descripcion, nuevo);
                 n = 2;
                 break;
-            case 3:
+            case 2:
                 do
                 {
                     printf("\nIngrese el nuevo precio:\n");
@@ -399,7 +399,7 @@ int modificarProducto()
                 productos[count_p[1]].precio = nuevoPrecio;
                 n = 2;
                 break;
-            case 4:
+            case 3:
                 do
                 { /*�Comprobaci�n de stock*/
                     printf("\nIngrese la nueva cantidad de productos disponibles:\n");
@@ -420,7 +420,7 @@ int modificarProducto()
                 productos[count_p[1]].stock = nuevoStock;
                 n = 2;
                 break;
-            case 5:
+            case 4:
                 n=2;
                 break;
             default:
@@ -471,7 +471,7 @@ void mostrar10Productos()
                productos[i].stock);
     }
 
-    
+
     printf("\n[1] Pagina principal\t[2] Pagina anterior\t[3] Pagina siguiente\t [4]Salir\nIngrese su respuesta: ");
     scanf("%d",&opcion);
         switch (opcion)
@@ -484,7 +484,7 @@ void mostrar10Productos()
         }
     }while (opcion != 4);
 
-    
+
 }
 
 /*Muestra base de datos de Clientes*/

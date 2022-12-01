@@ -506,7 +506,8 @@ int modificarCliente()
 
     do
     {
-        printf("\nQue dato quieres cambiar?\n [1] Nombre\n [2] Correo\n [3] Direccion\n [4] Telefono\n [5] Contactof\n [6] Username\n [7] Clave\n [8] Fecha de Nacimiento\n [9] Lugar de Nacimiento\n [10] Genero\n");
+        printf("\nQue dato quieres cambiar?\n [1] Nombre\n [2] Correo\n [3] Direccion\n [4] Telefono\n [5] Contactof\n" 
+        " [6] Clave\n [7] Fecha de Nacimiento\n [8] Lugar de Nacimiento\n [9] Genero\n [10] Salir\n");
         printf("Seleccione una opcion:\t");
         scanf("%d", &dato);
         fflush(stdin);
@@ -646,8 +647,8 @@ int modificarCliente()
             fflush(stdin);
             n = 2;
             break;
-        case 6:
-            do /*Comprobación username vacio*/
+        /*case 6:
+            do //Comprobación username vacio
             {
                 printf("\nIngrese nuevo nombre de usuario: "); // nombre de usuario
                 fflush(stdout);
@@ -677,8 +678,8 @@ int modificarCliente()
             strcpy(clientes[num_fila[0]].username, nuevo);
             fflush(stdin);
             n = 2;
-            break;
-        case 7:
+            break;*/
+        case 6:
             do
             { /*Coincidan las claves*/
                 do
@@ -713,7 +714,7 @@ int modificarCliente()
             } while (n < 1);
             n = 2;
             break;
-        case 8:
+        case 7:
             do /*Comprobación dia de nacimiento vacio*/
             {
                 printf("Ingrese nueva fecha de nacimiento:\n");
@@ -731,7 +732,7 @@ int modificarCliente()
                     n = 0;
                 }
             } while (n < 1);
-        case 9:
+        case 8:
             do /*Comprobación lugar de nacimiento vacio*/
             {
                 printf("\nIngrese lugar de nacimiento: "); // Lugar de nacimiento
@@ -754,7 +755,7 @@ int modificarCliente()
             fflush(stdin);
             n = 2;
             break;
-        case 10:
+        case 9:
             do
             {
                 printf("\nSeleccione su género:\nFemenino[1]\nMasculino[2]\nNo especificar[3]\n"); // Género mediante menu
@@ -782,6 +783,7 @@ int modificarCliente()
             fflush(stdin);
             n = 2;
             break;
+        case 10: return;break;    
         default:
             printf("\nNo es una de las opciones");
             n = 0;
