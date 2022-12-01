@@ -52,4 +52,6 @@ void ingresarAdmin();
 /*Actualiza la base de datos de productos*/
 int actualizarBDProductos();
 
+/*Muestra productos de 10 en 10*/
+void mostrar10Productos();
 #endif

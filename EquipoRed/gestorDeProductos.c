@@ -446,12 +446,45 @@ void mostrarBDDProductos()
     for (int i = 0; i < count_p[0] - 1; i++)
     {
 
-        printf("%s\t%s\t\t%f\t%d\n",
+        printf("%4s\t%10s\t%.2f\t\t%4d\n",
                productos[i].codigo,
                productos[i].descripcion,
                productos[i].precio,
                productos[i].stock);
     }
+}
+
+/*Muestra base de datos del producto*/
+void mostrar10Productos()
+{
+    int p=0,opcion,a=10;
+    do{
+    abrirBDDProductos();
+    printf("\n\nCodigo\tDescripcion\tPrecio\t\tStock\n");
+    for (int i = p; i < p+a; i++)
+    {
+
+        printf("%4s\t%10s\t%.2f\t\t%4d\n",
+               productos[i].codigo,
+               productos[i].descripcion,
+               productos[i].precio,
+               productos[i].stock);
+    }
+
+    
+    printf("\n[1] Pagina principal\t[2] Pagina anterior\t[3] Pagina siguiente\t [4]Salir\nIngrese su respuesta: ");
+    scanf("%d",&opcion);
+        switch (opcion)
+        {
+        case 1:p=0;a=10;break;//
+        case 2:p=p-10;if(p<0){p=0;};a=10;break;//
+        case 3:p=p+10;if(p>count_p[0]){p=p-10;};if(count_p[0]-p<10){a=count_p[0]-p-1;}else{a=10;};break;//
+        case 4:return;break;
+        default: printf("\nOpcion Invalida");break;
+        }
+    }while (opcion != 4);
+
+    
 }
 
 /*Muestra base de datos de Clientes*/
@@ -491,7 +524,7 @@ void operacionProductos()
         switch (accionCliente)
         {
         case 1:
-            mostrarBDDProductos();
+            mostrar10Productos();
             n = 0;
             break;
         case 2:

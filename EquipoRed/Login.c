@@ -827,7 +827,7 @@ void operacionCliente()
             n = 0;
             break;
         case 2:
-            mostrarBDDProductos();
+            mostrar10Productos();
             fflush(stdout);
             n = 0;
             break;
