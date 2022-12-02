@@ -234,7 +234,7 @@ orden nuevaOrden() {
         printf("\nIngrese nombre de usuario: ");
         fflush(stdout);
         fflush(stdin);
-        fgets(nueva.codigoCliente, 20, stdin);
+        strcpy(nueva.codigoCliente, clientes[count_c[0]].nombre);
         fflush(stdin);
         if (nueva.codigoCliente[1] != '\0')
         {
@@ -504,7 +504,7 @@ void elimOrden(DynaOrden *dynaOrden, int pos)
 {
     int tam = ordTam(dynaOrden);
     orden ordenNula;
-    ordenNula.cantidad = 0;
+    ///ordenNula.cantidad = 0;
     strcpy(ordenNula.codigoCliente, '\0');
     strcpy(ordenNula.codigoOrden, '\0');
     ordenNula.codigoProducto; // No esta operando
