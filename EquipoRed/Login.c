@@ -402,7 +402,7 @@ int buscarCliente(const char username[20], cliente clienteL[100])
         {
 
             printf("El cliente no se encontró\n\n");
-            return 0;
+            break;;
         }
     }
 
