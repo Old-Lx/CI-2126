@@ -231,11 +231,7 @@ orden nuevaOrden() {
     do /*Comprobacion usuario está en base de datoss*/
     {
 
-        printf("\nIngrese nombre de usuario: ");
-        fflush(stdout);
-        fflush(stdin);
         strcpy(nueva.codigoCliente, clientes[count_c[0]].nombre);
-        fflush(stdin);
         if (nueva.codigoCliente[1] != '\0')
         {
             nueva.codigoCliente[strcspn(nueva.codigoCliente, "\n")] = 0;
