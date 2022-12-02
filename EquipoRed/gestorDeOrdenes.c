@@ -52,9 +52,6 @@ orden *abrirBDOrdenes()
 
                 else if (column == 3)
                 {
-                    char cant[20];
-                    strcpy(cant, entrada);
-                    listaO[i].cantidad = atoi(cant);
                 }
 
                 else if (column == 4)

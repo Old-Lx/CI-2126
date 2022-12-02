@@ -457,7 +457,7 @@ void mostrarBDDProductos()
 /*Muestra base de datos del producto*/
 void mostrar10Productos()
 {
-    int p=0,opcion,a=10;
+    int p=0,opcion,a=10, ordenNueva;
     do{
     abrirBDDProductos();
     printf("\n\nCodigo\tDescripcion\tPrecio\t\tStock\n");
@@ -469,6 +469,19 @@ void mostrar10Productos()
                productos[i].descripcion,
                productos[i].precio,
                productos[i].stock);
+        printf("\n\nDeseas crear una orden?\n[1]Si\n");
+        fflush(stdout);
+        scanf("%d",&ordenNueva);
+        switch (ordenNueva)
+        {
+        case 1:
+            crearOrd(nuevaOrden());
+            break;
+        
+        default:
+            printf("No se creó orden nueva\n");
+            break;
+        }
     }
 
 

@@ -1,1 +1,0 @@
-$CC *.cxx -o run
