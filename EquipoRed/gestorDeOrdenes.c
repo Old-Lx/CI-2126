@@ -198,7 +198,7 @@ const char *abrirProdPorOrd()
                 {
                     if (!strcmp(cliFila[x][1], (const char *)j))
                     {
-                        strcpy(listaO[x].ordenes->productoOrden.codigoProd[fila][k], ordProd[fila][k]);
+                        strcpy(listaO[x].ordenes->productoOrden.codigoProd[fila], ordProd[fila][k]);
                     }
                 }
             }
@@ -207,10 +207,10 @@ const char *abrirProdPorOrd()
 }
 
 /*Devuelve la columna de productos de una orden*/
-int columnOrd(DynaOrden *dynaOrden, char codOrd) {
+int columnOrd(DynaOrden *dynaOrden, char *codOrd) {
     for (int i = 0; i < dynaOrden->tamano; i++) {
         for (int j = 0; j < 20; j++) {
-            if (!strcmp(dynaOrden->ordenes[i].productoOrden.codigoProd[0][j], codOrd)) {
+            if (!strcmp(dynaOrden->ordenes[i].productoOrden.codigoProd[0], codOrd)) {
                 return j;
             }
         }
@@ -296,9 +296,9 @@ orden nuevaOrden() {
 
             printf("\nIngrese cuales productos desea: ");
             fflush(stdout);
-            fgets(nueva.productoOrden.codigoProd[i][columnOrd(listaO, nueva.codigoOrden)], 20, stdin);
+            fgets(nueva.productoOrden.codigoProd[i], 20, stdin);
             fflush(stdin);
-            if (buscarProducto(nueva.productoOrden.codigoProd[i][columnOrd(listaO, nueva.codigoOrden)], productos))
+            if (buscarProducto(nueva.productoOrden.codigoProd[i], productos))
             {
                 printf("\nEse producto no se encuentra disponible\n");
                 fflush(stdout);
@@ -317,11 +317,11 @@ orden nuevaOrden() {
 
     do
     {
-        printf("\nIngrese la cantidad del producto: ");
+        /*printf("\nIngrese la cantidad del producto: ");
         fflush(stdout);
         scanf("%d", &nueva.productoOrden.cantidad);
         fflush(stdin);
-        if (nueva.productoOrden.cantidad <= 0 || nueva.productoOrden.cantidad > productos[buscarProducto(nueva.productoOrden.codigoProd, nueva.productoOrden.codigoProd[i][columnOrd(listaO, nueva.codigoOrden)])].stock) {
+        if (nueva.productoOrden.cantidad <= 0 || nueva.productoOrden.cantidad > (productos[buscarProducto(nueva.productoOrden.codigoProd[i], productos)].stock)) {
                 printf("\nNo hay suficientes unidades\n");
                 fflush(stdout);
                 n = 0;
@@ -329,7 +329,7 @@ orden nuevaOrden() {
         else
         {
             n = 2;
-        };
+        };*/
         // system ("cls");
     } while (n < 1);
 
