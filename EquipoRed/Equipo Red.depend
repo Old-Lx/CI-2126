@@ -57,7 +57,7 @@
 	<string.h>
 	"Login.h"
 
-1669931738 source:c:\users\gustavo\documents\github\ci-2126\equipored\gestordeproductos.c
+1669993550 source:c:\users\gustavo\documents\github\ci-2126\equipored\gestordeproductos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -66,7 +66,7 @@
 	"gestorDeProductos.h"
 	"gestorDeOrdenes.h"
 
-1669386821 source:c:\users\gustavo\documents\github\ci-2126\equipored\login.c
+1669993459 source:c:\users\gustavo\documents\github\ci-2126\equipored\login.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -75,7 +75,7 @@
 	"gestorDeProductos.h"
 	"gestorDeOrdenes.h"
 
-1669931050 source:c:\users\gustavo\documents\github\ci-2126\equipored\gestordeordenes.c
+1669993455 source:c:\users\gustavo\documents\github\ci-2126\equipored\gestordeordenes.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -84,7 +84,7 @@
 	"gestorDeProductos.h"
 	"gestorDeOrdenes.h"
 
-1669930781 c:\users\gustavo\documents\github\ci-2126\equipored\gestordeordenes.h
+1669987478 c:\users\gustavo\documents\github\ci-2126\equipored\gestordeordenes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

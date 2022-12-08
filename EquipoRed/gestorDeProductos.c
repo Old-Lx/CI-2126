@@ -469,19 +469,7 @@ void mostrar10Productos()
                productos[i].descripcion,
                productos[i].precio,
                productos[i].stock);
-        printf("\n\nDeseas crear una orden?\n[1]Si\n");
-        fflush(stdout);
-        scanf("%d",&ordenNueva);
-        switch (ordenNueva)
-        {
-        case 1:
-            crearOrd(nuevaOrden());
-            break;
         
-        default:
-            printf("No se creó orden nueva\n");
-            break;
-        }
     }
 
 
@@ -492,10 +480,11 @@ void mostrar10Productos()
         case 1:p=0;a=10;break;//
         case 2:p=p-10;if(p<0){p=0;};a=10;break;//
         case 3:p=p+10;if(p>count_p[0]){p=p-10;};if(count_p[0]-p<10){a=count_p[0]-p-1;}else{a=10;};break;//
-        case 4:return;break;
+        case 4:crearOrd(nuevaOrden());break;
+        case 5:return;break;
         default: printf("\nOpcion Invalida");break;
         }
-    }while (opcion != 4);
+    }while (opcion != 5);
 
 
 }
