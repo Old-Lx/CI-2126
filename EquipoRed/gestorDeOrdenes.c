@@ -198,7 +198,7 @@ const char *abrirProdPorOrd()
                 {
                     if (!strcmp(cliFila[x][1], (const char *)j))
                     {
-                        strcpy(listaO[x].ordenes->codigoProducto[fila][k], ordProd[fila][k]);
+                        strcpy(listaO[x].ordenes->productoOrden.codigoProd[fila][k], ordProd[fila][k]);
                     }
                 }
             }
@@ -210,7 +210,7 @@ const char *abrirProdPorOrd()
 int columnOrd(DynaOrden *dynaOrden, char codOrd) {
     for (int i = 0; i < dynaOrden->tamano; i++) {
         for (int j = 0; j < 20; j++) {
-            if (!strcmp(dynaOrden->ordenes[i].codigoProducto[0][j], codOrd)) {
+            if (!strcmp(dynaOrden->ordenes[i].productoOrden.codigoProd[0][j], codOrd)) {
                 return j;
             }
         }
@@ -296,9 +296,9 @@ orden nuevaOrden() {
 
             printf("\nIngrese cuales productos desea: ");
             fflush(stdout);
-            fgets(nueva.codigoProducto[i][columnOrd(listaO, nueva.codigoOrden)], 20, stdin);
+            fgets(nueva.productoOrden.codigoProd[i][columnOrd(listaO, nueva.codigoOrden)], 20, stdin);
             fflush(stdin);
-            if (buscarProducto(nueva.codigoProducto[i][columnOrd(listaO, nueva.codigoOrden)], productos))
+            if (buscarProducto(nueva.productoOrden.codigoProd[i][columnOrd(listaO, nueva.codigoOrden)], productos))
             {
                 printf("\nEse producto no se encuentra disponible\n");
                 fflush(stdout);
@@ -319,9 +319,9 @@ orden nuevaOrden() {
     {
         printf("\nIngrese la cantidad del producto: ");
         fflush(stdout);
-        scanf("%d", &nueva.cantidad);
+        scanf("%d", &nueva.productoOrden.cantidad);
         fflush(stdin);
-        if (nueva.cantidad <= 0 || nueva.cantidad > productos[buscarProducto(nueva.codigoProducto, nueva.codigoProducto[i][columnOrd(listaO, nueva.codigoOrden)])].stock) {
+        if (nueva.productoOrden.cantidad <= 0 || nueva.productoOrden.cantidad > productos[buscarProducto(nueva.productoOrden.codigoProd, nueva.productoOrden.codigoProd[i][columnOrd(listaO, nueva.codigoOrden)])].stock) {
                 printf("\nNo hay suficientes unidades\n");
                 fflush(stdout);
                 n = 0;
@@ -375,11 +375,9 @@ void guardarOrden(orden nueva)
         if (fila == 0)
         {
             fprintf(bddOrd,
-                    "%s;%s;%s;%s;%s\n",
+                    "%s;%s;%s\n",
                     "Codigo cliente",
-                    "Codigo producto",
                     "Codigo orden",
-                    "cantidad",
                     "descuento");
         }
         else if (fila < listaO->tamano && fila > 0)
@@ -387,17 +385,13 @@ void guardarOrden(orden nueva)
             fprintf(bddOrd,
                     "%s;%s;%d;%d\n",
                     listaO[fila - 1].ordenes->codigoCliente,
-                    listaO[fila - 1].ordenes->codigoProducto,
-                    listaO[fila - 1].ordenes->cantidad,
                     listaO[fila - 1].ordenes->descuento);
         }
         else if (fila == listaO->tamano)
         {
             fprintf(bddOrd,
-                    "%s;%s;%d;%d\n",
+                    "%s;%d\n",
                     nueva.codigoCliente,
-                    nueva.codigoProducto,
-                    nueva.cantidad,
                     nueva.descuento);
         }
         else if (ferror(bddOrd))
@@ -503,7 +497,7 @@ void elimOrden(DynaOrden *dynaOrden, int pos)
     ///ordenNula.cantidad = 0;
     strcpy(ordenNula.codigoCliente, '\0');
     strcpy(ordenNula.codigoOrden, '\0');
-    ordenNula.codigoProducto; // No esta operando
+    ordenNula.productoOrden.codigoProd; // No esta operando
     ordenNula.descuento = 0;
 
     if (pos >= tam)
@@ -655,7 +649,7 @@ int crearOrd(orden nuevo)
                     listaO->ordenes[fila - 1].codigoCliente,
                     "\0",
                     listaO->ordenes[fila - 1].codigoOrden,
-                    listaO->ordenes[fila - 1].cantidad,
+                    "\0",
                     listaO->ordenes[fila - 1].descuento);
         };
 
@@ -665,9 +659,9 @@ int crearOrd(orden nuevo)
             fprintf(bddocsv,
                     "%s;%s;%s;%d;%d\n",
                     nuevo.codigoCliente,
-                    nuevo.codigoProducto,
                     "\0",
-                    nuevo.cantidad,
+                    listaO->ordenes[fila - 1].codigoOrden,
+                    "\0",
                     nuevo.descuento);
         };
 

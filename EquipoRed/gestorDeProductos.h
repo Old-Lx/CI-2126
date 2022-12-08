@@ -17,7 +17,7 @@ typedef struct {
         float precio;
         int stock;
         int posProd;
-}producto ;
+}producto;
 
 int count_p[1];
 producto productos[100];
@@ -26,7 +26,7 @@ producto productos[100];
 producto *abrirBDDProductos() ;
 
 /*Devuelve un producto agregado*/
-producto nuevoProducto() ;
+producto nuevoProducto();
 
 /*Devuelve el índice de un producto*/
 int buscarProducto(const char codigo[20], producto productoL[100]);

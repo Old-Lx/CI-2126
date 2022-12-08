@@ -6,8 +6,6 @@
 #include "gestorDeProductos.h"
 #include "gestorDeOrdenes.h"
 
-/*Struct de datos de clientes*/
-cliente clientes[100];
 
 /*Abre una base de datos de personas guardada en un archivo csv*/
 cliente *abrirBDDClientes()
@@ -783,7 +781,7 @@ int modificarCliente()
             fflush(stdin);
             n = 2;
             break;
-        case 10: return;break;    
+        case 10: return 1;break;    
         default:
             printf("\nNo es una de las opciones");
             n = 0;
@@ -897,7 +895,6 @@ int ingresar()
                 }
             }
             printf("\nHa alcanzado el limite de intentos\n");
-            main();
         }
         else if (i == count_c[0] - 1 && strcmp(usuario, clientes[num_fila[0]].username))
         {
