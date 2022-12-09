@@ -815,7 +815,7 @@ void operacionCliente()
     do
     {
         printf("\nQue deseas Realizar? \n");
-        printf(" [1] Modificar datos\n [2] Ver catalogo de compra\n [3] Ver mis datos\n [4] Realizar pedido\n [5] Menu principal\n [6] Salir\nIngrese su respuesta:\t");
+        printf(" [1] Modificar datos\n [2] Ver catalogo de compra\n [3] Ver mis datos\n [4] Realizar pedido\n [5] Menu principal\n [6] Mostrar mis ordenes\n [7] Salir\nIngrese su respuesta:\t");
         fflush(stdout);
         scanf("%i", &accionCliente);
         switch (accionCliente)
@@ -843,6 +843,10 @@ void operacionCliente()
             n = 1;
             break;
         case 6:
+            mostrarOrden();
+            n = 0;
+            break;
+        case 7:
             exit(0);
             break;
         default:
