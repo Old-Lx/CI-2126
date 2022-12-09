@@ -467,7 +467,7 @@ void mostrar10Productos()
     }
 
 
-    printf("\n[1] Pagina principal\t[2] Pagina anterior\t[3] Pagina siguiente\t [4]Crear orden\t[5]Salir\nIngrese su respuesta: ");
+    printf("\n[1] Pagina principal\n[2] Pagina anterior\n[3] Pagina siguiente\n [4]Crear orden\n[5]Salir\nIngrese su respuesta: ");
     fflush(stdout);
     scanf("%d",&opcion);
         switch (opcion)
