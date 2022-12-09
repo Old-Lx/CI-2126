@@ -442,10 +442,9 @@ int indOrd(int i, DynaOrden *listaO)
             pos = k;
             min = listaO->ordenes[k];
             return pos;
-        } else if (k == listaO->tamano -1) {
-            return -1;
-        }
+        } 
     }
+    return -1;
 }
 
 /*Cambia la posición de dos ordenes*/
@@ -526,12 +525,13 @@ DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2)
 }*/
 
 /*Busca la orden de un cliente x*/
-int buscarOrden(DynaOrden *listaO, orden buscada) {
+int buscarOrden(DynaOrden *listaO, char *buscado) {
     for (int i = 0; i < listaO->tamano; i++) {
-        if (!strcmp(buscada.codigoCliente, listaO->ordenes[i].codigoOrden)) {
-            return indOrd(i, listaO->ordenes);
+        if (!strcmp(buscado, listaO->ordenes[i].codigoOrden)) {
+            return indOrd(i, listaO);
         }
     }
+    /*Llega aquí si no se encuentra*/
     return -1;
 }
 
@@ -548,7 +548,7 @@ int crearOrd(orden nuevo)
     if (bddocsv == NULL)
     {
         printf("Error al abrir la base de datos ordenes\n");
-        return 1;
+        return -1;
     }
 
     for (int fila = 0; fila < count_o[0] + 2; fila++)
@@ -563,32 +563,38 @@ int crearOrd(orden nuevo)
                     "descuento");
         }
 
-        if (fila < count_o[0] + 1 && fila > 1)
-        {
-            printf("lista old %s espacio %d\n", 
-            listaO->ordenes[fila - 1].codigoCliente,
-            fila);
+        if (buscarOrden(listaO, usuario) == -1) {    
+            if (fila < count_o[0] + 1 && fila > 1)
+            {
+                fprintf(bddocsv,
+                        "%s;%s;%d\n",
+                        listaO->ordenes[fila - 1].codigoCliente,
+                        listaO->ordenes[fila - 1].codigoOrden,
+                        listaO->ordenes[fila - 1].descuento);
+            };
+
+            if (fila == count_o[0] + 1)
+            {
+
+                fprintf(bddocsv,
+                        "%s;%d;%d",
+                        usuario,
+                        tam,
+                        nuevo.descuento);
+            }
+        } else {
             fprintf(bddocsv,
                     "%s;%s;%d\n",
                     listaO->ordenes[fila - 1].codigoCliente,
                     listaO->ordenes[fila - 1].codigoOrden,
                     listaO->ordenes[fila - 1].descuento);
-        };
 
-        if (fila == count_o[0] + 1)
-        {
-
-            fprintf(bddocsv,
-                    "%s;%d;%d",
-                    usuario,
-                    tam,
-                    nuevo.descuento);
-        };
+        }
 
         if (ferror(bddocsv))
         {
             printf("No se pudo agregar el cliente\n");
-            return 1;
+            return -1;
         };
     };
 

@@ -50,7 +50,7 @@ const char *abrirProdPorOrd();
 int columnOrd(DynaOrden *dynaOrden, char *codOrd);
 
 /*Busca la orden de un cliente x*/
-int buscarOrden(DynaOrden *listaO, orden buscada);
+int buscarOrden(DynaOrden *listaO, char *buscado);
 
 /*Encuentra el indice de la string que se elija*/
 int indOrd(int i, DynaOrden *listaO);
