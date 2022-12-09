@@ -206,12 +206,11 @@ int buscarProducto(const char codigo[20], producto productoL[100])
     while (strcmp(codigo, productoL[i].codigo))
     {
 
-        printf("Buscando cliente...\n\n");
         i++;
         if (i == 100)
         {
 
-            printf("El cliente no se encontró\n\n");
+            printf("El producto no se encontró\n\n");
             return 0;
         }
     }

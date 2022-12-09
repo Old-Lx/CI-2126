@@ -361,7 +361,7 @@ orden nuevaOrden() {
 void guardarOrden(orden nueva)
 {
     FILE *bddOrd;
-    bddOrd = fopen("codOrd.csv", "w");
+    bddOrd = fopen("ordenes.csv", "w");
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
 
     if (bddOrd == NULL)
@@ -620,7 +620,7 @@ int crearOrd(orden nuevo)
 
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
 
-    bddocsv = fopen("productos.csv", "w");
+    bddocsv = fopen("ordenes.csv", "w");
 
     if (bddocsv == NULL)
     {
@@ -634,34 +634,28 @@ int crearOrd(orden nuevo)
         if (fila == 0)
         {
             fprintf(bddocsv,
-                    "%s;%s;%s;%s;%s\n",
+                    "%s;%s;%s\n",
                     "codigo cliente",
-                    "codigo producto",
                     "codigo orden",
-                    "cantidad",
                     "descuento");
         }
 
         if (fila < count_o[0] && fila > 0)
         {
             fprintf(bddocsv,
-                    "%s;%s;%s;%d;%d\n",
+                    "%s;%s;%d\n",
                     listaO->ordenes[fila - 1].codigoCliente,
-                    "\0",
                     listaO->ordenes[fila - 1].codigoOrden,
-                    "\0",
                     listaO->ordenes[fila - 1].descuento);
         };
 
-        if (fila == count_o[0])
+        /*if (fila == count_o[0])
         {
 
             fprintf(bddocsv,
-                    "%s;%s;%s;%d;%d\n",
+                    "%s;%s;%d\n",
                     nuevo.codigoCliente,
-                    "\0",
                     listaO->ordenes[fila - 1].codigoOrden,
-                    "\0",
                     nuevo.descuento);
         };
 
@@ -669,10 +663,10 @@ int crearOrd(orden nuevo)
         {
             printf("No se pudo agregar el cliente\n");
             return 1;
-        };
+        };*/
     };
 
     fclose(bddocsv);
-    printf("Se agreg� exitosamente a la base de datos\n");
+    printf("Se agrego exitosamente a la base de datos\n");
     return 0;
 }
