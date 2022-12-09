@@ -602,3 +602,20 @@ int crearOrd(orden nuevo)
     printf("\n\nSe agrego exitosamente a la base de datos\n");
     return 0;
 }
+
+/*Mostrar detalles de orden*/
+void mostrarOrden(){
+    int a=0;
+    abrirBDOrdenes();
+    for (int i = 0; i < 100; i++)
+    {
+        if(strcmp(clientes[num_fila[0]].username,listaO[i].codigoCliente)==0){
+          
+                printf("\nSu orden es la Numero: %s", listaO[i].codigoOrden );
+                printf("\nPor el usuario: %s", listaO[i].codigoCliente);
+                printf("\nTiene un descuento total de: %s\n\n", listaO[i].descuento);
+                a=1;
+            }
+    }
+    if(a==0){printf("\n\nNo has realizado pedidos\n\n");}    
+}
