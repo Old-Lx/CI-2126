@@ -15,7 +15,7 @@ producto *abrirBDDProductos()
 
     if (bddpcsv == NULL)
     {
-        printf("Error al abrir la base de datos\n");
+        printf("Error al abrir la base de datos de productos\n");
         return NULL;
     }
 
@@ -199,29 +199,21 @@ producto nuevoProducto()
 }
 
 /*Devuelve el índice de un producto*/
-int buscarProducto(const char codigo[20], producto productoL[100])
+int buscarProducto(char codigo[20], producto productoL[100])
 {
 
-    int i = 0;
-    while (strcmp(codigo, productoL[i].codigo))
+    for (int i = 0; i < 24; i++)
     {
 
-        i++;
-        if (i == 100)
+        if (atoi(productoL[i].codigo), atoi(codigo))
+        {
+            return productoL[i].posProd;
+        } else if (i == 100)
         {
 
             printf("El producto no se encontró\n\n");
             return 0;
         }
-    }
-
-    if (!strcmp(codigo, productoL[i].codigo))
-    {
-        return productoL[i].posProd;
-    }
-    else
-    {
-        return -1;
     }
 }
 
@@ -236,7 +228,7 @@ int guardarProducto(producto nuevo)
 
     if (bddpcsv == NULL)
     {
-        printf("Error al abrir la base de datos\n");
+        printf("Error al abrir la base de datos de productos\n");
         return 1;
     }
 

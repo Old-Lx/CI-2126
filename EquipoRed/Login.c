@@ -15,7 +15,7 @@ cliente *abrirBDDClientes()
 
     if (bddcsv == NULL)
     {
-        printf("Error al abrir la base de datos\n");
+        printf("Error al abrir la base de datos de clientes\n");
         return NULL;
     }
 
@@ -424,7 +424,7 @@ int guardarCliente(cliente nuevo)
 
     if (bddcsv == NULL)
     {
-        printf("Error al abrir la base de datos\n");
+        printf("Error al abrir la base de datos de clientes\n");
         return 1;
     }
 

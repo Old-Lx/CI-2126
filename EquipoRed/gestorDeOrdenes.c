@@ -15,7 +15,7 @@ orden *abrirBDOrdenes()
 
     if (bddocsv == NULL)
     {
-        printf("Error al abrir la base de datos\n");
+        printf("Error al abrir la base de datos de ordenes\n");
         return NULL;
     }
 
@@ -42,23 +42,14 @@ orden *abrirBDOrdenes()
 
                 else if (column == 1)
                 {
+                    strcpy(listaO[i].codigoOrden, entrada);
                 }
 
                 else if (column == 2)
                 {
-
-                    strcpy(listaO[i].codigoOrden, entrada);
-                }
-
-                else if (column == 3)
-                {
-                }
-
-                else if (column == 4)
-                {
                     char descu[20];
                     strcpy(descu, entrada);
-                    listaO[i].descuento = atoi(descu);
+                    listaO[i].descuento = atoi(descu);  
                 }
             }
             column++;
@@ -223,7 +214,7 @@ orden nuevaOrden() {
     orden nueva;
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
     abrirProdPorOrd();
-    abrirBDDClientes();
+    ///cliente clientes[100] = abrirBDDClientes();
     abrirBDDProductos();
     fflush(stdin);
     printf("\n\nSolicitaremos los datos para agregar un nuevo producto:\n");
@@ -254,7 +245,7 @@ orden nuevaOrden() {
     } while (n < 1);*/
 
 
-    do /*Comprobaci�n orden vacio*/
+    do /*Comprobacion orden vacio*/
     {
         printf("\nIngrese codigo de la orden: ");
         fflush(stdout);
@@ -285,7 +276,6 @@ orden nuevaOrden() {
 
     do
     {
-        mostrarBDDProductos();
         int numProductos;
         printf("\nIngrese cuantos tipos de producto desea: ");
         fflush(stdout);
@@ -294,7 +284,7 @@ orden nuevaOrden() {
 
         for (int i = 0; i < numProductos; i++) {
 
-            printf("\nIngrese cuales productos desea: ");
+            printf("\nIngrese codigo de producto desea: ");
             fflush(stdout);
             fgets(nueva.productoOrden.codigoProd[i], 20, stdin);
             fflush(stdin);
@@ -366,7 +356,7 @@ void guardarOrden(orden nueva)
 
     if (bddOrd == NULL)
     {
-        printf("Error al abrir la base de datos\n");
+        printf("Error al abrir la base de datos de ordenes\n");
         return;
     }
 
@@ -379,29 +369,34 @@ void guardarOrden(orden nueva)
                     "Codigo cliente",
                     "Codigo orden",
                     "descuento");
+                    printf("fila 1\n");
         }
         else if (fila < listaO->tamano && fila > 0)
         {
+            printf("lista old %s\n", listaO[fila - 1].ordenes->codigoCliente);
             fprintf(bddOrd,
-                    "%s;%s;%d;%d\n",
+                    "%s;%s;%d\n",
                     listaO[fila - 1].ordenes->codigoCliente,
+                    listaO[fila - 1].ordenes->codigoOrden,
                     listaO[fila - 1].ordenes->descuento);
         }
         else if (fila == listaO->tamano)
         {
+            printf("nuevo %s\n", nueva.codigoCliente);
             fprintf(bddOrd,
-                    "%s;%d\n",
+                    "%s;%s;%d\n",
+                    nueva.codigoOrden,
                     nueva.codigoCliente,
                     nueva.descuento);
         }
         else if (ferror(bddOrd))
         {
-            printf("No se pudo agregar el cliente\n");
+            printf("No se pudo agregar la orden\n");
             return;
         }
     }
     fclose(bddOrd);
-    printf("Se agreg� exitosamente a la base de datos\n");
+    printf("Se agrego exitosamente a la base de datos\n");
     return;
 }
 
