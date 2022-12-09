@@ -137,19 +137,34 @@ const char *abrirProdPorOrd()
             switch (fila)
             {
             case 0:
-                ///fprintf("Fila 1 col 1 %s\n", entrada);
+                ///printf("Fila 1 col 1 %s\n", entrada);
                 break;
 
-            case 1:
-                char *col2 = strtok(entrada, ",");
-                printf("no %s\n", col2);
+            case 1:;
+                char *col = strtok(entrada, ",");
+                for (int i = 0; i < 2; i++) {
+                    if (i == 0) {
+                        ///printf("col%d hh %s\n", i, col); 
+                    } else {
+                       ///printf("col%d hh %s\n", i, col); 
+                    }
+                    col = strtok(NULL, ",");
+                }
                 break;
 
-            default:
+            default:;
                 if (fila%2 == 0) {
-                    printf("col 1 %s\n", entrada);
+                    strcpy(listaO->ordenes[indOrden].codigoOrden, entrada);
                 } else {
-                    printf("col 2 %s\n", entrada);
+                    char *col = strtok(entrada, ",");
+                    for (int i = 0; i < 2; i++) {
+                        if (i == 0) {
+                            strcpy(listaO->ordenes->productoOrden.codigoProd[i], entrada); 
+                        } else {
+                            strcpy(listaO->ordenes->productoOrden.cantidad[i], entrada);  
+                        }
+                        col = strtok(NULL, ",");
+                    }
                 }
             }
             fila++;
@@ -415,16 +430,18 @@ int indOrd(int i, DynaOrden *listaO)
 {
     int pos = i;
     orden min = listaO->ordenes[pos];
-    for (int k = i + 1; k < listaO->tamano; ++k)
+    for (int k = i; k < listaO->tamano; ++k)
     {
-        if (strcmp(listaO->ordenes[k].codigoOrden, min.codigoOrden) == 0)
+        if (!strcmp(listaO->ordenes[k].codigoOrden, min.codigoOrden))
         {
             pos = k;
             min = listaO->ordenes[k];
             return pos;
-        } 
+            break;
+        } else {
+            return -1;
+        }
     }
-    return -1;
 }
 
 /*Cambia la posición de dos ordenes*/
@@ -506,13 +523,14 @@ DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2)
 
 /*Busca la orden de un cliente x*/
 int buscarOrden(DynaOrden *listaO, char *buscado) {
-    for (int i = 0; i < listaO->tamano; i++) {
-        if (!strcmp(buscado, listaO->ordenes[i].codigoOrden)) {
+    for (int i = 1; i < listaO->tamano; i++) {
+        if (!strcmp(buscado, listaO->ordenes[i].codigoCliente)) {
             return indOrd(i, listaO);
+            break;
+        } else if (strcmp(buscado, listaO->ordenes[i].codigoCliente) && i == listaO->tamano) {
+            return -1;
         }
     }
-    /*Llega aquí si no se encuentra*/
-    return -1;
 }
 
 /*Crea una orden en la base de datos*/

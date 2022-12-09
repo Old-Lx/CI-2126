@@ -61,6 +61,9 @@ orden nuevaOrden();
 /*Guarda una orden en la base de datos*/
 void guardarOrden(orden nueva);
 
+/*Mostrar detalles de orden*/
+void mostrarOrden();
+
 /*Devuelve la orden en el indice i*/
 orden valorOrd(int i, const DynaOrden *dynaOrden);
 
