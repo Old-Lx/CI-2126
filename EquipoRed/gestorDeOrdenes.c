@@ -268,7 +268,7 @@ orden nuevaOrden() {
             n = 1;
             for (i = 0; i < 100; i++)
             {
-                if (strcmp(nueva.codigoOrden, listaO->ordenes[i].codigoOrden))
+                if (!strcmp(nueva.codigoOrden, listaO->ordenes[i].codigoOrden))
                 {
                     printf("\nEste codigo ya esta registrado\n");
                     n = 0;
