@@ -461,6 +461,8 @@ void mostrar10Productos()
     do{
     abrirBDDProductos();
     printf("\n\nCodigo\tDescripcion\tPrecio\t\tStock\n");
+    fflush(stdout);
+
     for (int i = p; i < p+a; i++)
     {
 
@@ -469,11 +471,13 @@ void mostrar10Productos()
                productos[i].descripcion,
                productos[i].precio,
                productos[i].stock);
+               fflush(stdout);
         
     }
 
 
-    printf("\n[1] Pagina principal\t[2] Pagina anterior\t[3] Pagina siguiente\t [4]Salir\nIngrese su respuesta: ");
+    printf("\n[1] Pagina principal\t[2] Pagina anterior\t[3] Pagina siguiente\t [4]Crear orden\t[5]Salir\nIngrese su respuesta: ");
+    fflush(stdout);
     scanf("%d",&opcion);
         switch (opcion)
         {
