@@ -25,6 +25,9 @@ int count_c[1];
 /*Fila donde se encuentra almacenado el usuario*/
 int num_fila[1];
 
+/*Nombre de usuario que ingreso*/
+char usuario[20];
+
 /*Struct de datos de clientes*/
 cliente clientes[100];
 

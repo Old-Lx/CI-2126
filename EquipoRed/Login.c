@@ -859,7 +859,6 @@ int ingresar()
 
     printf("\nIngresa tu nombre de usuario:\t");
     fflush(stdout);
-    char usuario[20];
     char clave[20];
     char operacion[2];
     scanf("%s", usuario);

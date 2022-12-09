@@ -58,22 +58,21 @@ orden *abrirBDOrdenes()
         };
         column = 0;
 
-        if (count_o[0] >= 10)
+        if (count_o[0] >= 3)
         {
-
             i++;
         }
     };
 
     fclose(bddocsv);
 
+    bddocsv = fopen("ordenes.csv", "r");
+
     if (bddocsv == NULL)
     {
         printf("Error al abrir la base de datos\n");
         return NULL;
     }
-
-    bddocsv = fopen("ordenes.csv", "r");
 
     count_o[0] = 0;
 
@@ -214,7 +213,7 @@ orden nuevaOrden() {
     orden nueva;
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
     abrirProdPorOrd();
-    ///cliente clientes[100] = abrirBDDClientes();
+    ///abrirBDDClientes();
     abrirBDDProductos();
     fflush(stdin);
     printf("\n\nSolicitaremos los datos para agregar un nuevo producto:\n");
@@ -245,37 +244,15 @@ orden nuevaOrden() {
     } while (n < 1);*/
 
 
-    do /*Comprobacion orden vacio*/
-    {
-        printf("\nIngrese codigo de la orden: ");
-        fflush(stdout);
-        fgets(nueva.codigoOrden, 20, stdin);
-        fflush(stdin);
-        // system ("cls");
-
-        if (nueva.codigoOrden[1] != '\0')
-        {
-            nueva.codigoOrden[strcspn(nueva.codigoOrden, "\n")] = 0;
-            n = 1;
-            for (i = 0; i < 100; i++)
-            {
-                if (!strcmp(nueva.codigoOrden, listaO->ordenes[i].codigoOrden))
-                {
-                    printf("\nEste codigo ya esta registrado\n");
-                    n = 0;
-                    i = 100;
-                }
-            }
-        }
-        else
-        {
-            printf("\nNo puedes ingresar datos vacios\n");
-            n = 0;
-        }
-    } while (n < 1);
-
     do
     {
+        /*for (int i = 0; i < listaO->capacidad; i++) {
+            if (i == listaO->tamano && listaO->tamano < listaO->capacidad) {
+                strcpy(nueva.codigoOrden, (char *) (atoi(listaO->ordenes[i].codigoOrden) + 1));
+            } else {
+                printf("No hay espacio para mas ordenes\n");
+            }
+        }*/
         int numProductos;
         printf("\nIngrese cuantos tipos de producto desea: ");
         fflush(stdout);
@@ -350,6 +327,7 @@ orden nuevaOrden() {
 /*Guarda una orden en la base de datos*/
 void guardarOrden(orden nueva)
 {
+    printf("guard ord\n");
     FILE *bddOrd;
     bddOrd = fopen("ordenes.csv", "w");
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
@@ -614,12 +592,13 @@ int crearOrd(orden nuevo)
     FILE *bddocsv;
 
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
+    int tam = listaO->tamano;
 
     bddocsv = fopen("ordenes.csv", "w");
 
     if (bddocsv == NULL)
     {
-        printf("Error al abrir la base de datos\n");
+        printf("Error al abrir la base de datos ordenes\n");
         return 1;
     }
 
@@ -635,8 +614,11 @@ int crearOrd(orden nuevo)
                     "descuento");
         }
 
-        if (fila < count_o[0] && fila > 0)
+        if (fila < count_o[0] + 1 && fila > 1)
         {
+            printf("lista old %s espacio %d\n", 
+            listaO->ordenes[fila - 1].codigoCliente,
+            fila);
             fprintf(bddocsv,
                     "%s;%s;%d\n",
                     listaO->ordenes[fila - 1].codigoCliente,
@@ -644,13 +626,13 @@ int crearOrd(orden nuevo)
                     listaO->ordenes[fila - 1].descuento);
         };
 
-        /*if (fila == count_o[0])
+        if (fila == count_o[0] + 1)
         {
 
             fprintf(bddocsv,
-                    "%s;%s;%d\n",
-                    nuevo.codigoCliente,
-                    listaO->ordenes[fila - 1].codigoOrden,
+                    "%s;%d;%d",
+                    usuario,
+                    tam,
                     nuevo.descuento);
         };
 
@@ -658,10 +640,10 @@ int crearOrd(orden nuevo)
         {
             printf("No se pudo agregar el cliente\n");
             return 1;
-        };*/
+        };
     };
 
     fclose(bddocsv);
-    printf("Se agrego exitosamente a la base de datos\n");
+    printf("\n\nSe agrego exitosamente a la base de datos\n");
     return 0;
 }
