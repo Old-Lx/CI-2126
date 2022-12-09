@@ -207,7 +207,7 @@ const char *abrirProdPorOrd()
 }
 
 /*Devuelve la columna de productos de una orden*/
-int columnOrd(DynaOrden *dynaOrden, char codOrd) {
+int columnOrd(DynaOrden *dynaOrden, char *codOrd) {
     for (int i = 0; i < dynaOrden->tamano; i++) {
         for (int j = 0; j < 20; j++) {
             if (!strcmp(dynaOrden->ordenes[i].productoOrden.codigoProd[0], codOrd)) {

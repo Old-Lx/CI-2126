@@ -476,12 +476,8 @@ void mostrar10Productos()
     }
 
 
-<<<<<<< HEAD
     printf("\n[1] Pagina principal\t[2] Pagina anterior\t[3] Pagina siguiente\t [4]Crear orden\t[5]Salir\nIngrese su respuesta: ");
     fflush(stdout);
-=======
-    printf("\n[1] Pagina principal\t[2] Pagina anterior\t[3] Pagina siguiente\t [4]Crear Orden\t [5]Salir\nIngrese su respuesta: ");
->>>>>>> 093d3aa24a4e1f8713a7168d8e88c1165545ca32
     scanf("%d",&opcion);
         switch (opcion)
         {
