@@ -218,31 +218,6 @@ orden nuevaOrden() {
     fflush(stdin);
     printf("\n\nSolicitaremos los datos para agregar un nuevo producto:\n");
 
-    /*do Comprobacion usuario está en base de datoss
-    {
-
-        strcpy(nueva.codigoCliente, clientes[count_c[0]].nombre);
-        if (nueva.codigoCliente[1] != '\0')
-        {
-            nueva.codigoCliente[strcspn(nueva.codigoCliente, "\n")] = 0;
-            n = 1;
-            for (i = 0; i < 100; i++)
-            {
-                if (buscarCliente(nueva.codigoCliente, clientes))
-                {
-                    printf("\nEl usuario no se encuentra en nuestra base de datos\n");
-                    n = 0;
-                    i = 100;
-                }
-            }
-        }
-        else
-        {
-            printf("\nNo puedes ingresar datos vacios");
-            n = 0;
-        }
-    } while (n < 1);*/
-
 
     do
     {
@@ -322,60 +297,6 @@ orden nuevaOrden() {
     } while (n < 1);*/
 
     return nueva;
-}
-
-/*Guarda una orden en la base de datos*/
-void guardarOrden(orden nueva)
-{
-    printf("guard ord\n");
-    FILE *bddOrd;
-    bddOrd = fopen("ordenes.csv", "w");
-    DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
-
-    if (bddOrd == NULL)
-    {
-        printf("Error al abrir la base de datos de ordenes\n");
-        return;
-    }
-
-    for (int fila = 0; fila < listaO->tamano + 2; fila++)
-    {
-        if (fila == 0)
-        {
-            fprintf(bddOrd,
-                    "%s;%s;%s\n",
-                    "Codigo cliente",
-                    "Codigo orden",
-                    "descuento");
-                    printf("fila 1\n");
-        }
-        else if (fila < listaO->tamano && fila > 0)
-        {
-            printf("lista old %s\n", listaO[fila - 1].ordenes->codigoCliente);
-            fprintf(bddOrd,
-                    "%s;%s;%d\n",
-                    listaO[fila - 1].ordenes->codigoCliente,
-                    listaO[fila - 1].ordenes->codigoOrden,
-                    listaO[fila - 1].ordenes->descuento);
-        }
-        else if (fila == listaO->tamano)
-        {
-            printf("nuevo %s\n", nueva.codigoCliente);
-            fprintf(bddOrd,
-                    "%s;%s;%d\n",
-                    nueva.codigoOrden,
-                    nueva.codigoCliente,
-                    nueva.descuento);
-        }
-        else if (ferror(bddOrd))
-        {
-            printf("No se pudo agregar la orden\n");
-            return;
-        }
-    }
-    fclose(bddOrd);
-    printf("Se agrego exitosamente a la base de datos\n");
-    return;
 }
 
 /*Devuelve la orden en el indice i*/
@@ -509,6 +430,24 @@ int indOrdAlfa(int i, int j, const char *a[])
     return pos;
 }
 
+/*Encuentra el indice de la string que se elija*/
+int indOrd(int i, DynaOrden *listaO)
+{
+    int pos = i;
+    orden min = listaO->ordenes[pos];
+    for (int k = i + 1; k < listaO->tamano; ++k)
+    {
+        if (strcmp(listaO->ordenes[k].codigoOrden, min.codigoOrden) == 0)
+        {
+            pos = k;
+            min = listaO->ordenes[k];
+            return pos;
+        } else if (k == listaO->tamano -1) {
+            return -1;
+        }
+    }
+}
+
 /*Cambia la posición de dos ordenes*/
 void cambOrd(int i, int j, DynaOrden *dynaOrden)
 {
@@ -585,6 +524,16 @@ DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2)
         printf("No hay suficientes unidades de %s para tu pedido, intenta disminuyendo la cantidad\n", nuevo.descripcion);
     }
 }*/
+
+/*Busca la orden de un cliente x*/
+int buscarOrden(DynaOrden *listaO, orden buscada) {
+    for (int i = 0; i < listaO->tamano; i++) {
+        if (!strcmp(buscada.codigoCliente, listaO->ordenes[i].codigoOrden)) {
+            return indOrd(i, listaO->ordenes);
+        }
+    }
+    return -1;
+}
 
 /*Crea una orden en la base de datos*/
 int crearOrd(orden nuevo)

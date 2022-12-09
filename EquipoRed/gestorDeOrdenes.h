@@ -49,6 +49,12 @@ const char *abrirProdPorOrd();
 /*Devuelve la columna de productos de una orden*/
 int columnOrd(DynaOrden *dynaOrden, char *codOrd);
 
+/*Busca la orden de un cliente x*/
+int buscarOrden(DynaOrden *listaO, orden buscada);
+
+/*Encuentra el indice de la string que se elija*/
+int indOrd(int i, DynaOrden *listaO);
+
 /*Crea orden nueva*/
 orden nuevaOrden();
 
