@@ -17,6 +17,7 @@ int main() {
         printf("\nQue deseas Realizar? \n");
         printf(" [1] Registrarte\n [2] Iniciar Sesion\n [3] Ingresar como administrador\n [4] Ingresar como invitado\n [5] Salir\n");
         printf(" Ingresa tu opcion:\t");
+        fflush(stdout);
         scanf("%d", &aux);
         fflush(stdin);
         switch (aux)

@@ -6,7 +6,6 @@
 #include "gestorDeProductos.h"
 #include "gestorDeOrdenes.h"
 
-
 /*Abre una base de datos de personas guardada en un archivo csv*/
 cliente *abrirBDDClientes()
 {
@@ -394,7 +393,6 @@ int buscarCliente(const char username[20], cliente clienteL[100])
     while (strcmp(username, clienteL[i].username))
     {
 
-        printf("Buscando cliente...\n\n");
         i++;
         if (i == 100)
         {

@@ -47,7 +47,7 @@ DynaOrden *dynaOrden(orden listaDeOrdenes[100]);
 const char *abrirProdPorOrd();
 
 /*Devuelve la columna de productos de una orden*/
-int columnOrd(DynaOrden *dynaOrden, char codOrd);
+int columnOrd(DynaOrden *dynaOrden, char *codOrd);
 
 /*Crea orden nueva*/
 orden nuevaOrden();
