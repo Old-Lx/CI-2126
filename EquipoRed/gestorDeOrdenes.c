@@ -242,7 +242,7 @@ orden nuevaOrden() {
             }
             else
             {
-                printf("\nIngrese cantidad que desea de %s\n",
+                printf("\nIngrese cantidad que desea de %s:\n",
                 nueva.productoOrden.codigoProd[i]);
                 fflush(stdout);
                 fgets(nueva.productoOrden.cantidad[i], 20, stdin);
