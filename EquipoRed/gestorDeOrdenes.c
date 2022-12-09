@@ -70,7 +70,7 @@ orden *abrirBDOrdenes()
 
     if (bddocsv == NULL)
     {
-        printf("Error al abrir la base de datos\n");
+        printf("Error al abrir la base de datos de ordenes\n");
         return NULL;
     }
 
@@ -109,17 +109,18 @@ const char *abrirProdPorOrd()
 {
 
     FILE *bddPorOrd;
-    bddPorOrd = fopen("codOrd.csv", "r");
+    bddPorOrd = fopen("codOrdenes.csv", "r");
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
+    int indOrden = buscarOrden(listaO, usuario);
 
     char ordProd[20][20][20];
 
     if (bddPorOrd == NULL)
     {
-        printf("Error al abrir la base de datos\n");
+        printf("Error al abrir la base de datos de cantidad de productos\n");
         return NULL;
     }
-    char buff[1024]; // guarda las primeras 1024 l�neas en un buffer
+    char buff[1024]; // guarda las primeras 1024 lineas en un buffer
     int i = 0;
     int fila = 0;
     char cliFila[100][2][20];
@@ -136,41 +137,20 @@ const char *abrirProdPorOrd()
             switch (fila)
             {
             case 0:
-                strcpy(cliFila[i][0], entrada);
-                strcpy(cliFila[i][1], (const char *)fila);
+                ///fprintf("Fila 1 col 1 %s\n", entrada);
                 break;
 
             case 1:
-                strcpy(ordProd[fila][i], entrada);
-                break;
-
-            case 2:
-                strcpy(ordProd[fila][i], entrada);
-                break;
-
-            case 3:
-                strcpy(ordProd[fila][i], entrada);
-                break;
-
-            case 4:
-                strcpy(ordProd[fila][i], entrada);
-                break;
-
-            case 5:
-                strcpy(ordProd[fila][i], entrada);
-                break;
-
-            case 6:
-                strcpy(ordProd[fila][i], entrada);
-                break;
-
-            case 7:
-                strcpy(ordProd[fila][i], entrada);
+                char *col2 = strtok(entrada, ",");
+                printf("no %s\n", col2);
                 break;
 
             default:
-                strcpy(ordProd[fila][i], entrada);
-                break;
+                if (fila%2 == 0) {
+                    printf("col 1 %s\n", entrada);
+                } else {
+                    printf("col 2 %s\n", entrada);
+                }
             }
             fila++;
             entrada = strtok(NULL, ";");
@@ -178,7 +158,7 @@ const char *abrirProdPorOrd()
         i++;
     }
     fclose(bddPorOrd);
-    for (int j = 0; j < fila; j++)
+    /*for (int j = 0; j < fila; j++)
     {
         for (int k = 0; k < i; k++)
         {
@@ -193,7 +173,7 @@ const char *abrirProdPorOrd()
                 }
             }
         }
-    }
+    }*/
 }
 
 /*Devuelve la columna de productos de una orden*/
@@ -563,32 +543,23 @@ int crearOrd(orden nuevo)
                     "descuento");
         }
 
-        if (buscarOrden(listaO, usuario) == -1) {    
-            if (fila < count_o[0] + 1 && fila > 1)
-            {
-                fprintf(bddocsv,
-                        "%s;%s;%d\n",
-                        listaO->ordenes[fila - 1].codigoCliente,
-                        listaO->ordenes[fila - 1].codigoOrden,
-                        listaO->ordenes[fila - 1].descuento);
-            };
-
-            if (fila == count_o[0] + 1)
-            {
-
-                fprintf(bddocsv,
-                        "%s;%d;%d",
-                        usuario,
-                        tam,
-                        nuevo.descuento);
-            }
-        } else {
+        if (fila < count_o[0] + 1 && fila > 1)
+        {
             fprintf(bddocsv,
                     "%s;%s;%d\n",
                     listaO->ordenes[fila - 1].codigoCliente,
                     listaO->ordenes[fila - 1].codigoOrden,
                     listaO->ordenes[fila - 1].descuento);
+        };
 
+        if (fila == count_o[0] + 1)
+        {
+
+            fprintf(bddocsv,
+                    "%s;%d;%d",
+                    usuario,
+                    tam + 1,
+                    nuevo.descuento);
         }
 
         if (ferror(bddocsv))
