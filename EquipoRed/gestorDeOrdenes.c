@@ -207,14 +207,14 @@ const char *abrirProdPorOrd()
 }
 
 /*Devuelve la columna de productos de una orden*/
-int columnOrd(DynaOrden *dynaOrden, char *codOrd) {
+int columnOrd(DynaOrden *dynaOrden, char codOrd) {
     for (int i = 0; i < dynaOrden->tamano; i++) {
         for (int j = 0; j < 20; j++) {
             if (!strcmp(dynaOrden->ordenes[i].productoOrden.codigoProd[0], codOrd)) {
                 return j;
             }
         }
-    } 
+    }
 }
 
 /*Crea orden nueva*/
@@ -225,10 +225,10 @@ orden nuevaOrden() {
     abrirProdPorOrd();
     abrirBDDClientes();
     abrirBDDProductos();
-
+    fflush(stdin);
     printf("\n\nSolicitaremos los datos para agregar un nuevo producto:\n");
 
-    do /*Comprobacion usuario está en base de datoss*/
+    /*do Comprobacion usuario está en base de datoss
     {
 
         strcpy(nueva.codigoCliente, clientes[count_c[0]].nombre);
@@ -251,7 +251,7 @@ orden nuevaOrden() {
             printf("\nNo puedes ingresar datos vacios");
             n = 0;
         }
-    } while (n < 1);
+    } while (n < 1);*/
 
 
     do /*Comprobaci�n orden vacio*/
@@ -289,7 +289,7 @@ orden nuevaOrden() {
         int numProductos;
         printf("\nIngrese cuantos tipos de producto desea: ");
         fflush(stdout);
-        scanf("%d", numProductos);
+        scanf("%d", &numProductos);
         fflush(stdin);
 
         for (int i = 0; i < numProductos; i++) {
@@ -310,7 +310,7 @@ orden nuevaOrden() {
             }
         }
 
-        
+
         // system ("cls");
     } while (n < 1);
 
