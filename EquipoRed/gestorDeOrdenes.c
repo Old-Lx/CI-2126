@@ -206,7 +206,7 @@ orden nuevaOrden() {
     int n, i;
     orden nueva;
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
-    abrirProdPorOrd();
+    abrirProdPorOrd(listaO);
     ///abrirBDDClientes();
     abrirBDDProductos();
     fflush(stdin);
