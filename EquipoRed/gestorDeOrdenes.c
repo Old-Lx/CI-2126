@@ -105,12 +105,11 @@ DynaOrden *dynaOrden(orden listaDeOrdenes[100])
 };
 
 /*Carga los codigos de los productos de cada orden*/
-const char *abrirProdPorOrd()
+const char *abrirProdPorOrd(DynaOrden *listaO)
 {
 
     FILE *bddPorOrd;
     bddPorOrd = fopen("codOrdenes.csv", "r");
-    DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
     int indOrden = buscarOrden(listaO, usuario);
 
     char ordProd[20][20][20];
@@ -243,7 +242,19 @@ orden nuevaOrden() {
             }
             else
             {
+                printf("\nIngrese cantidad que desea de %s\n",
+                nueva.productoOrden.codigoProd[i]);
+                fflush(stdout);
+                fgets(nueva.productoOrden.cantidad[i], 20, stdin);
+                fflush(stdin);
+                if (productos[buscarProducto(nueva.productoOrden.codigoProd[i], productos)].stock < atoi(nueva.productoOrden.cantidad[i]))
+                {
+                    printf("\nNo hay suficiente [%s] disponible\n", nueva.productoOrden.codigoProd[i]);
+                    fflush(stdout);
+                    n = 0;
+                } else {
                 n = 2;
+                }
             }
         }
 
@@ -539,6 +550,7 @@ int crearOrd(orden nuevo)
     FILE *bddocsv;
 
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
+    abrirProdPorOrd(listaO);
     int tam = listaO->tamano;
 
     bddocsv = fopen("ordenes.csv", "w");
@@ -582,7 +594,7 @@ int crearOrd(orden nuevo)
 
         if (ferror(bddocsv))
         {
-            printf("No se pudo agregar el cliente\n");
+            printf("No se pudo agregar la orden\n");
             return -1;
         };
     };
