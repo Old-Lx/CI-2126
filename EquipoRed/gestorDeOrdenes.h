@@ -23,6 +23,7 @@ typedef struct {
     codigoProducto productoOrden;
     unsigned int descuento;
     unsigned int precio;
+    int cantTipProd;
     char envio[2];
     char pago[2];
     char estado[1];
