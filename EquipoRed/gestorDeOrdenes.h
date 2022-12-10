@@ -22,6 +22,10 @@ typedef struct {
     char codigoOrden[20];
     codigoProducto productoOrden;
     unsigned int descuento;
+    unsigned int precio;
+    char envio[2];
+    char pago[2];
+    char estado[1];
 } orden ;
 
 /*Declaramos arreglo dinámico de órdenes*/
@@ -59,7 +63,7 @@ int indOrd(int i, DynaOrden *listaO);
 orden nuevaOrden();
 
 /*Guarda una orden en la base de datos*/
-void guardarOrden(orden nueva);
+void guardarOrd(orden nuevo);
 
 /*Mostrar detalles de orden*/
 void mostrarOrden();
@@ -100,10 +104,7 @@ void sortOrd(DynaOrden *dynaOrden);
 /*Por si acaso, función para concatenar dos listas de ordenes*/
 DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2);
 
-/*Crea una orden en la base de datos*/
-int crearOrd(orden nuevo);
-
 /*Agrega un producto a la orden determinada*/
-void aggProducto(const char *codigoOrden, producto nuevo, DynaOrden *dynaOrden);
+void aggProducto(char *codigoOrden, producto nuevo, DynaOrden *dynaOrden);
 
 #endif

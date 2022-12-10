@@ -172,22 +172,6 @@ const char *abrirProdPorOrd(DynaOrden *listaO)
         i++;
     }
     fclose(bddPorOrd);
-    /*for (int j = 0; j < fila; j++)
-    {
-        for (int k = 0; k < i; k++)
-        {
-            for (int x = 0; x < 100; x++)
-            {
-                if (!strcmp(cliFila[x][0], listaO[x].ordenes->codigoCliente))
-                {
-                    if (!strcmp(cliFila[x][1], (const char *)j))
-                    {
-                        strcpy(listaO[x].ordenes->productoOrden.codigoProd[fila], ordProd[fila][k]);
-                    }
-                }
-            }
-        }
-    }*/
 }
 
 /*Devuelve la columna de productos de una orden*/
@@ -243,7 +227,7 @@ orden nuevaOrden() {
             else
             {
                 printf("\nIngrese cantidad que desea de %s:\n",
-                nueva.productoOrden.codigoProd[i]);
+                productos[buscarProducto(nueva.productoOrden.codigoProd[i], productos)].descripcion);
                 fflush(stdout);
                 fgets(nueva.productoOrden.cantidad[i], 20, stdin);
                 fflush(stdin);
@@ -253,39 +237,20 @@ orden nuevaOrden() {
                     fflush(stdout);
                     n = 0;
                 } else {
-                n = 2;
+                    productos[buscarProducto(nueva.productoOrden.codigoProd[i], productos)].stock = productos[buscarProducto(nueva.productoOrden.codigoProd[i], productos)].stock - atoi(nueva.productoOrden.cantidad[i]);
+                    actualizarBDProductos();
+                    n = 2;
                 }
             }
         }
-
-
-        // system ("cls");
-    } while (n < 1);
-
-
-    do
-    {
-        /*printf("\nIngrese la cantidad del producto: ");
-        fflush(stdout);
-        scanf("%d", &nueva.productoOrden.cantidad);
-        fflush(stdin);
-        if (nueva.productoOrden.cantidad <= 0 || nueva.productoOrden.cantidad > (productos[buscarProducto(nueva.productoOrden.codigoProd[i], productos)].stock)) {
-                printf("\nNo hay suficientes unidades\n");
-                fflush(stdout);
-                n = 0;
-        }
-        else
-        {
-            n = 2;
-        };*/
         // system ("cls");
     } while (n < 1);
 
     nueva.descuento = 0;
-    /*Comprobaci�n de descuento*/
+    /*Comprobacion de descuento*/
     /*do
     {
-        printf("\nIngrese la cantidad de productos disponibles: ");
+        printf("\nPosee codigo de descuento?\n[1]Si\n[2]No\n ");
         fflush(stdout);
         fflush(stdin);
         scanf("%d", &nuevo.stock);
@@ -509,7 +474,7 @@ DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2)
 }
 
 /*Agrega un producto a la orden determinada*/
-/*void aggProducto(const char *codigoOrden, producto nuevo, int cant, DynaOrden *dynaOrden) {
+/*void aggProducto(char *codigoOrden, int cant, DynaOrden *dynaOrden) {
     int tam = dynaOrden->tamano;
     if (nuevo.stock >= cant) {
         for (int i = 0; i < tam; i++) {
@@ -544,9 +509,8 @@ int buscarOrden(DynaOrden *listaO, char *buscado) {
     }
 }
 
-/*Crea una orden en la base de datos*/
-int crearOrd(orden nuevo)
-{
+/*Guarda una orden en la base de datos*/
+void guardarOrd(orden nuevo) {
     FILE *bddocsv;
 
     DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
@@ -558,7 +522,7 @@ int crearOrd(orden nuevo)
     if (bddocsv == NULL)
     {
         printf("Error al abrir la base de datos ordenes\n");
-        return -1;
+        return;
     }
 
     for (int fila = 0; fila < count_o[0] + 2; fila++)
@@ -595,13 +559,13 @@ int crearOrd(orden nuevo)
         if (ferror(bddocsv))
         {
             printf("No se pudo agregar la orden\n");
-            return -1;
+            return;
         };
     };
 
     fclose(bddocsv);
     printf("\n\nSe agrego exitosamente a la base de datos\n");
-    return 0;
+    return;
 }
 
 /*Mostrar detalles de orden*/

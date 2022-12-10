@@ -392,7 +392,7 @@ int modificarProducto()
                 break;
             case 3:
                 do
-                { /*�Comprobaci�n de stock*/
+                { /*�Comprobacion de stock*/
                     printf("\nIngrese la nueva cantidad de productos disponibles:\n");
                     fflush(stdin);
                     scanf("%i", &nuevoStock);
@@ -475,7 +475,7 @@ void mostrar10Productos()
         case 1:p=0;a=10;break;//
         case 2:p=p-10;if(p<0){p=0;};a=10;break;//
         case 3:p=p+10;if(p>count_p[0]){p=p-10;};if(count_p[0]-p<10){a=count_p[0]-p-1;}else{a=10;};break;//
-        case 4:crearOrd(nuevaOrden());break;
+        case 4:guardarOrd(nuevaOrden());break;
         case 5:return;break;
         default: printf("\nOpcion Invalida");break;
         }
