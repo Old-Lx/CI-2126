@@ -32,36 +32,32 @@ orden *abrirBDOrdenes()
         while (entrada)
         {
 
-            if (count_o[0] != 0)
+            if (i != 0)
             {
 
                 if (column == 0)
                 {
-                    strcpy(listaO[i].codigoCliente, entrada);
+                    strcpy(listaO[i - 1].codigoCliente, entrada);
                 }
 
                 else if (column == 1)
                 {
-                    strcpy(listaO[i].codigoOrden, entrada);
+                    strcpy(listaO[i -1].codigoOrden, entrada);
                 }
 
                 else if (column == 2)
                 {
                     char descu[20];
                     strcpy(descu, entrada);
-                    listaO[i].descuento = atoi(descu);  
+                    listaO[i - 1].descuento = atoi(descu);  
                 }
             }
             column++;
             entrada = strtok(NULL, ";");
-            count_o[0]++;
         };
         column = 0;
-
-        if (count_o[0] >= 3)
-        {
-            i++;
-        }
+        count_o[0]++;
+        i++;
     };
 
     fclose(bddocsv);
@@ -129,21 +125,23 @@ const char *abrirProdPorOrd(DynaOrden *listaO)
             if (count > 1) {
                 if (col % 2 == 0) {
 
-                    if (!strcmp(listaO->ordenes[indOrden].codigoOrden, entrada) && indOrden > 0) {
+                    if (!strcmp(listaO->ordenes[indOrden - 1].codigoOrden, entrada) && indOrden > 0) {
                         numProd++;
-                        listaO->ordenes[indOrden - 1].cantTipProd = 1 + numProd;
                     } else {
                         numProd = 0;
                     }
                     indOrden = atoi(entrada);
 
                 } else {
+                    printf("completa %s\n", entrada);
                     char *codCant = strtok(entrada, ",");
                     for (int i = 0; i < 2; i++) {
+                        printf("mitad %d check\n", atoi(codCant));
                         if (i == 0) { 
                             strcpy(listaO->ordenes[indOrden - 1].productoOrden.codigoProd[numProd], codCant);
                         } else {
                             listaO->ordenes[indOrden - 1].productoOrden.cantidad[numProd] = atoi(codCant);
+                            listaO->ordenes[indOrden - 1].cantTipProd++;
                         }
                         codCant = strtok(NULL, ",");
                     }
@@ -193,6 +191,7 @@ orden nuevaOrden() {
         printf("\nIngrese cuantos tipos de producto desea: ");
         fflush(stdout);
         scanf("%d", &numProductos);
+        nueva.cantTipProd = numProductos;
         fflush(stdin);
 
         for (int i = 0; i < numProductos; i++) {
@@ -218,12 +217,12 @@ orden nuevaOrden() {
                 fflush(stdin);
                 if (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock < nueva.productoOrden.cantidad[i])
                 {
-                    printf("\nNo hay suficiente [%s] disponible\n", productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].descripcion);
+                    ///printf("\nNo hay suficiente [%s] disponible\n", productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].descripcion);
                     fflush(stdout);
                     n = 0;
                 } else {
-                    productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock = productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock - nueva.productoOrden.cantidad[i];
-                    nueva.precio = nueva.precio + (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].precio * nueva.productoOrden.cantidad[i]);
+                    ///productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock = productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock - nueva.productoOrden.cantidad[i];
+                    ///nueva.precio = nueva.precio + (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].precio * nueva.productoOrden.cantidad[i]);
                     actualizarBDProductos();
                     n = 2;
                 }
@@ -514,8 +513,8 @@ void guardarOrd(orden nuevo) {
     for (int fila = 0; fila < count_o[0] + 2; fila++)
     {
 
-        if (fila == 0)
-        {
+        if (fila == 0) {
+
             fprintf(bddocsv,
                     "%s;%s;%s\n",
                     "codigo cliente",
@@ -523,8 +522,8 @@ void guardarOrd(orden nuevo) {
                     "descuento");
         }
 
-        if (fila < count_o[0] + 1 && fila > 1)
-        {
+        if (fila < count_o[0] && fila > 0) {
+
             fprintf(bddocsv,
                     "%s;%s;%d\n",
                     listaO->ordenes[fila - 1].codigoCliente,
@@ -532,13 +531,13 @@ void guardarOrd(orden nuevo) {
                     listaO->ordenes[fila - 1].descuento);
         };
 
-        if (fila == count_o[0] + 1)
+        if (fila == count_o[0])
         {
 
             fprintf(bddocsv,
                     "%s;%d;%d",
                     usuario,
-                    tam,
+                    tam + 1,
                     nuevo.descuento);
         }
 
@@ -554,52 +553,48 @@ void guardarOrd(orden nuevo) {
     /*Guardado de la cantidad de cada producto*/
     FILE *bddordcant;
 
-    ///bddordcant = fopen("codOrdenes.csv", "w");
+    bddordcant = fopen("codOrdenes.csv", "w");
 
     if (bddordcant == NULL) {
         printf("Error al abrir la base de datos con la cantidad de productos\n");
         return;
     }
 
-    for (int fila = 0; fila < count_o[0] + 2; fila++) {
+    for (int fila = 0; fila < count_o[0]; fila++) {
         switch (fila) {
         case 0:
-            /*fprintf(bddocsv,
+            fprintf(bddordcant,
                     "%s;%s,%s\n",
                     "Codigo de orden",
                     "Codigo de producto",
-                    "Cantidad");*/
+                    "Cantidad");
             break;
         
         default:
-            for (int j = 1; j < listaO->ordenes[fila -1].cantTipProd; j++) {
-                if (fila < count_o[0]) {
-                    /*fprintf(bddocsv,
-                        "%s;%s,%s\n",
-                        listaO->ordenes[fila].codigoOrden,
-                        listaO->ordenes[fila].productoOrden.codigoProd[j],
-                        listaO->ordenes[fila].productoOrden.cantidad[j]);*/
-                        printf("viejo %s;%s %s\n",
-                        listaO->ordenes[fila - 1].codigoOrden,
-                        listaO->ordenes[fila - 1].productoOrden.cantidad[0],
-                        listaO->ordenes[fila - 1].productoOrden.codigoProd[j]);
-                } else if (fila == count_o[0] + 1) {
-                    break;
-                }else {
-                    /*fprintf(bddocsv,
-                        "%s;%s,%s",
-                        nuevo.codigoOrden,
-                        nuevo.productoOrden.codigoProd,
-                        nuevo.productoOrden.cantidad);*/
-                        printf("Nuevo: %d;\n",
-                        tam);
-                }
+            for (int j = 0; j < listaO->ordenes[fila - 1].cantTipProd; j++) {
+                fprintf(bddordcant,"%s;%s,%d\n",
+                listaO->ordenes[fila - 1].codigoOrden,
+                listaO->ordenes[fila - 1].productoOrden.codigoProd[j],
+                listaO->ordenes[fila - 1].productoOrden.cantidad[j]);
             }
             break;
         }
+        if (fila == count_o[0] - 1) {
+            for (int j = 0; j < nuevo.cantTipProd; j++) {
+            fprintf(bddordcant,"%d;%s,%d\n",
+            tam + 1,
+            nuevo.productoOrden.codigoProd[j],
+            nuevo.productoOrden.cantidad[j]);
+            
+            printf("%d;%s,%d\n",
+            tam + 1,
+            nuevo.productoOrden.codigoProd[j],
+            nuevo.productoOrden.cantidad[j]);
+            }
+        }
     }
 
-    ///fclose(bddordcant);
+    fclose(bddordcant);
 
     printf("\n\nSe agrego exitosamente a la base de datos\n");
     return;
