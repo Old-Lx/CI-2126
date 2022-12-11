@@ -110,7 +110,6 @@ const char *abrirProdPorOrd(DynaOrden *listaO)
 
     FILE *bddPorOrd;
     bddPorOrd = fopen("codOrdenes.csv", "r");
-    int indOrden = buscarOrden(listaO, usuario);
 
     if (bddPorOrd == NULL)
     {
@@ -118,58 +117,61 @@ const char *abrirProdPorOrd(DynaOrden *listaO)
         return NULL;
     }
     char buff[1024]; // guarda las primeras 1024 lineas en un buffer
-    int i = 0;
     int fila = 0;
+    int indOrden;
 
-    while (fgets(buff, 1024, bddPorOrd))
-    {
+    while (fgets(buff, 1024, bddPorOrd)) {
 
         char *entrada = strtok(buff, ";"); // divide el buffer por entrada de datos
-        i = 0;
 
-        while (entrada)
-        {
+        while (entrada) {
 
-            switch (fila)
-            {
-            case 0:
-                ///printf("Fila 1 col 1 %s\n", entrada);
-                break;
+            switch (fila) {
 
-            case 1:;
-                char *col = strtok(entrada, ",");
-                for (int i = 0; i < 2; i++) {
-                    if (i == 0) {
-                        ///printf("col%d hh %s\n", i, col); 
-                    } else {
-                       ///printf("col%d hh %s\n", i, col); 
-                    }
-                    col = strtok(NULL, ",");
-                }
-                break;
-
-            default:
-                if (fila%2 == 0) {
+                case 0:
+                    indOrden = atoi(entrada);
                     strcpy(listaO->ordenes[indOrden].codigoOrden, entrada);
-                } else {
+                    break;
+
+                case 1:;
                     char *col = strtok(entrada, ",");
                     for (int i = 0; i < 2; i++) {
                         if (i == 0) {
-                            strcpy(listaO->ordenes->productoOrden.codigoProd[i], entrada); 
+                            strcpy(listaO->ordenes[indOrden].productoOrden.codigoProd[0], entrada); 
                         } else {
-                            strcpy(listaO->ordenes->productoOrden.cantidad[i], entrada);  
+                        //printf("col%d hh %s\n", i, col); 
                         }
                         col = strtok(NULL, ",");
                     }
-                }
+                    break;
+
+                default:
+                    if (fila%2 == 0) {
+                        strcpy(listaO->ordenes[indOrden].codigoOrden, entrada);
+                    } else {
+                        char *col = strtok(entrada, ",");
+                        for (int i = 0; i < 2; i++) {
+                            for (int j = 0; j < listaO->ordenes[indOrden].cantTipProd; j++) {
+                                if (i == 0) {
+                                    strcpy(listaO->ordenes[indOrden].productoOrden.codigoProd[j], col);
+                                    printf("fil1 col%d %s %d\n", j, 
+                                    listaO->ordenes[indOrden].productoOrden.codigoProd[j]); 
+                                } else {
+                                    ///strcpy(listaO->ordenes[indOrden].productoOrden.cantidad[i], col); 
+                                    ///printf("fil2 col%d %s\n", i, col);  
+                                }
+                            }
+                            col = strtok(NULL, ",");
+                        }
+                    }
+                    break;
             }
             fila++;
             entrada = strtok(NULL, ";");
-            listaO->ordenes[indOrden].cantTipProd = fila;
         }
-        i++;
-    }
+        listaO->ordenes[indOrden].cantTipProd++;
     fclose(bddPorOrd);
+    }
 }
 
 /*Devuelve la columna de productos de una orden*/
@@ -567,7 +569,7 @@ void guardarOrd(orden nuevo) {
     /*Guardado de la cantidad de cada producto*/
     FILE *bddordcant;
 
-    bddordcant = fopen("codOrdenes.csv", "w");
+    ///bddordcant = fopen("codOrdenes.csv", "w");
 
     if (bddordcant == NULL) {
         printf("Error al abrir la base de datos con la cantidad de productos\n");
@@ -585,15 +587,17 @@ void guardarOrd(orden nuevo) {
             break;
         
         default:
-            for (int j = 0; j < listaO->ordenes[fila -1].cantTipProd; j++) {
+            for (int j = 1; j < listaO->ordenes[fila -1].cantTipProd; j++) {
                 if (fila < count_o[0]) {
                     /*fprintf(bddocsv,
                         "%s;%s,%s\n",
                         listaO->ordenes[fila].codigoOrden,
                         listaO->ordenes[fila].productoOrden.codigoProd[j],
                         listaO->ordenes[fila].productoOrden.cantidad[j]);*/
-                        printf("viejo %s;\n",
-                        listaO->ordenes[fila].codigoOrden);
+                        printf("viejo %s;%s %s\n",
+                        listaO->ordenes[fila - 1].codigoOrden,
+                        listaO->ordenes[fila - 1].productoOrden.cantidad[0],
+                        listaO->ordenes[fila - 1].productoOrden.codigoProd[j]);
                 } else if (fila == count_o[0] + 1) {
                     break;
                 }else {
@@ -610,7 +614,7 @@ void guardarOrd(orden nuevo) {
         }
     }
 
-    fclose(bddordcant);
+    ///fclose(bddordcant);
 
     printf("\n\nSe agrego exitosamente a la base de datos\n");
     return;

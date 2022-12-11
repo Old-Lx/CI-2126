@@ -9,6 +9,7 @@
 #include <string.h>
 #include "gestorDeProductos.h"
 #include "Login.h"
+#include "gestorDeOrdenes.h"
 
 /*Struct de cantidad de productos*/
 typedef struct {
@@ -18,14 +19,14 @@ typedef struct {
 
 /*Declaramos un struct para guardar ordenes*/
 typedef struct {
-    char codigoCliente[20]; ///Hacerlo como struct incluyendo cantidad
+    char codigoCliente[20];
     char codigoOrden[20];
     codigoProducto productoOrden;
     unsigned int descuento;
     unsigned int precio;
     int cantTipProd;
-    char envio[2];
-    char pago[2];
+    char envio[1];
+    char pago[1];
     char estado[1];
 } orden ;
 
@@ -49,7 +50,7 @@ orden *abrirBDOrdenes() ;
 DynaOrden *dynaOrden(orden listaDeOrdenes[100]);
 
 /*Carga los codigos de los productos de cada orden*/
-const char *abrirProdPorOrd();
+const char *abrirProdPorOrd(DynaOrden *listaO);
 
 /*Devuelve la columna de productos de una orden*/
 int columnOrd(DynaOrden *dynaOrden, char *codOrd);
