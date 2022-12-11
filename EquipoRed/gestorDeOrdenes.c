@@ -133,10 +133,8 @@ const char *abrirProdPorOrd(DynaOrden *listaO)
                     indOrden = atoi(entrada);
 
                 } else {
-                    printf("completa %s\n", entrada);
                     char *codCant = strtok(entrada, ",");
                     for (int i = 0; i < 2; i++) {
-                        printf("mitad %d check\n", atoi(codCant));
                         if (i == 0) { 
                             strcpy(listaO->ordenes[indOrden - 1].productoOrden.codigoProd[numProd], codCant);
                         } else {
@@ -581,14 +579,10 @@ void guardarOrd(orden nuevo) {
         }
         if (fila == count_o[0] - 1) {
             for (int j = 0; j < nuevo.cantTipProd; j++) {
-            fprintf(bddordcant,"%d;%s,%d\n",
+            int tempCode = atoi(nuevo.productoOrden.codigoProd[j]);
+            fprintf(bddordcant,"%d;%d,%d\n",
             tam + 1,
-            nuevo.productoOrden.codigoProd[j],
-            nuevo.productoOrden.cantidad[j]);
-            
-            printf("%d;%s,%d\n",
-            tam + 1,
-            nuevo.productoOrden.codigoProd[j],
+            tempCode,
             nuevo.productoOrden.cantidad[j]);
             }
         }
