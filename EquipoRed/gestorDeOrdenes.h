@@ -14,7 +14,7 @@
 /*Struct de cantidad de productos*/
 typedef struct {
     char codigoProd[20][20];
-    char cantidad[20][20];
+    int cantidad[20];
 } codigoProducto ;
 
 /*Declaramos un struct para guardar ordenes*/

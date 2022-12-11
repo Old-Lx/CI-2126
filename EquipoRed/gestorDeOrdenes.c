@@ -117,61 +117,44 @@ const char *abrirProdPorOrd(DynaOrden *listaO)
         return NULL;
     }
     char buff[1024]; // guarda las primeras 1024 lineas en un buffer
-    int fila = 0;
+    int col = 0;
     int indOrden;
-
+    int numProd;
+    int count = 0;
     while (fgets(buff, 1024, bddPorOrd)) {
-
+        
         char *entrada = strtok(buff, ";"); // divide el buffer por entrada de datos
-
+        
         while (entrada) {
+            if (count > 1) {
+                if (col % 2 == 0) {
 
-            switch (fila) {
-
-                case 0:
-                    indOrden = atoi(entrada);
-                    strcpy(listaO->ordenes[indOrden].codigoOrden, entrada);
-                    break;
-
-                case 1:;
-                    char *col = strtok(entrada, ",");
-                    for (int i = 0; i < 2; i++) {
-                        if (i == 0) {
-                            strcpy(listaO->ordenes[indOrden].productoOrden.codigoProd[0], entrada); 
-                        } else {
-                        //printf("col%d hh %s\n", i, col); 
-                        }
-                        col = strtok(NULL, ",");
-                    }
-                    break;
-
-                default:
-                    if (fila%2 == 0) {
-                        strcpy(listaO->ordenes[indOrden].codigoOrden, entrada);
+                    if (!strcmp(listaO->ordenes[indOrden].codigoOrden, entrada) && indOrden > 0) {
+                        numProd++;
+                        listaO->ordenes[indOrden - 1].cantTipProd = 1 + numProd;
                     } else {
-                        char *col = strtok(entrada, ",");
-                        for (int i = 0; i < 2; i++) {
-                            for (int j = 0; j < listaO->ordenes[indOrden].cantTipProd; j++) {
-                                if (i == 0) {
-                                    strcpy(listaO->ordenes[indOrden].productoOrden.codigoProd[j], col);
-                                    printf("fil1 col%d %s %d\n", j, 
-                                    listaO->ordenes[indOrden].productoOrden.codigoProd[j]); 
-                                } else {
-                                    ///strcpy(listaO->ordenes[indOrden].productoOrden.cantidad[i], col); 
-                                    ///printf("fil2 col%d %s\n", i, col);  
-                                }
-                            }
-                            col = strtok(NULL, ",");
-                        }
+                        numProd = 0;
                     }
-                    break;
+                    indOrden = atoi(entrada);
+
+                } else {
+                    char *codCant = strtok(entrada, ",");
+                    for (int i = 0; i < 2; i++) {
+                        if (i == 0) { 
+                            strcpy(listaO->ordenes[indOrden - 1].productoOrden.codigoProd[numProd], codCant);
+                        } else {
+                            listaO->ordenes[indOrden - 1].productoOrden.cantidad[numProd] = atoi(codCant);
+                        }
+                        codCant = strtok(NULL, ",");
+                    }
+                }
+                col++;
             }
-            fila++;
             entrada = strtok(NULL, ";");
+            count++;
         }
-        listaO->ordenes[indOrden].cantTipProd++;
-    fclose(bddPorOrd);
     }
+    fclose(bddPorOrd);
 }
 
 /*Devuelve la columna de productos de una orden*/
@@ -229,16 +212,18 @@ orden nuevaOrden() {
                 printf("\nIngrese cantidad que desea de [%s]: \n",
                 productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].descripcion);
                 fflush(stdout);
-                fgets(nueva.productoOrden.cantidad[i], 20, stdin);
+                char tempCant[20];
+                fgets(tempCant, 20, stdin);
+                nueva.productoOrden.cantidad[i] = atoi(tempCant);
                 fflush(stdin);
-                if (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock < atoi(nueva.productoOrden.cantidad[i]))
+                if (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock < nueva.productoOrden.cantidad[i])
                 {
                     printf("\nNo hay suficiente [%s] disponible\n", productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].descripcion);
                     fflush(stdout);
                     n = 0;
                 } else {
-                    productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock = productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock - atoi(nueva.productoOrden.cantidad[i]);
-                    nueva.precio = nueva.precio + (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].precio * atoi(nueva.productoOrden.cantidad[i]));
+                    productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock = productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock - nueva.productoOrden.cantidad[i];
+                    nueva.precio = nueva.precio + (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].precio * nueva.productoOrden.cantidad[i]);
                     actualizarBDProductos();
                     n = 2;
                 }
