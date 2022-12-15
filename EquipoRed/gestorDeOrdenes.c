@@ -51,6 +51,28 @@ orden *abrirBDOrdenes()
                     strcpy(descu, entrada);
                     listaO[i - 1].descuento = atoi(descu);  
                 }
+
+                else if (column == 3)
+                {
+                    char precio[20];
+                    strcpy(precio, entrada);
+                    listaO[i -1].precio = atoi(precio);
+                }
+
+                else if (column == 4)
+                {
+                    strcpy(listaO[i -1].envio, entrada);
+                }
+
+                else if (column == 5)
+                {
+                    strcpy(listaO[i -1].pago, entrada);
+                }
+
+                else if (column == 6)
+                {
+                    strcpy(listaO[i -1].estado, entrada);
+                }
             }
             column++;
             entrada = strtok(NULL, ";");
@@ -81,7 +103,7 @@ orden *abrirBDOrdenes()
     return listaO;
 }
 
-/*Inicializa un arreglo din�mico de �rdenes*/
+/*Inicializa un arreglo dinamico de ordenes*/
 DynaOrden *dynaOrden(orden listaDeOrdenes[100])
 {
 
@@ -215,12 +237,12 @@ orden nuevaOrden() {
                 fflush(stdin);
                 if (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock < nueva.productoOrden.cantidad[i])
                 {
-                    ///printf("\nNo hay suficiente [%s] disponible\n", productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].descripcion);
+                    printf("\nNo hay suficiente [%s] disponible\n", productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].descripcion);
                     fflush(stdout);
                     n = 0;
                 } else {
-                    ///productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock = productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock - nueva.productoOrden.cantidad[i];
-                    ///nueva.precio = nueva.precio + (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].precio * nueva.productoOrden.cantidad[i]);
+                    productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock = productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].stock - nueva.productoOrden.cantidad[i];
+                    nueva.precio = nueva.precio + (productos[atoi(nueva.productoOrden.codigoProd[i]) - 1].precio * nueva.productoOrden.cantidad[i]);
                     actualizarBDProductos();
                     n = 2;
                 }
