@@ -690,22 +690,22 @@ void aggProducto(char *codigoOrden, char *productoCod, char *cant, DynaOrden *dy
 }
 
 /*Elimina cantidad cant de un producto en la orden ecogida*/
-void elimProducto(char *codigoOrden, char *productoCod, char *cant, DynaOrden *dynaOrden) {
-    int tam = dynaOrden->tamano;
-    int indOrd = buscarOrden(dynaOrden, codigoOrden);
-    abrirProdPorOrd(dynaOrden);
+void elimProducto(char *codigoOrden, char *productoCod, char *cant) {
+    DynaOrden *ordenes = dynaOrden(abrirBDOrdenes());
+    int tam = ordenes->tamano;
+    int indOrd = buscarOrden(ordenes, codigoOrden);
+    abrirProdPorOrd(ordenes);
     int cantidad;
-    for (int i = 0; i < dynaOrden->ordenes[indOrd].cantTipProd; i++) {
-        if (!strcmp(codigoOrden, dynaOrden->ordenes[indOrd].productoOrden.codigoProd[i])) {
-            cantidad = dynaOrden->ordenes[indOrd].productoOrden.cantidad[i] - atoi(cant);
+    for (int i = 0; i < ordenes->ordenes[indOrd].cantTipProd; i++) {
+        if (!strcmp(codigoOrden, ordenes->ordenes[indOrd].productoOrden.codigoProd[i])) {
+            cantidad = ordenes->ordenes[indOrd].productoOrden.cantidad[i] - atoi(cant);
         }
-        if (cantidad == 0 && i < dynaOrden->ordenes[indOrd].cantTipProd - 1) {
-            strcpy(dynaOrden->ordenes[indOrd].productoOrden.codigoProd[i], dynaOrden->ordenes[indOrd].productoOrden.codigoProd[i + 1]);
-            dynaOrden->ordenes[indOrd].productoOrden.cantidad[i] = dynaOrden->ordenes[indOrd].productoOrden.cantidad[i + 1];
-        }
-        if (cantidad == 0 && i == dynaOrden->ordenes[indOrd].cantTipProd - 1) {
-            strcpy(dynaOrden->ordenes[indOrd].productoOrden.codigoProd[i], "/0");
-            dynaOrden->ordenes[indOrd].productoOrden.cantidad[i] = 0;
+        if (cantidad == 0 && i < ordenes->ordenes[indOrd].cantTipProd - 1) {
+            strcpy(ordenes->ordenes[indOrd].productoOrden.codigoProd[i], ordenes->ordenes[indOrd].productoOrden.codigoProd[i + 1]);
+            ordenes->ordenes[indOrd].productoOrden.cantidad[i] = ordenes->ordenes[indOrd].productoOrden.cantidad[i + 1];
+        } else if (cantidad == 0 && i == ordenes->ordenes[indOrd].cantTipProd - 1) {
+            strcpy(ordenes->ordenes[indOrd].productoOrden.codigoProd[i], "/0");
+            ordenes->ordenes[indOrd].productoOrden.cantidad[i] = 0;
         }
     }
     actualizarBDOrdenes(); 

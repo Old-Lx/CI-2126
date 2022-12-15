@@ -64,6 +64,9 @@ int indOrd(int i, DynaOrden *listaO);
 /*Crea orden nueva*/
 orden nuevaOrden();
 
+/*Actualiza BD de ordenes*/
+void actualizarBDOrdenes();
+
 /*Guarda una orden en la base de datos*/
 void guardarOrd(orden nuevo);
 
