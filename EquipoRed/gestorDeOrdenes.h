@@ -25,9 +25,9 @@ typedef struct {
     unsigned int descuento;
     unsigned int precio;
     int cantTipProd;
-    char envio[1];
-    char pago[1];
-    char estado[1];
+    char envio[2];
+    char pago[2];
+    char estado[2];
 } orden ;
 
 /*Declaramos arreglo dinámico de órdenes*/
@@ -56,7 +56,7 @@ const char *abrirProdPorOrd(DynaOrden *listaO);
 int columnOrd(DynaOrden *dynaOrden, char *codOrd);
 
 /*Busca la orden de un cliente x*/
-int buscarOrden(DynaOrden *listaO, char *buscado);
+int buscarOrden(DynaOrden *listaO, char *codOrdBuscada);
 
 /*Encuentra el indice de la string que se elija*/
 int indOrd(int i, DynaOrden *listaO);
@@ -107,6 +107,9 @@ void sortOrd(DynaOrden *dynaOrden);
 DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2);
 
 /*Agrega un producto a la orden determinada*/
-void aggProducto(char *codigoOrden, producto nuevo, DynaOrden *dynaOrden);
+void aggProducto(char *codigoOrden, char *productoCod, char *cant, DynaOrden *dynaOrden);
+
+/*Elimina cantidad cant de un producto en la orden ecogida*/
+void elimProducto(char *codigoOrden, char *productoCod, char *cant, DynaOrden *dynaOrden);
 
 #endif

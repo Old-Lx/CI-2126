@@ -175,6 +175,97 @@ const char *abrirProdPorOrd(DynaOrden *listaO)
     fclose(bddPorOrd);
 }
 
+/*Actualiza BD de ordenes*/
+void actualizarBDOrdenes() {
+    FILE *bddocsv;
+
+    DynaOrden *listaO = dynaOrden(abrirBDOrdenes());
+    abrirProdPorOrd(listaO);
+    int tam = listaO->tamano;
+
+    bddocsv = fopen("ordenes.csv", "w");
+
+    if (bddocsv == NULL)
+    {
+        printf("Error al abrir la base de datos ordenes\n");
+        return;
+    }
+
+    for (int fila = 0; fila < count_o[0] + 2; fila++)
+    {
+
+        if (fila == 0) {
+
+            fprintf(bddocsv,
+                    "%s;%s;%s;%s;%s;%s;%s\n",
+                    "codigo cliente",
+                    "codigo orden",
+                    "descuento",
+                    "precio",
+                    "envio",
+                    "pago",
+                    "estado");
+        }
+
+        if (fila < count_o[0] && fila > 0) {
+
+            fprintf(bddocsv,
+                    "%s;%s;%d;%d;%s;%s;%s",
+                    listaO->ordenes[fila - 1].codigoCliente,
+                    listaO->ordenes[fila - 1].codigoOrden,
+                    listaO->ordenes[fila - 1].descuento,
+                    listaO->ordenes[fila - 1].precio,
+                    listaO->ordenes[fila - 1].envio,
+                    listaO->ordenes[fila - 1].pago,
+                    listaO->ordenes[fila - 1].estado);
+        };
+
+        if (ferror(bddocsv))
+        {
+            printf("No se pudo agregar la orden\n");
+            return;
+        };
+    };
+
+    fclose(bddocsv);
+
+    /*Guardado de la cantidad de cada producto*/
+    FILE *bddordcant;
+
+    bddordcant = fopen("codOrdenes.csv", "w");
+
+    if (bddordcant == NULL) {
+        printf("Error al abrir la base de datos con la cantidad de productos\n");
+        return;
+    }
+
+    for (int fila = 0; fila < count_o[0]; fila++) {
+        switch (fila) {
+        case 0:
+            fprintf(bddordcant,
+                    "%s;%s,%s\n",
+                    "Codigo de orden",
+                    "Codigo de producto",
+                    "Cantidad");
+            break;
+        
+        default:
+            for (int j = 0; j < listaO->ordenes[fila - 1].cantTipProd; j++) {
+                fprintf(bddordcant,"%s;%s,%d\n",
+                listaO->ordenes[fila - 1].codigoOrden,
+                listaO->ordenes[fila - 1].productoOrden.codigoProd[j],
+                listaO->ordenes[fila - 1].productoOrden.cantidad[j]);
+            }
+            break;
+        }
+    }
+
+    fclose(bddordcant);
+
+    printf("\n\nSe agrego exitosamente a la base de datos\n");
+    return;
+}
+
 /*Devuelve la columna de productos de una orden*/
 int columnOrd(DynaOrden *dynaOrden, char *codOrd) {
     for (int i = 0; i < dynaOrden->tamano; i++) {
@@ -253,24 +344,130 @@ orden nuevaOrden() {
 
     nueva.descuento = 0;
     /*Comprobacion de descuento*/
-    /*do
+    do
     {
         printf("\nPosee codigo de descuento?\n[1]Si\n[2]No\n ");
         fflush(stdout);
+        int resp;
+        scanf("%d", &resp);
         fflush(stdin);
-        scanf("%d", &nuevo.stock);
-        fflush(stdin);
-        if (nuevo.stock < 0)
-        {
-            printf("\nOpcion invalida, intente de nuevo\n");
+        switch (resp) {
+        case 1:
+            printf("\nInserte su codigo de descuento\n");
+            fflush(stdout);
+            char codDescuento[20];
+            scanf("%s", codDescuento);
+            fflush(stdin);
+            ///falta desarrollar función que chequee base de datos con
+            ///códigos de descuento y confirme la exitencia del mismo
+            printf("Código inválido");
             n = 0;
-        }
-        else
-        {
+            break;
+
+        case 2:
             n = 2;
-        };
+            break;
+        
+        default:
+            printf("Inserte una opción válida\n");
+            n = 0;
+            break;
+        }
         // system ("cls");
-    } while (n < 1);*/
+    } while (n < 1);
+
+    do {
+
+        printf("\nSeleccione metodo para recibir sus productos\n[0]Pickup\n[1]Envio local\n[2]Envio nacional\n[3]Envio internacional\n");
+        fflush(stdout);
+        int resp;
+        scanf("%d", &resp);
+        fflush(stdin);
+        switch (resp) {
+        case 0:
+            printf("\nHa seleccionado Pickup\n");
+            strcpy(nueva.envio,"0");
+            fflush(stdout);
+            n = 2;
+            break;
+
+        case 1:
+            printf("\nHa seleccionado Envio local\nPor favor, elija lugar donde desea recibir sus productos\n[1]Mi casa\n[2]Indique cual\n");
+            fflush(stdout);
+            strcpy(nueva.envio,"1");
+            char lugar[20];
+            scanf("%s", lugar);
+            fflush(stdin);
+            n = 2;
+            break;
+        
+        case 2:
+            printf("\nHa seleccionado Envio nacional\nPor favor, elija lugar donde desea recibir sus productos\n[1]Mi casa\n[2]Indique cual\n");
+            fflush(stdout);
+            strcpy(nueva.envio,"2");
+            scanf("%s", lugar);
+            fflush(stdin);
+            n = 2;
+            break;
+
+        case 3:
+            printf("\nHa seleccionado Envio internacional\nPor favor, elija tipo de transporte para sus productos\n[0]Terrestre\n[2]Maritimo\n[3]Aereo\n");
+            fflush(stdout);
+            strcpy(nueva.envio,"3");
+            char trans[20];
+            scanf("%s", trans);
+            fflush(stdin);
+            n = 2;
+            break;
+        
+        default:
+            printf("Inserte una opción válida\n");
+            n = 0;
+            break;
+        }
+
+    } while (n < 1);
+
+    strcpy(nueva.estado,"0");
+
+    do {
+       printf("\nSeleccione metodo de pago\n[0]Efectivo\n[1]Debito\n[2]Credito\n[3]Billetera de la app\n");
+        fflush(stdout);
+        int resp;
+        scanf("%d", &resp);
+        fflush(stdin); 
+        switch (resp) {
+        case 0:
+            printf("\nHa seleccionado Efectivo\n");
+            strcpy(nueva.pago,"0");
+            fflush(stdout);
+            n = 2;
+            break;
+        
+        case 1:
+            printf("\nHa seleccionado Debito\n");
+            strcpy(nueva.pago,"1");
+            fflush(stdout);
+            n = 2;
+            break;
+        
+        case 2:
+            printf("\nHa seleccionado Credito\n");
+            strcpy(nueva.pago,"1");
+            fflush(stdout);
+            n = 2;
+            break;
+
+        case 3:
+            printf("\nHa seleccionado Billetera de la app\n");
+            strcpy(nueva.pago,"1");
+            strcpy(nueva.estado,"1");
+            fflush(stdout);
+            n = 2;
+            break;
+        }
+
+    } while (n < 1);
 
     return nueva;
 }
@@ -364,7 +561,6 @@ void elimOrden(DynaOrden *dynaOrden, int pos)
 {
     int tam = ordTam(dynaOrden);
     orden ordenNula;
-    ///ordenNula.cantidad = 0;
     strcpy(ordenNula.codigoCliente, '\0');
     strcpy(ordenNula.codigoOrden, '\0');
     ordenNula.productoOrden.codigoProd; // No esta operando
@@ -384,10 +580,15 @@ void elimOrden(DynaOrden *dynaOrden, int pos)
         }
         else
         {
+            for (int j = 0; j < dynaOrden->ordenes[i].cantTipProd; j++) {
+                strcpy(dynaOrden->ordenes[i].productoOrden.codigoProd[j], "/0");
+                dynaOrden->ordenes[i].productoOrden.cantidad[j] = 0;
+            }
             dynaOrden->ordenes[i] = ordenNula;
         }
     }
     dynaOrden->tamano = dynaOrden->tamano - 1;
+    actualizarBDOrdenes();
 }
 
 /*Encuentra el indice de la string más cercano a la A*/
@@ -479,36 +680,44 @@ DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2)
 }
 
 /*Agrega un producto a la orden determinada*/
-/*void aggProducto(char *codigoOrden, int cant, DynaOrden *dynaOrden) {
+void aggProducto(char *codigoOrden, char *productoCod, char *cant, DynaOrden *dynaOrden) {
     int tam = dynaOrden->tamano;
-    if (nuevo.stock >= cant) {
-        for (int i = 0; i < tam; i++) {
-            if (!strcmp(codigoOrden, dynaOrden->ordenes[i].codigoOrden)) {
-                int j = 0;
-                while(dynaOrden->ordenes[i].codigoOrden[j]) {
-                    strcpy(dynaOrden->ordenes[i].codigoProducto[i],dynaOrden->ordenes[i].codigoProducto[i]);
-                    j++;
-                    break;
-                }
-                if (!dynaOrden->ordenes[i].codigoOrden[j]) {
-                    strcpy(dynaOrden->ordenes[i].codigoProducto[i],nuevo.codigo);
-                }
-            }
+    int indOrd = buscarOrden(dynaOrden, codigoOrden);
+    abrirProdPorOrd(dynaOrden);
+    strcpy(dynaOrden->ordenes[indOrd].productoOrden.codigoProd[dynaOrden->ordenes[indOrd].cantTipProd], productoCod);
+    strcpy(dynaOrden->ordenes[indOrd].productoOrden.codigoProd[dynaOrden->ordenes[indOrd].cantTipProd], cant);
+    actualizarBDProductos();
+}
+
+/*Elimina cantidad cant de un producto en la orden ecogida*/
+void elimProducto(char *codigoOrden, char *productoCod, char *cant, DynaOrden *dynaOrden) {
+    int tam = dynaOrden->tamano;
+    int indOrd = buscarOrden(dynaOrden, codigoOrden);
+    abrirProdPorOrd(dynaOrden);
+    int cantidad;
+    for (int i = 0; i < dynaOrden->ordenes[indOrd].cantTipProd; i++) {
+        if (!strcmp(codigoOrden, dynaOrden->ordenes[indOrd].productoOrden.codigoProd[i])) {
+            cantidad = dynaOrden->ordenes[indOrd].productoOrden.cantidad[i] - atoi(cant);
         }
-        int prod = buscarProducto(nuevo.codigo, productos);
-        productos[prod].stock = productos[prod].stock - cant;
-    } else {
-        printf("No hay suficientes unidades de %s para tu pedido, intenta disminuyendo la cantidad\n", nuevo.descripcion);
+        if (cantidad == 0 && i < dynaOrden->ordenes[indOrd].cantTipProd - 1) {
+            strcpy(dynaOrden->ordenes[indOrd].productoOrden.codigoProd[i], dynaOrden->ordenes[indOrd].productoOrden.codigoProd[i + 1]);
+            dynaOrden->ordenes[indOrd].productoOrden.cantidad[i] = dynaOrden->ordenes[indOrd].productoOrden.cantidad[i + 1];
+        }
+        if (cantidad == 0 && i == dynaOrden->ordenes[indOrd].cantTipProd - 1) {
+            strcpy(dynaOrden->ordenes[indOrd].productoOrden.codigoProd[i], "/0");
+            dynaOrden->ordenes[indOrd].productoOrden.cantidad[i] = 0;
+        }
     }
-}*/
+    actualizarBDOrdenes(); 
+}
 
 /*Busca la orden de un cliente x*/
-int buscarOrden(DynaOrden *listaO, char *buscado) {
+int buscarOrden(DynaOrden *listaO, char *codOrdBuscada) {
     for (int i = 1; i < listaO->tamano; i++) {
-        if (!strcmp(buscado, listaO->ordenes[i].codigoCliente)) {
+        if (!strcmp(codOrdBuscada, listaO->ordenes[i].codigoOrden)) {
             return indOrd(i, listaO);
             break;
-        } else if (strcmp(buscado, listaO->ordenes[i].codigoCliente) && i == listaO->tamano) {
+        } else if (strcmp(codOrdBuscada, listaO->ordenes[i].codigoOrden) && i == listaO->tamano) {
             return -1;
         }
     }
@@ -536,29 +745,41 @@ void guardarOrd(orden nuevo) {
         if (fila == 0) {
 
             fprintf(bddocsv,
-                    "%s;%s;%s\n",
+                    "%s;%s;%s;%s;%s;%s;%s\n",
                     "codigo cliente",
                     "codigo orden",
-                    "descuento");
+                    "descuento",
+                    "precio",
+                    "envio",
+                    "pago",
+                    "estado");
         }
 
         if (fila < count_o[0] && fila > 0) {
 
             fprintf(bddocsv,
-                    "%s;%s;%d\n",
+                    "%s;%s;%d;%d;%s;%s;%s",
                     listaO->ordenes[fila - 1].codigoCliente,
                     listaO->ordenes[fila - 1].codigoOrden,
-                    listaO->ordenes[fila - 1].descuento);
+                    listaO->ordenes[fila - 1].descuento,
+                    listaO->ordenes[fila - 1].precio,
+                    listaO->ordenes[fila - 1].envio,
+                    listaO->ordenes[fila - 1].pago,
+                    listaO->ordenes[fila - 1].estado);
         };
 
         if (fila == count_o[0])
         {
 
             fprintf(bddocsv,
-                    "%s;%d;%d",
+                    "\n%s;%d;%d;%d;%s;%s;%s",
                     usuario,
                     tam + 1,
-                    nuevo.descuento);
+                    nuevo.descuento,
+                    nuevo.precio,
+                    nuevo.envio,
+                    nuevo.pago,
+                    nuevo.estado);
         }
 
         if (ferror(bddocsv))
