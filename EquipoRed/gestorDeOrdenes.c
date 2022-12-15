@@ -847,7 +847,7 @@ void mostrarOrden(){
           
                 printf("\nSu orden es la Numero: %s", listaO[i].codigoOrden );
                 printf("\nPor el usuario: %s", listaO[i].codigoCliente);
-                printf("\nTiene un descuento total de: %s\n\n", listaO[i].descuento);
+                printf("\nTiene un descuento total de: %d\n\n", listaO[i].descuento);
                 a=1;
             }
     }
