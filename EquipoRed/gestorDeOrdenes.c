@@ -846,12 +846,42 @@ void mostrarOrden(){
     for (int i = 0; i < 100; i++)
     {
         if(strcmp(clientes[num_fila[0]].username,listaO[i].codigoCliente)==0){
-          
-                printf("\nSu orden es la Numero: %s", listaO[i].codigoOrden );
+
+                printf("\n\nSu orden es la Numero: %s", listaO[i].codigoOrden );
                 printf("\nPor el usuario: %s", listaO[i].codigoCliente);
-                printf("\nTiene un descuento total de: %d\n\n", listaO[i].descuento);
+                printf("\nTiene un descuento total de: %d", listaO[i].descuento);
+                switch (atoi(listaO[i].envio))
+                {
+                case 0:printf("\nTipo de envio: Pickup");break;
+                case 1:printf("\nTipo de envio: Local ");break;
+                case 2:printf("\nTipo de envio: Nacional ");break;
+                case 3:printf("\nTipo de envio: Internacional");break;
+                default:break;
+                }
+                switch (atoi(listaO[i].pago))
+                {
+                case 0:printf("\nTipo de pago: Efectivo");break;
+                case 1:printf("\nTipo de pago: Debito ");break;
+                case 2:printf("\nTipo de pago: Credito ");break;
+                case 3:printf("\nTipo de pago: Billetera digital ");break;
+                default:break;
+                }
+                printf("\nSu pedidio Incluye los siguientes productos:");
+                for (int k = 0; k < 1; k++)
+                {
+                    if(1==1/*listaO[i].codigoCliente == Variable del codigoOrden que barra en k */){
+
+                        printf("\n\t%c\tCantidad: %d"/*codigo del producto, codigo de cantidad*/);
+
+                    }
+
+                }
+                printf("\nPara un precio total de: %d\n", listaO[i].precio);
+
+
+
                 a=1;
             }
     }
-    if(a==0){printf("\n\nNo has realizado pedidos\n\n");}    
+    if(a==0){printf("\n\nNo has realizado pedidos\n\n");}
 }
