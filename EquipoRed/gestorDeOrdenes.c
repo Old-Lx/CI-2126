@@ -119,6 +119,7 @@ DynaOrden *dynaOrden(orden listaDeOrdenes[100])
             ordenesL->tamano++;
         }
     }
+    printf("                         ");
     return ordenesL;
 };
 
@@ -866,16 +867,7 @@ void mostrarOrden(){
                 case 3:printf("\nTipo de pago: Billetera digital ");break;
                 default:break;
                 }
-                printf("\nSu pedidio Incluye los siguientes productos:");
-                for (int k = 0; k < 1; k++)
-                {
-                    if(1==1/*listaO[i].codigoCliente == Variable del codigoOrden que barra en k */){
 
-                        printf("\n\t%c\tCantidad: %d"/*codigo del producto, codigo de cantidad*/);
-
-                    }
-
-                }
                 printf("\nPara un precio total de: %d\n", listaO[i].precio);
 
 
