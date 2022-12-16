@@ -49,7 +49,7 @@ orden *abrirBDOrdenes()
                 {
                     char descu[20];
                     strcpy(descu, entrada);
-                    listaO[i - 1].descuento = atoi(descu);  
+                    listaO[i - 1].descuento = atoi(descu);
                 }
 
                 else if (column == 3)
@@ -141,9 +141,9 @@ const char *abrirProdPorOrd(DynaOrden *listaO)
     int numProd;
     int count = 0;
     while (fgets(buff, 1024, bddPorOrd)) {
-        
+
         char *entrada = strtok(buff, ";"); // divide el buffer por entrada de datos
-        
+
         while (entrada) {
             if (count > 1) {
                 if (col % 2 == 0) {
@@ -158,7 +158,7 @@ const char *abrirProdPorOrd(DynaOrden *listaO)
                 } else {
                     char *codCant = strtok(entrada, ",");
                     for (int i = 0; i < 2; i++) {
-                        if (i == 0) { 
+                        if (i == 0) {
                             strcpy(listaO->ordenes[indOrden - 1].productoOrden.codigoProd[numProd], codCant);
                         } else {
                             listaO->ordenes[indOrden - 1].productoOrden.cantidad[numProd] = atoi(codCant);
@@ -249,7 +249,7 @@ void actualizarBDOrdenes() {
                     "Codigo de producto",
                     "Cantidad");
             break;
-        
+
         default:
             for (int j = 0; j < listaO->ordenes[fila - 1].cantTipProd; j++) {
                 fprintf(bddordcant,"%s;%s,%d\n",
@@ -368,7 +368,7 @@ orden nuevaOrden() {
         case 2:
             n = 2;
             break;
-        
+
         default:
             printf("Inserte una opción válida\n");
             n = 0;
@@ -401,7 +401,7 @@ orden nuevaOrden() {
             fflush(stdin);
             n = 2;
             break;
-        
+
         case 2:
             printf("\nHa seleccionado Envio nacional\nPor favor, elija lugar donde desea recibir sus productos\n[1]Mi casa\n[2]Indique cual\n");
             fflush(stdout);
@@ -420,7 +420,7 @@ orden nuevaOrden() {
             fflush(stdin);
             n = 2;
             break;
-        
+
         default:
             printf("Inserte una opción válida\n");
             n = 0;
@@ -436,7 +436,7 @@ orden nuevaOrden() {
         fflush(stdout);
         int resp;
         scanf("%d", &resp);
-        fflush(stdin); 
+        fflush(stdin);
         switch (resp) {
         case 0:
             printf("\nHa seleccionado Efectivo\n");
@@ -444,24 +444,24 @@ orden nuevaOrden() {
             fflush(stdout);
             n = 2;
             break;
-        
+
         case 1:
             printf("\nHa seleccionado Debito\n");
             strcpy(nueva.pago,"1");
             fflush(stdout);
             n = 2;
             break;
-        
+
         case 2:
             printf("\nHa seleccionado Credito\n");
-            strcpy(nueva.pago,"1");
+            strcpy(nueva.pago,"2");
             fflush(stdout);
             n = 2;
             break;
 
         case 3:
             printf("\nHa seleccionado Billetera de la app\n");
-            strcpy(nueva.pago,"1");
+            strcpy(nueva.pago,"3");
             strcpy(nueva.estado,"1");
             fflush(stdout);
             n = 2;
@@ -711,7 +711,7 @@ void elimProducto(char *codigoOrden, char *productoCod, char *cant) {
             ordenes->ordenes[indOrd].productoOrden.cantidad[i] = 0;
         }
     }
-    actualizarBDOrdenes(); 
+    actualizarBDOrdenes();
 }
 
 /*Busca la orden de un cliente x*/
@@ -813,7 +813,7 @@ void guardarOrd(orden nuevo) {
                     "Codigo de producto",
                     "Cantidad");
             break;
-        
+
         default:
             for (int j = 0; j < listaO->ordenes[fila - 1].cantTipProd; j++) {
                 fprintf(bddordcant,"%s;%s,%d\n",
