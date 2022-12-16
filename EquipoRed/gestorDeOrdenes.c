@@ -560,11 +560,6 @@ void dynaInsOrd(DynaOrden *dynaOrden, int N, orden *nueva)
 void elimOrden(DynaOrden *dynaOrden, int pos)
 {
     int tam = ordTam(dynaOrden);
-    orden ordenNula;
-    strcpy(ordenNula.codigoCliente, '\0');
-    strcpy(ordenNula.codigoOrden, '\0');
-    ordenNula.productoOrden.codigoProd; // No esta operando
-    ordenNula.descuento = 0;
 
     if (pos >= tam)
     {
@@ -584,7 +579,14 @@ void elimOrden(DynaOrden *dynaOrden, int pos)
                 strcpy(dynaOrden->ordenes[i].productoOrden.codigoProd[j], "/0");
                 dynaOrden->ordenes[i].productoOrden.cantidad[j] = 0;
             }
-            dynaOrden->ordenes[i] = ordenNula;
+            printf("%s\n", dynaOrden->ordenes[i].codigoCliente);
+            strcpy(dynaOrden->ordenes[i].codigoCliente, "/0");
+            strcpy(dynaOrden->ordenes[i].codigoOrden, "/0");
+            strcpy(dynaOrden->ordenes[i].envio, "/0");
+            strcpy(dynaOrden->ordenes[i].estado, "/0");
+            strcpy(dynaOrden->ordenes[i].pago, "/0");
+            dynaOrden->ordenes[i].descuento = 0;
+            dynaOrden->ordenes[i].precio = 0;
         }
     }
     dynaOrden->tamano = dynaOrden->tamano - 1;
@@ -686,10 +688,10 @@ void aggProducto(char *codigoOrden, char *productoCod, char *cant, DynaOrden *dy
     abrirProdPorOrd(dynaOrden);
     strcpy(dynaOrden->ordenes[indOrd].productoOrden.codigoProd[dynaOrden->ordenes[indOrd].cantTipProd], productoCod);
     strcpy(dynaOrden->ordenes[indOrd].productoOrden.codigoProd[dynaOrden->ordenes[indOrd].cantTipProd], cant);
-    actualizarBDProductos();
+    actualizarBDOrdenes();
 }
 
-/*Elimina cantidad cant de un producto en la orden ecogida*/
+/*Elimina cantidad cant de un producto en la orden escogida*/
 void elimProducto(char *codigoOrden, char *productoCod, char *cant) {
     DynaOrden *ordenes = dynaOrden(abrirBDOrdenes());
     int tam = ordenes->tamano;

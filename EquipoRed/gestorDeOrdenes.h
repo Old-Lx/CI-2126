@@ -113,6 +113,6 @@ DynaOrden *unirLisOrd(DynaOrden *dynaOrden1, DynaOrden *dynaOrden2);
 void aggProducto(char *codigoOrden, char *productoCod, char *cant, DynaOrden *dynaOrden);
 
 /*Elimina cantidad cant de un producto en la orden ecogida*/
-void elimProducto(char *codigoOrden, char *productoCod, char *cant, DynaOrden *dynaOrden);
+void elimProducto(char *codigoOrden, char *productoCod, char *cant);
 
 #endif
