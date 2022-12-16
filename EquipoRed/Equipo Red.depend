@@ -75,7 +75,7 @@
 	"gestorDeProductos.h"
 	"gestorDeOrdenes.h"
 
-1670588883 source:c:\users\gustavo\documents\github\ci-2126\equipored\gestordeordenes.c
+1671198829 source:c:\users\gustavo\documents\github\ci-2126\equipored\gestordeordenes.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

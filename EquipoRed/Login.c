@@ -835,7 +835,7 @@ void operacionCliente()
             n = 0;
             break;
         case 4:
-            n = 1;
+            main();
             break;
         case 5:
             mostrarOrden();
