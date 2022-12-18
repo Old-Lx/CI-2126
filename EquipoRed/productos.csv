@@ -1,12 +1,12 @@
 codigo;descripcion;precio;stock
 1;Aceite;4.000000;9
-2;Cerelac;4.000000;26
+2;Cerelac;4.000000;21
 3;Harina;7.000000;37
 4;Leche;9.000000;18
 5;Nestum;4.000000;9
 6;Queso;10.000000;7
 7;Toddy;8.000000;54
-8;Helado;8.000000;
+8;Helado;8.000000;10
 9;Torta;9.000000;12
 10;Azucar;14.000000;23
 11;Tomates;2.000000;20
@@ -23,3 +23,4 @@ codigo;descripcion;precio;stock
 22;Caramelos;100.000000;150
 23;Refresco;3.000000;24
 24;Agua;12.000000;15
+25;casa;600.000000;2
